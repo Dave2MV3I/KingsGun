@@ -14,6 +14,7 @@ public class MainController extends GraphicalObject {
     private HashMap<String, ModeControl> modeControls;
     private HashMap<String, ModeView> modeViews;
     public MainController() {
+        currentMode = "map";
         modeControls = new HashMap<>();
         modeControls.put("map", new MapModeControl());
         modeControls.put("village", new VillageModeControl());
@@ -28,6 +29,13 @@ public class MainController extends GraphicalObject {
     }
     @Override
     public void draw(DrawTool drawTool) {
-
+        modeViews.get(currentMode).draw(drawTool);
+    }
+    @Override
+    public void update(double dt) {
+        modeControls.get(currentMode).update(dt);
+    }
+    public void setMode(String mode) {
+        currentMode = mode;
     }
 }
