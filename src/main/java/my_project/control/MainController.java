@@ -31,7 +31,9 @@ public class MainController extends GraphicalObject {
         modeControls.get(currentMode).update(dt);
     }
     public void setMode(String mode) {
+        modeControls.get(currentMode).setActive(false);
         currentMode = mode.toLowerCase();
+        modeControls.get(currentMode).setActive(true);
     }
     public String getMode() {
         return currentMode;

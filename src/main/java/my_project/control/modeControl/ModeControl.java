@@ -1,5 +1,6 @@
 package my_project.control.modeControl;
 
+import KAGO_framework.view.DrawTool;
 import my_project.view.modeView.ModeView;
 
 public abstract class ModeControl{
@@ -26,5 +27,9 @@ public abstract class ModeControl{
      */
     public void setActive(boolean active){
         this.active = active;
+        //if(active) activate(); else deactivate();
     }
+    //TODO: Override activate() & deactivate() in all ModeControl subclasses
+    //protected abstract void activate();
+    //protected abstract void deactivate();
 }

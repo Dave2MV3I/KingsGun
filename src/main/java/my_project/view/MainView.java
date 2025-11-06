@@ -17,7 +17,7 @@ public class MainView {
     private HashMap<String, ModeView> modeViews;
     private MainController mainController;
 
-    private static double SCALE = 1.0;
+    private static double SCALE = 5.0;
     private static double OFFSET_X = 0.0;
     private static double OFFSET_Y = 0.0;
     private static double SCREEN_OFFSET_X = 0.0;
@@ -31,7 +31,7 @@ public class MainView {
         frame = new JFrame();
         frame.setContentPane(backendDeveloperAcces.getContentPane());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(600, 300));
+        frame.setPreferredSize(new Dimension(300, 400));
         frame.pack();
         frame.setVisible(true);
 
