@@ -1,17 +1,45 @@
 package my_project.view;
 
+import KAGO_framework.view.DrawTool;
 import my_project.Config;
+import my_project.control.MainController;
+import my_project.control.modeControl.*;
+import my_project.view.javafx.BackendDeveloperAcces;
+import my_project.view.modeView.*;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class MainView {
+    private BackendDeveloperAcces backendDeveloperAcces;
+    private JFrame frame;
+    private HashMap<String, ModeView> modeViews;
+    private MainController mainController;
+
     private static double SCALE = 1.0;
     private static double OFFSET_X = 0.0;
     private static double OFFSET_Y = 0.0;
     private static double SCREEN_OFFSET_X = 0.0;
     private static double SCREEN_OFFSET_Y = 0.0;
 
-    public MainView() {
+    public MainView(MainController mainController) {
+        this.mainController = mainController;
+        HashMap<String, ModeControl> modeControls = mainController.getModeControls();
+
+        backendDeveloperAcces = new BackendDeveloperAcces(mainController);
+        frame = new JFrame();
+        frame.setContentPane(backendDeveloperAcces.getContentPane());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(600, 300));
+        frame.pack();
+        frame.setVisible(true);
+
+        modeViews = new HashMap<>();
+        modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
+        modeViews.put("village", new VillageModeView((VillageModeControl)modeControls.get("village")));
+        modeViews.put("travel", new TravelModeView((TravelModeControl)modeControls.get("travel")));
+        modeViews.put("dungeon", new DungeonModeView((DungeonModeControl)modeControls.get("dungeon")));
 
     }
     public static double getScale() {
@@ -84,6 +112,9 @@ public class MainView {
     }
 
 
+    public void draw(DrawTool drawTool) {
+        modeViews.get(mainController.getMode()).draw(drawTool);
+    }
 }
 
 

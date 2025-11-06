@@ -3,6 +3,7 @@ package my_project.control.modeControl;
 import my_project.view.modeView.ModeView;
 
 public abstract class ModeControl{
+    boolean active;
     ModeView modeView;
     public ModeControl() {
 
@@ -17,5 +18,13 @@ public abstract class ModeControl{
     }
     public void update(double dt){
 
+    }
+
+    /**
+     * Notifies the ModeController, that its Activation status has been Changed.
+     * @param active wether the ModeController should be activated or deactivated
+     */
+    public void setActive(boolean active){
+        this.active = active;
     }
 }
