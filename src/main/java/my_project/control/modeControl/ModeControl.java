@@ -27,9 +27,13 @@ public abstract class ModeControl{
      */
     public void setActive(boolean active){
         this.active = active;
-        //if(active) activate(); else deactivate();
+        if(active) activate(); else deactivate();
     }
-    //TODO: Override activate() & deactivate() in all ModeControl subclasses
-    //protected abstract void activate();
-    //protected abstract void deactivate();
+
+    /** Method to be executed whenever the ModeController is activated
+     */
+    protected abstract void activate();
+    /** Method to be executed whenever the ModeController is deactivated
+     */
+    protected abstract void deactivate();
 }
