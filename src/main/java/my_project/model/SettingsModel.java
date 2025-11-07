@@ -1,7 +1,7 @@
 package my_project.model;
 
 /**
- * SettingModel is a container class for all settings in the game.
+ * SettingModel is a container class for all settings in the game. <br>
  * David Glusmann
  */
 public class SettingsModel {

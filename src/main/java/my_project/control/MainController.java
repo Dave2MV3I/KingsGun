@@ -42,4 +42,10 @@ public class MainController extends GraphicalObject {
     public HashMap<String, ModeControl> getModeControls() {
         return modeControls;
     }
+
+    public void processInput(String c){
+        switch (c) {
+            case "settings" : mainView.getSettingsFrame().setVisible(true);
+        }
+    }
 }

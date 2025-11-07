@@ -4,6 +4,7 @@ import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.control.MainController;
 import my_project.control.modeControl.*;
+import my_project.model.SettingsModel;
 import my_project.view.javafx.BackendDeveloperAcces;
 import my_project.view.modeView.*;
 
@@ -23,6 +24,9 @@ public class MainView {
     private static double SCREEN_OFFSET_X = 0.0;
     private static double SCREEN_OFFSET_Y = 0.0;
 
+    // SettingsFrame
+    private JFrame settingsFrame;
+
     public MainView(MainController mainController) {
         this.mainController = mainController;
         HashMap<String, ModeControl> modeControls = mainController.getModeControls();
@@ -34,6 +38,14 @@ public class MainView {
         frame.setPreferredSize(new Dimension(300, 400));
         frame.pack();
         frame.setVisible(true);
+
+        SettingsWindow settingsWindow = new SettingsWindow(this);
+        settingsFrame = new JFrame();
+        settingsFrame.setContentPane(settingsWindow.getMainPanel());
+        settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        settingsFrame.setPreferredSize(new Dimension(300, 400));
+        settingsFrame.pack();
+        settingsFrame.setVisible(true); // TODO Settings setVisible beim esc drücken
 
         modeViews = new HashMap<>();
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
@@ -115,6 +127,28 @@ public class MainView {
     public void draw(DrawTool drawTool) {
         modeViews.get(mainController.getMode()).draw(drawTool);
     }
+
+    /**
+     * Method for changing Settings.
+     * @param setting options: musicVolume, soundVolume, brightness
+     * @param value the new value to be assigned
+     */
+    public void setSetting(String setting, float value) {
+        switch (setting) {
+            case "musicVolume" : SettingsModel.setMusicVolume(value);
+            break;
+            case "soundsVolume" : SettingsModel.setSoundVolume(value);
+            break;
+            case "brightness" : SettingsModel.setBrightness(value);
+            break;
+        }
+    }
+
+    // public void setSetting(String setting, String value) {}
+
+    // public void setSetting(String setting, boolean value) {}
+
+    public JFrame getSettingsFrame() {return settingsFrame;}
 }
 
 
