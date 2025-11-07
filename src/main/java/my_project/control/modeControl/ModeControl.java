@@ -5,9 +5,10 @@ import my_project.view.modeView.ModeView;
 
 public abstract class ModeControl{
     boolean active;
+    protected double timer;
     ModeView modeView;
     public ModeControl() {
-
+        timer = 0.0;
     }
 
     /**
@@ -18,7 +19,7 @@ public abstract class ModeControl{
         this.modeView = modeView;
     }
     public void update(double dt){
-
+        timer += dt;
     }
 
     /**
@@ -27,7 +28,12 @@ public abstract class ModeControl{
      */
     public void setActive(boolean active){
         this.active = active;
-        if(active) activate(); else deactivate();
+        if(active) {
+            activate();
+            timer = 0.0;
+        } else{
+            deactivate();
+        }
     }
 
     /** Method to be executed whenever the ModeController is activated
