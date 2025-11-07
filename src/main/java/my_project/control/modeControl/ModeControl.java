@@ -3,7 +3,10 @@ package my_project.control.modeControl;
 import KAGO_framework.view.DrawTool;
 import my_project.control.MainController;
 import my_project.view.modeView.ModeView;
-
+/**Blueprint Class for all Mode Controls
+ *<br><br>
+ *Joshua Becker
+ */
 public abstract class ModeControl{
     protected MainController mainController;
     protected ModeView modeView;

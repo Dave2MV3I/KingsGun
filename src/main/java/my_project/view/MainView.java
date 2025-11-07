@@ -54,6 +54,15 @@ public class MainView {
         modeViews.put("dungeon", new DungeonModeView((DungeonModeControl)modeControls.get("dungeon")));
 
     }
+
+    public void draw(DrawTool drawTool) {
+        modeViews.get(mainController.getMode()).draw(drawTool);
+        drawTool.setCurrentColor(0,0,0,(int)((SettingsModel.getBrightness())*2.55));
+        drawTool.drawFilledRectangle(0,0,Config.WINDOW_WIDTH,Config.WINDOW_HEIGHT);
+    }
+
+
+    //Getter and Setters
     public static double getScale() {
         return SCALE;
     }
@@ -124,9 +133,7 @@ public class MainView {
     }
 
 
-    public void draw(DrawTool drawTool) {
-        modeViews.get(mainController.getMode()).draw(drawTool);
-    }
+
 
     /**
      * Method for changing Settings.
