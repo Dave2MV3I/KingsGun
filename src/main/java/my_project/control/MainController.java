@@ -21,6 +21,10 @@ public class MainController extends GraphicalObject {
         modeControls.put("dungeon", new DungeonModeControl());
 
         mainView = new MainView(this);
+
+        for (ModeControl mode :  modeControls.values()) {
+            mode.setMainController(this);
+        }
     }
     @Override
     public void draw(DrawTool drawTool) {
