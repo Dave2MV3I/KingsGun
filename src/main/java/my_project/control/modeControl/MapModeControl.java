@@ -10,8 +10,7 @@ public class MapModeControl extends ModeControl {
     private List<Village> villages;
 
     public MapModeControl() {
-        VillageModeControl villageController = (VillageModeControl) mainController.getModeControls().get("village");
-        villages = villageController.getVillages();
+
     }
 
     @Override
@@ -19,6 +18,8 @@ public class MapModeControl extends ModeControl {
     }
     @Override
     protected void activate() {
+        VillageModeControl villageController = (VillageModeControl) mainController.getModeControls().get("village");
+        villages = villageController.getVillages();
     }
 
 }
