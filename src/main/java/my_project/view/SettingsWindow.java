@@ -28,8 +28,10 @@ public class SettingsWindow {
         musicSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                mainView.setSetting("musicVolume", musicSlider.getValue());
-            }
+                mainView.setSetting("musicVolume", musicSlider.getValue());}
+            //TODO Assigned von Joshua: eigene SettingControl Klasse mit static Atributes machen machen.
+            //Irgendwie sieht das mit mainview.setSetting() nicht ganz richtig aus.
+            // Ich glaube SettingController.setSetting() wäre deutlich besser für hohe Köhäsion
         });
 
         soundSlider.addChangeListener(new ChangeListener() {
