@@ -1,14 +1,20 @@
 package my_project.control.modeControl;
 
 import KAGO_framework.view.DrawTool;
+import my_project.control.MainController;
 import my_project.view.modeView.ModeView;
 
 public abstract class ModeControl{
+    protected MainController mainController;
+    protected ModeView modeView;
     boolean active;
     protected double timer;
-    ModeView modeView;
+
     public ModeControl() {
         timer = 0.0;
+    }
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     /**
