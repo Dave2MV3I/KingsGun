@@ -1,7 +1,7 @@
 package my_project.control.modeControl;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
-import my_project.model.Village;
+import my_project.model.VillageMode.Village;
 
 /**
  * Tomole

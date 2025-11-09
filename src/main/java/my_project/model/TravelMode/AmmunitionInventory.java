@@ -1,6 +1,5 @@
-package my_project.model;
+package my_project.model.TravelMode;
 
-import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 
 public class AmmunitionInventory {

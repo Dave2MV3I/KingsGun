@@ -1,18 +1,18 @@
-package my_project.model;
+package my_project.model.CoreClasses;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.view.MainView;
 
 public class Texture extends GraphicalObject {
-    /** CLASS IS CURRENTLY INCOMPLETE! DO NOT USE YET please :)
+    /** Creates a Texture Object
      *
-     * @param texture path to the Imagefile
+     * @param texture path to the Imagefile relative from src/my_project/resources/
      */
     public Texture(String texture) {
-        setNewImage(texture);
+        setNewImage("src/my_project/resources/" + texture);
     }
-    /** CLASS IS CURRENTLY INCOMPLETE! DO NOT USE YET please :)
+    /** create a Texture without Image (Only for easier implementation of Spritesheet)
      */
     protected Texture() {}
 

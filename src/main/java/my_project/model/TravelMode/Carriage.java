@@ -1,6 +1,8 @@
-package my_project.model;
+package my_project.model.TravelMode;
 
-public class Carriage extends GameObject{
+import my_project.model.CoreClasses.GameObject;
+
+public class Carriage extends GameObject {
     private AmmunitionInventory ammoInvent;
     private Gun gun;
     public Carriage() {
