@@ -52,4 +52,5 @@ public class MainController extends GraphicalObject {
             case "settings" : mainView.getSettingsFrame().setVisible(true);
         }
     }
+
 }

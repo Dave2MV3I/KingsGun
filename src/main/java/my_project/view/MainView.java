@@ -45,7 +45,7 @@ public class MainView {
         settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         settingsFrame.setPreferredSize(new Dimension(300, 400));
         settingsFrame.pack();
-        settingsFrame.setVisible(true); // TODO Settings setVisible beim esc drücken
+        //settingsFrame.setVisible(true); // TODO Settings setVisible beim esc drücken
 
         modeViews = new HashMap<>();
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));

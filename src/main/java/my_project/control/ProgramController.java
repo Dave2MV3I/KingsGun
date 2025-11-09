@@ -1,6 +1,7 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import my_project.view.InputManager;
 
 /**
  * Ein Objekt der Klasse ProgramController dient dazu das Programm zu steuern.
@@ -18,6 +19,7 @@ public class ProgramController {
     // Referenzen
     private final ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private final MainController mainController = new MainController();
+    private final InputManager inputManager = new InputManager(mainController);
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -39,6 +41,7 @@ public class ProgramController {
 
         // Teile dem ViewController-Objekt mit, dass das Objekt gezeichnet werden soll
         viewController.draw(mainController);
+        viewController.register(inputManager);
     }
 
     /**
