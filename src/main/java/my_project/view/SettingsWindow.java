@@ -1,10 +1,13 @@
 package my_project.view;
+import my_project.model.CoreClasses.SettingsController;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * SettingsWindow is a View Class for the Settings GUI. <br>
+ * SettingsWindow is a View Class for the Settings GUI.
+ * <br><br>
  * David Glusmann
  */
 public class SettingsWindow {
@@ -17,34 +20,31 @@ public class SettingsWindow {
     private JLabel soundLabel;
     private JLabel brightnessLabel;
 
-    private MainView mainView;
+    private SettingsController settingController;
 
     /**
      * Constructor adds Change Listeners to the swing elements.
      */
-    public SettingsWindow(MainView mainView) {
-        this.mainView = mainView;
+    public SettingsWindow(SettingsController settingController) {
+        this.settingController = settingController;
 
         musicSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                mainView.setSetting("musicVolume", musicSlider.getValue());}
-            //TODO Assigned von Joshua: eigene SettingControl Klasse mit static Atributes machen machen.
-            //Irgendwie sieht das mit mainview.setSetting() nicht ganz richtig aus.
-            // Ich glaube SettingController.setSetting() wäre deutlich besser für hohe Köhäsion
+                settingController.setSetting("musicVolume", musicSlider.getValue());}
         });
 
         soundSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                mainView.setSetting("soundVolume", soundSlider.getValue());
+                settingController.setSetting("soundVolume", soundSlider.getValue());
             }
         });
 
         brightnessSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                mainView.setSetting("brightness", brightnessSlider.getValue());
+                settingController.setSetting("brightness", brightnessSlider.getValue());
             }
         });
     }

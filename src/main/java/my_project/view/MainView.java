@@ -12,6 +12,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
+/**
+ * Main rendering Class of the project
+ * <br><br>
+ * Joshua Becker
+ */
 public class MainView {
     private BackendDeveloperAcces backendDeveloperAcces;
     private JFrame frame;
@@ -24,19 +29,13 @@ public class MainView {
     private static double SCREEN_OFFSET_X = 0.0;
     private static double SCREEN_OFFSET_Y = 0.0;
 
-    // SettingsFrame
-    private JFrame settingsFrame;
 
     public MainView(MainController mainController) {
         this.mainController = mainController;
         HashMap<String, ModeControl> modeControls = mainController.getModeControls();
 
         backendDeveloperAcces = new BackendDeveloperAcces(mainController);
-        frame = createJFrame(backendDeveloperAcces.getContentPane());
-
-
-        SettingsWindow settingsWindow = new SettingsWindow(this);
-        settingsFrame = createJFrame(settingsWindow.getMainPanel(), 400, 200, false);
+        frame = mainController.createJFrame(backendDeveloperAcces.getContentPane());
 
         modeViews = new HashMap<>();
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
@@ -122,51 +121,6 @@ public class MainView {
     public static double scale(double v) {
         return v * SCALE;
     }
-
-
-
-
-    /**
-     * Method for changing Settings.
-     * @param setting options: musicVolume, soundVolume, brightness
-     * @param value the new value to be assigned
-     */
-    public void setSetting(String setting, float value) {
-        switch (setting) {
-            case "musicVolume" : SettingsModel.setMusicVolume(value);
-            break;
-            case "soundsVolume" : SettingsModel.setSoundVolume(value);
-            break;
-            case "brightness" : SettingsModel.setBrightness(value);
-            break;
-        }
-    }
-
-    // public void setSetting(String setting, String value) {}
-
-    // public void setSetting(String setting, boolean value) {}
-
-    public JFrame getSettingsFrame() {return settingsFrame;}
-
-    private JFrame createJFrame(Container contentPane){
-        return createJFrame(contentPane, 300, 400, true);
-    }
-    private JFrame createJFrame(Container contentPane, boolean visible){
-        return createJFrame(contentPane, 300, 400, visible);
-    }
-    private JFrame createJFrame(Container contentPane, int width, int height){
-        return createJFrame(contentPane, width, height);
-    }
-    private JFrame createJFrame(Container contentPane, int width, int height, boolean visible) {
-        JFrame localFrame = new JFrame();
-        localFrame.setContentPane(contentPane);
-        localFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        localFrame.setPreferredSize(new Dimension(width, height));
-        localFrame.pack();
-        localFrame.setVisible(visible);
-        return localFrame;
-    }
-
 
 }
 
