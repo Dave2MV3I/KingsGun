@@ -32,20 +32,11 @@ public class MainView {
         HashMap<String, ModeControl> modeControls = mainController.getModeControls();
 
         backendDeveloperAcces = new BackendDeveloperAcces(mainController);
-        frame = new JFrame();
-        frame.setContentPane(backendDeveloperAcces.getContentPane());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(300, 400));
-        frame.pack();
-        frame.setVisible(true);
+        frame = createJFrame(backendDeveloperAcces.getContentPane());
+
 
         SettingsWindow settingsWindow = new SettingsWindow(this);
-        settingsFrame = new JFrame();
-        settingsFrame.setContentPane(settingsWindow.getMainPanel());
-        settingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        settingsFrame.setPreferredSize(new Dimension(300, 400));
-        settingsFrame.pack();
-        //settingsFrame.setVisible(true); // TODO Settings setVisible beim esc drücken
+        settingsFrame = createJFrame(settingsWindow.getMainPanel(), 500, 600, false);
 
         modeViews = new HashMap<>();
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
@@ -156,6 +147,27 @@ public class MainView {
     // public void setSetting(String setting, boolean value) {}
 
     public JFrame getSettingsFrame() {return settingsFrame;}
+
+    private JFrame createJFrame(Container contentPane){
+        return createJFrame(contentPane, 300, 400, true);
+    }
+    private JFrame createJFrame(Container contentPane, boolean visible){
+        return createJFrame(contentPane, 300, 400, visible);
+    }
+    private JFrame createJFrame(Container contentPane, int width, int height){
+        return createJFrame(contentPane, width, height);
+    }
+    private JFrame createJFrame(Container contentPane, int width, int height, boolean visible) {
+        JFrame localFrame = new JFrame();
+        localFrame.setContentPane(contentPane);
+        localFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        localFrame.setPreferredSize(new Dimension(width, height));
+        localFrame.pack();
+        localFrame.setVisible(visible);
+        return localFrame;
+    }
+
+
 }
 
 
