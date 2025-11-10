@@ -1,8 +1,8 @@
 package my_project.control.modeControl;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
-import my_project.model.TravelMode.Archer;
-import my_project.model.TravelMode.Bandit;
+import my_project.model.TravelMode.Bandits.Archer;
+import my_project.model.TravelMode.Bandits.Bandit;
 import my_project.model.TravelMode.Carriage;
 
 public class TravelModeControl extends ModeControl {

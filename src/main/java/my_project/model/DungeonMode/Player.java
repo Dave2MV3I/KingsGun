@@ -1,8 +1,7 @@
 package my_project.model.DungeonMode;
 
 import my_project.model.CoreClasses.GameObject;
-import my_project.model.CoreClasses.SpriteSheet;
-import my_project.model.CoreClasses.Texture;
+import my_project.model.Graphics.Texture;
 
 public class Player extends GameObject {
     public Player() {

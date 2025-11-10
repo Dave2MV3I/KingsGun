@@ -1,4 +1,4 @@
-package my_project.model;
+package my_project.model.CoreClasses;
 
 /**
  * SettingModel is a container class for all settings in the game. <br>

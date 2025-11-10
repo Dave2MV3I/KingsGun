@@ -1,4 +1,4 @@
-package my_project.model.CoreClasses;
+package my_project.model.Graphics;
 
 import java.awt.image.BufferedImage;
 

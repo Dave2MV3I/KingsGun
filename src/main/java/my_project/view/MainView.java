@@ -4,7 +4,7 @@ import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.control.MainController;
 import my_project.control.modeControl.*;
-import my_project.model.SettingsModel;
+import my_project.model.CoreClasses.SettingsModel;
 import my_project.view.javafx.BackendDeveloperAcces;
 import my_project.view.modeView.*;
 
@@ -36,7 +36,7 @@ public class MainView {
 
 
         SettingsWindow settingsWindow = new SettingsWindow(this);
-        settingsFrame = createJFrame(settingsWindow.getMainPanel(), 500, 600, false);
+        settingsFrame = createJFrame(settingsWindow.getMainPanel(), 400, 200, false);
 
         modeViews = new HashMap<>();
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
