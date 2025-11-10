@@ -28,6 +28,7 @@ public class VillageModeControl extends ModeControl {
     }
 
     public List<Village> getVillages() {return villages;}
+    public int getAmountVillage() {return amountVillage;}
 
     @Override
     protected void activate() {
