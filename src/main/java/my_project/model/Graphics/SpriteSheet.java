@@ -15,7 +15,7 @@ public class SpriteSheet extends Texture {
 
     /** Creates a SpriteSheet Object
      *
-     * @param spriteSheet path to the Imagefile relative from src/my_project/resources/
+     * @param spriteSheet path to the Imagefile relative from src/main/resources/graphic/
      * @param rows amount of rows in the Sprite Sheet
      * @param cols amount of columns in the Sprite Sheet
      */

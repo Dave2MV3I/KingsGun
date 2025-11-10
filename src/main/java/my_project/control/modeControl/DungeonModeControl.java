@@ -9,6 +9,7 @@ public class DungeonModeControl extends ModeControl {
     }
     @Override
     protected void activate() {
+        dungeon = new Dungeon();
     }
     public void setDungeon(Dungeon dungeon){
         this.dungeon = dungeon;

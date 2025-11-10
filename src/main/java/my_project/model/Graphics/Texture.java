@@ -7,10 +7,10 @@ import my_project.view.MainView;
 public class Texture extends GraphicalObject {
     /** Creates a Texture Object
      *
-     * @param texture path to the Imagefile relative from src/my_project/resources/
+     * @param texture path to the Imagefile relative from src/main/resources/graphic/
      */
     public Texture(String texture) {
-        setNewImage("src/my_project/resources/" + texture);
+        setNewImage("src/main/resources/graphic/" + texture);
     }
     /** create a Texture without Image (Only for easier implementation of Spritesheet)
      */
