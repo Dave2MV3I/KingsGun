@@ -3,18 +3,36 @@ package my_project.control;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.control.modeControl.*;
+import my_project.model.CoreClasses.SettingsController;
 import my_project.view.MainView;
 import my_project.view.modeView.*;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 
+/**
+ * Main Controlling Class of the project
+ * <br><br>
+ * Joshua Becker
+ */
 public class MainController extends GraphicalObject {
-    private MainView mainView;
+
+    // Attributes and Strings
     private static String currentMode;
+
+    // References
+    private MainView mainView;
+    private SettingsController settingsController = new SettingsController(this);
+
+    // Data structures
     private HashMap<String, ModeControl> modeControls;
+
+    // Constructor
     public MainController() {
         currentMode = "map";
-        modeControls = new HashMap<>();
+        modeControls = new HashMap<>(); // create Hashmap to cantain all controllers of game modes
+        // add mode controllers to Hashmap
         modeControls.put("map", new MapModeControl());
         modeControls.put("village", new VillageModeControl());
         modeControls.put("travel", new TravelModeControl());
@@ -49,8 +67,27 @@ public class MainController extends GraphicalObject {
 
     public void processInput(String c){
         switch (c) {
-            case "settings" : mainView.getSettingsFrame().setVisible(true);
+            case "settings" : settingsController.getSettingsFrame().setVisible(true);
         }
+    }
+
+    public JFrame createJFrame(Container contentPane){
+        return createJFrame(contentPane, 300, 400, true);
+    }
+    public JFrame createJFrame(Container contentPane, boolean visible){
+        return createJFrame(contentPane, 300, 400, visible);
+    }
+    public JFrame createJFrame(Container contentPane, int width, int height){
+        return createJFrame(contentPane, width, height);
+    }
+    public JFrame createJFrame(Container contentPane, int width, int height, boolean visible) {
+        JFrame localFrame = new JFrame();
+        localFrame.setContentPane(contentPane);
+        localFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        localFrame.setPreferredSize(new Dimension(width, height));
+        localFrame.pack();
+        localFrame.setVisible(visible);
+        return localFrame;
     }
 
 }
