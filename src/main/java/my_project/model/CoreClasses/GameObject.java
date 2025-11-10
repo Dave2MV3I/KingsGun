@@ -9,4 +9,63 @@ import my_project.model.Graphics.Texture;
  */
 public class GameObject extends GraphicalObject {
     protected Texture texture;
+    private double velocityX, velocityY;
+    public GameObject() {}
+    private void setVelocity(double x, double y){
+        setVelocityX(x);
+        setVelocityY(y);
+    }
+    /**
+     * Sets the GameObjects velocity in a certain direction
+     * @param angle The angle in which the GameObject should move
+     * @param strength The amount the GameObject should move
+     */
+    protected void setVelocityAS(double angle, double strength){
+        setVelocityX(Math.cos(angle)*strength);
+        setVelocityY(Math.sin(angle)*strength);
+    }
+
+    /**
+     * sets the GameObjects velocity on the X-Axis
+     * @param vx
+     */
+    protected void setVelocityX(double vx) {
+        this.velocityX = vx;
+    }
+    /**
+     * sets the GameObjects velocity on the Y-Axis
+     * @param vy
+     */
+    protected void setVelocityY(double vy) {
+        this.velocityY = vy;
+    }
+
+    /**
+     * Moves the GameObject on the X-axis
+     * <br><br>
+     * Can be Overridden to incorporate Collision detection
+     * @param mx amount to be moved on the X-axis
+     */
+    protected void moveX(double mx) {
+        x += mx;
+    }
+    /**
+     * Moves the GameObject on the Y-axis
+     * <br><br>
+     * Can be Overridden to incorporate Collision detection
+     * @param my amount to be moved on the Y-axis
+     */
+    protected void moveY(double my) {
+        y += my;
+    }
+
+    @Override
+    public void update(double dt) {
+        if(velocityX != 0){
+            moveX(velocityX * dt);
+        }
+        if(velocityY != 0){
+            moveY(velocityY * dt);
+        }
+    }
 }
