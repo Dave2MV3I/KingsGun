@@ -8,6 +8,7 @@ import my_project.model.VillageMode.Village;
  */
 public class MapModeControl extends ModeControl {
     private List<Village> villages;
+    private VillageModeControl villageModeControl;
 
     public MapModeControl() {
 
@@ -18,8 +19,10 @@ public class MapModeControl extends ModeControl {
     }
     @Override
     protected void activate() {
-        VillageModeControl villageController = (VillageModeControl) mainController.getModeControls().get("village");
-        villages = villageController.getVillages();
+        villageModeControl = (VillageModeControl) mainController.getModeControls().get("village");
+        villages = villageModeControl.getVillages();
     }
+
+    public VillageModeControl getVillageControl() {return villageModeControl;}
 
 }
