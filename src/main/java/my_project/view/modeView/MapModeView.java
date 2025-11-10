@@ -11,7 +11,7 @@ public class MapModeView extends ModeView {
 
     public MapModeView(MapModeControl modeControl) {
         super(modeControl);
-        amountVillages = modeControl.getVillageControl().getAmountVillage();
+        //amountVillages = modeControl.getVillageControl().getAmountVillage();
     }
 
     @Override
