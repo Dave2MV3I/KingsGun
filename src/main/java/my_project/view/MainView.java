@@ -91,10 +91,32 @@ public class MainView {
     public static void follow(double x, double y, boolean center) {
         OFFSET_X = x;
         OFFSET_Y = y;
+        centerCamera(center);
+    }
+    public static void follow(double x, double y) {
+        follow(x, y, false);
+    }
+    public static void moveCamera(double x, double y) {
+        moveCameraX(x);
+        moveCameraY(y);
+    }
+    public static void moveCameraX(double x) {
+        OFFSET_X += x;
+    }
+    public static void moveCameraY(double y) {
+        OFFSET_Y += y;
+    }
+    public static void centerCamera(boolean center) {
         if (center) {
             SCREEN_OFFSET_X = Config.WINDOW_WIDTH/2;
             SCREEN_OFFSET_Y = Config.WINDOW_HEIGHT/2;
+        }else {
+            SCREEN_OFFSET_X = 0;
+            SCREEN_OFFSET_Y = 0;
         }
+    }
+    public static boolean isCameraCentered() {
+        return SCREEN_OFFSET_X == Config.WINDOW_WIDTH/2 && SCREEN_OFFSET_Y == Config.WINDOW_HEIGHT/2;
     }
     /**
      * Translates the given position By the GLOBAL OFFSET and
@@ -120,6 +142,9 @@ public class MainView {
      */
     public static double scale(double v) {
         return v * SCALE;
+    }
+    public BackendDeveloperAcces getBackEndDeveloperAcces() {
+        return backendDeveloperAcces;
     }
 
 }

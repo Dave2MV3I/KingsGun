@@ -1,4 +1,4 @@
-package my_project.view;
+package my_project.view.javafx;
 import my_project.model.CoreClasses.SettingsController;
 
 import javax.swing.*;

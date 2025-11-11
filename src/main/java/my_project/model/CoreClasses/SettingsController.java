@@ -1,6 +1,7 @@
 package my_project.model.CoreClasses;
 import my_project.control.MainController;
-import my_project.view.SettingsWindow;
+import my_project.view.javafx.SettingsWindow;
+import my_project.view.javafx.SettingsWindow.*;
 
 import javax.swing.*;
 
