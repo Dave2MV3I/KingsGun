@@ -43,6 +43,7 @@ public class MainController extends GraphicalObject {
         for (ModeControl mode :  modeControls.values()) {
             mode.setMainController(this);
         }
+        modeControls.get(currentMode).setActive(true);
     }
     @Override
     public void draw(DrawTool drawTool) {
