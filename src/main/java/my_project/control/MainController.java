@@ -51,7 +51,9 @@ public class MainController extends GraphicalObject {
     }
     @Override
     public void update(double dt) {
+        double fps = 1/dt;
         modeControls.get(currentMode).update(dt);
+        mainView.getBackEndDeveloperAcces().setFPS(fps);
     }
     public void setMode(String mode) {
         modeControls.get(currentMode).setActive(false);
@@ -68,7 +70,10 @@ public class MainController extends GraphicalObject {
 
     public void processInput(String c){
         switch (c) {
-            case "settings" : settingsController.getSettingsFrame().setVisible(true);
+            case "settings" : settingsController.getSettingsFrame().setVisible(true); break;
+            case "zoomIn" : MainView.setScale(MainView.getScale() + 1); break;
+            case "zoomOut" : MainView.setScale(MainView.getScale() - 1); System.out.println("out"); break;
+            case "centerCamera" : MainView.centerCamera(!MainView.isCameraCentered()); break;
         }
     }
 

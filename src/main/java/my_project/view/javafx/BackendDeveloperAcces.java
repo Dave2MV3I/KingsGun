@@ -12,6 +12,7 @@ public class BackendDeveloperAcces {
     private JLabel modeDisplay;
     private JButton setModeButton;
     private JTextField modeSelection;
+    private JLabel fpsDisplay;
 
     public BackendDeveloperAcces(MainController controller) {
         modeDisplay.setText(controller.getMode());
@@ -26,5 +27,9 @@ public class BackendDeveloperAcces {
 
     public Container getContentPane() {
         return panel1;
+    }
+
+    public void setFPS(double fps) {
+        fpsDisplay.setText(String.valueOf(fps));
     }
 }

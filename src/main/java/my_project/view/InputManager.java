@@ -34,6 +34,11 @@ public class InputManager extends InteractiveGraphicalObject {
         switch (key){
             case KeyEvent.VK_ESCAPE : mainController.processInput("settings");
             break;
+            case KeyEvent.VK_O : mainController.processInput("zoomOut");
+            break;
+            case KeyEvent.VK_I : mainController.processInput("zoomIn");
+            break;
+            case KeyEvent.VK_P : mainController.processInput("centerCamera");
         }
     }
 

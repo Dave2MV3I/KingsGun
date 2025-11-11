@@ -13,8 +13,8 @@ public class Config {
 
     // Konfiguration des Standardfensters: Anzeige und Breite des Programmfensters (Width) und Höhe des Programmfensters (Height)
     public final static boolean SHOW_DEFAULT_WINDOW = true;
-    public final static int WINDOW_WIDTH = (int)(MainView.scale(240));
-    public final static int WINDOW_HEIGHT = (int)(MainView.scale(160))+29;   // Effektive Höhe ist etwa 29 Pixel geringer (Titelleiste wird mitgezählt)
+    public final static int WINDOW_WIDTH = (240*6);
+    public final static int WINDOW_HEIGHT = (160*6)+29;   // Effektive Höhe ist etwa 29 Pixel geringer (Titelleiste wird mitgezählt)
 
     // Weitere Optionen für das Projekt
     public final static boolean useSound = true;
