@@ -13,9 +13,9 @@ import javax.swing.event.ChangeListener;
 public class SettingsWindow {
     private JPanel mainPanel;
     private JLabel header;
-    private JSlider musicSlider; // Divide with 100
-    private JSlider soundSlider; // Divide with 100
-    private JSlider brightnessSlider; // Divide with 100
+    private JSlider musicSlider;
+    private JSlider soundSlider;
+    private JSlider brightnessSlider;
     private JLabel musicLabel;
     private JLabel soundLabel;
     private JLabel brightnessLabel;
@@ -31,20 +31,20 @@ public class SettingsWindow {
         musicSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                settingController.setSetting("musicVolume", musicSlider.getValue());}
+                settingController.setSetting("musicVolume", (float) musicSlider.getValue() /100);}
         });
 
         soundSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                settingController.setSetting("soundVolume", soundSlider.getValue());
+                settingController.setSetting("soundVolume", (float) soundSlider.getValue() /100);
             }
         });
 
         brightnessSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                settingController.setSetting("brightness", brightnessSlider.getValue());
+                settingController.setSetting("brightness", (float) brightnessSlider.getValue() /100);
             }
         });
     }
