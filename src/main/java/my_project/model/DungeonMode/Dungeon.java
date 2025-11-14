@@ -46,7 +46,7 @@ public class Dungeon extends GraphicalObject {
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                switch (Integer.toBinaryString(map.getRGB(col, row))) { //aaaaaaaabbbbbbbbrrrrrrrrgggggggg
+                switch (Integer.toBinaryString(map.getRGB(col, row))) { //aaaaaaaarrrrrrrrggggggggbbbbbbbb
                     case "11111111000000000000000000000000": //black
                         tiles[col][row] = new TileWall(col, row);
                         ; break;

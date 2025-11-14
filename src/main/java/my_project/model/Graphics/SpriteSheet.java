@@ -31,25 +31,33 @@ public class SpriteSheet extends Texture {
                 subImages[iX][iY] = getMyImage().getSubimage((int)(iX*subImgWidth), (int)(iY*subImgHeight), (int)(subImgWidth), (int)(subImgHeight));
             }
         }
+        setImageToCurrent();
     }
     @Override
     public void update(double dt){
         super.update(dt);
 
+        setImageToCurrent();
+    }
+    protected void setImageToCurrent(){
         currentX %= subImages.length;
         currentY %= subImages[0].length;
+        setImage(subImages[currentX][currentY]);
     }
 
     //Getter and Setter
     public void setCurrent(int x, int y) {
         currentX = x;
         currentY = y;
+        setImageToCurrent();
     }
     public void setCurrentX(int currentX) {
         this.currentX = currentX;
+        setImageToCurrent();
     }
     public void setCurrentY(int currentY) {
         this.currentY = currentY;
+        setImageToCurrent();
     }
 
     public int getCurrentX() {

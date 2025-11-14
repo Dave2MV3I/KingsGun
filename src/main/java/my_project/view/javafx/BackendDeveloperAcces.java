@@ -30,6 +30,6 @@ public class BackendDeveloperAcces {
     }
 
     public void setFPS(double fps) {
-        fpsDisplay.setText(String.valueOf(fps));
+        fpsDisplay.setText(String.valueOf(Math.floor(fps*10)/10));
     }
 }
