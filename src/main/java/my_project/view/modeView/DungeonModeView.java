@@ -6,6 +6,8 @@ import my_project.control.modeControl.DungeonModeControl;
 import my_project.control.modeControl.ModeControl;
 import my_project.model.DungeonMode.Tiles.Tile;
 
+import java.awt.*;
+
 public class DungeonModeView extends ModeView {
     public DungeonModeView(DungeonModeControl modeControl) {
         super(modeControl);
@@ -13,7 +15,7 @@ public class DungeonModeView extends ModeView {
 
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(200, 140, 100, 255);
+        drawTool.setCurrentColor(new Color(58, 68, 102));
         drawTool.drawFilledRectangle(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         drawDungeon(drawTool);
         super.draw(drawTool);
