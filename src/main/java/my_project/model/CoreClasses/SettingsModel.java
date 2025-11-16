@@ -15,7 +15,7 @@ public class SettingsModel {
     private static float _musicVolume; // 0-1
 
     // image
-    private static float _brightness; // 0-1
+    private static float _brightness = 1; // 0-1
 
     // getter and setter methods
     public static float getSoundVolume() {return _soundVolume;}

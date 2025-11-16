@@ -60,15 +60,6 @@
           <maximum value="100"/>
         </properties>
       </component>
-      <component id="85cba" class="javax.swing.JSlider" binding="brightnessSlider">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <maximum value="100"/>
-          <value value="1"/>
-        </properties>
-      </component>
       <vspacer id="24d8b">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -84,6 +75,19 @@
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="85cba" class="javax.swing.JSlider" binding="brightnessSlider">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <majorTickSpacing value="10"/>
+          <maximum value="100"/>
+          <minorTickSpacing value="5"/>
+          <paintTicks value="true"/>
+          <snapToTicks value="true"/>
+          <value value="100"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
