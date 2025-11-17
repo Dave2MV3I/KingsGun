@@ -27,6 +27,7 @@ public abstract class ModeControl{
     public void setModeView(ModeView modeView){
         this.modeView = modeView;
     }
+    public ModeView getModeView(){return modeView;}
     public void update(double dt){
         timer += dt;
     }
