@@ -63,16 +63,16 @@ public class GameObject extends GraphicalObject {
      * Can be Overridden to incorporate Collision detection
      * @return wether the GameObject should move or not
      */
-    protected boolean movementcondition(){
+    protected boolean movementCondition(){
         return true;
     }
 
     @Override
     public void update(double dt) {
-        if(velocityX != 0 && movementcondition()){
+        if(velocityX != 0 && movementCondition()){
             moveX(velocityX * dt);
         }
-        if(velocityY != 0 && movementcondition()){
+        if(velocityY != 0 && movementCondition()){
             moveY(velocityY * dt);
         }
     }
