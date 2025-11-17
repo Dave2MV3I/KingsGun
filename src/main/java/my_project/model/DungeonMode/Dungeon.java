@@ -16,7 +16,7 @@ public class Dungeon extends GraphicalObject {
     private Tile[][] tiles;
 
     public Dungeon() {
-        this.monster = new Monster();
+        //this.monster = new Monster();
         setMap("src/main/resources/graphic/Dungeon 1.png");
     }
 
