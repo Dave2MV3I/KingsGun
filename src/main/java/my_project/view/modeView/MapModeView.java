@@ -4,8 +4,10 @@ import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.control.modeControl.MapModeControl;
 import my_project.control.modeControl.ModeControl;
+import my_project.view.InputManager;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class MapModeView extends ModeView {
     private int amountVillages;
@@ -16,6 +18,11 @@ public class MapModeView extends ModeView {
         //amountVillages = modeControl.getVillageControl().getAmountVillage();
 
     }
+
+    /**
+     * Fills the 2D Array with the amount of Villages and their drawn x- and y-Pos.
+     * @param amountVillages
+     */
     public void setAmountVillages(int amountVillages) {
         System.out.println("Amount of villages: " + amountVillages);
         this.amountVillages = amountVillages;
@@ -32,6 +39,8 @@ public class MapModeView extends ModeView {
 
     @Override
     public void draw(DrawTool drawTool) {
+        drawTool.setCurrentColor(new Color(184, 111, 80));
+        drawTool.drawFilledRectangle(0,0,Config.WINDOW_WIDTH,Config.WINDOW_HEIGHT);
 
         for(int i = 0; i < villagePos.length - 1; i++) {
             drawTool.setCurrentColor(new Color(24, 20, 37));
@@ -57,5 +66,14 @@ public class MapModeView extends ModeView {
 
         drawTool.setCurrentColor(new Color(13, 152, 241));
         drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/1.2,10);
+    }
+
+    //@Override
+    public void update(double dt) {
+
+    }
+
+    public void manageMouseInput(MouseEvent e) {
+
     }
 }

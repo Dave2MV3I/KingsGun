@@ -33,9 +33,14 @@ public class TravelModeControl extends ModeControl {
     }
 
     public boolean checkAndHandleCollision(GraphicalObject gO){
-        if (gO.collidesWith(carriage)) {
-            return true;
+        if (gO != null){
+            if (gO.collidesWith(carriage)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-        return false;
     }
 }

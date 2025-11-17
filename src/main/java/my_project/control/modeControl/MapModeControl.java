@@ -25,6 +25,6 @@ public class MapModeControl extends ModeControl {
         ((MapModeView)modeView).setAmountVillages(villageModeControl.getAmountVillage());
     }
 
-    public VillageModeControl getVillageControl() {return villageModeControl;}
+    public MapModeView getMapModeView() {return (MapModeView)modeView;}
 
 }
