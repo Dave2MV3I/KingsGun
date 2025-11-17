@@ -81,5 +81,10 @@ public class Dungeon extends GraphicalObject {
     public Tile[][] getTiles(){
         return tiles;
     }
-
+    public Tile getTile(int x, int y){
+        return tiles[x][y];
+    }
+    public Tile getTileFromCoordinates(double x, double y){
+        return getTile((int)(x/Tile.getWIDTH()), (int)(y/Tile.getHEIGHT()));
+    }
 }
