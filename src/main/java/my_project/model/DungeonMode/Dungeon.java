@@ -1,6 +1,7 @@
 package my_project.model.DungeonMode;
 
 import KAGO_framework.model.GraphicalObject;
+import my_project.model.DungeonMode.Monsters.Monster;
 import my_project.model.DungeonMode.Tiles.Tile;
 import my_project.model.DungeonMode.Tiles.TileFloor;
 import my_project.model.DungeonMode.Tiles.TileWall;
