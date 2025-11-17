@@ -31,7 +31,6 @@ public abstract class Tile extends GameObject {
     @Override
     public void draw(DrawTool drawTool) {
         if(this.texture != null) {
-
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
         }
 
