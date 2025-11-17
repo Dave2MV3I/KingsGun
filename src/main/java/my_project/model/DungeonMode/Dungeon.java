@@ -47,33 +47,36 @@ public class Dungeon extends GraphicalObject {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 switch (Integer.toBinaryString(map.getRGB(col, row))) { //aaaaaaaarrrrrrrrggggggggbbbbbbbb
-                    case "11111111000000000000000000000000": //black
+                    case "11111111000000000000000000000000": //black: wall
                         tiles[col][row] = new TileWall(col, row);
-                        ; break;
+                        break;
                     case "11111111111111110000000011111111": //magenta
 
-                        ; break;
+                        break;
                     case "11111111111111110000000000000000": //red
-                        ; break;
+
+                        break;
                     case "11111111111111111111111100000000": //yellow
-                        ; break;
+
+                        break;
                     case "11111111000000001111111100000000": //green
-                        ; break;
+
+                        break;
                     case "11111111000000001111111111111111": //cyan
-                        ; break;
+
+                        break;
                     case "11111111000000000000000011111111": //blue
-                        ; break;
+
+                        break;
                     case "11111111111111111111111111111111": //white
                         tiles[col][row] = new TileFloor(col, row);
-                        ; break;
+                        break;
                 }
-
             }
         }
     }
     private void setMap(String path){
         setMap(createImage(path));
-
     }
     public Tile[][] getTiles(){
         return tiles;
