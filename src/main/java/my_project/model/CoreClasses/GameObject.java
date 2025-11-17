@@ -42,8 +42,6 @@ public class GameObject extends GraphicalObject {
 
     /**
      * Moves the GameObject on the X-axis
-     * <br><br>
-     * Can be Overridden to incorporate Collision detection
      * @param mx amount to be moved on the X-axis
      */
     protected void moveX(double mx) {
@@ -51,20 +49,27 @@ public class GameObject extends GraphicalObject {
     }
     /**
      * Moves the GameObject on the Y-axis
-     * <br><br>
-     * Can be Overridden to incorporate Collision detection
+     *
      * @param my amount to be moved on the Y-axis
      */
     protected void moveY(double my) {
         y += my;
     }
 
+    /**
+     * Can be Overridden to incorporate Collision detection
+     * @return wether the GameObject should move or not
+     */
+    protected boolean movementcondition(){
+        return true;
+    }
+
     @Override
     public void update(double dt) {
-        if(velocityX != 0){
+        if(velocityX != 0 && movementcondition()){
             moveX(velocityX * dt);
         }
-        if(velocityY != 0){
+        if(velocityY != 0 && movementcondition()){
             moveY(velocityY * dt);
         }
     }
