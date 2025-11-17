@@ -24,6 +24,9 @@ public class GameObject extends GraphicalObject {
         setVelocityX(Math.cos(angle)*strength);
         setVelocityY(Math.sin(angle)*strength);
     }
+    protected double getDirection(GraphicalObject object){
+        return Math.atan2(object.getY() - this.getX(),  object.getX() - this.getY());
+    }
 
     /**
      * sets the GameObjects velocity on the X-Axis

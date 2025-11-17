@@ -30,7 +30,6 @@ public abstract class Tile extends GameObject {
     }
     @Override
     public void draw(DrawTool drawTool) {
-        System.out.println("Drawing tile: " + this.getClass().getSimpleName());
         if(this.texture != null) {
 
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
