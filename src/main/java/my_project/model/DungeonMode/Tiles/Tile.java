@@ -13,15 +13,14 @@ public abstract class Tile extends GameObject {
     private static final double HEIGHT = 16;
     private Dungeon dungeon;
     private boolean isSolid;
-    protected String textureType;
 
 
-    public Tile(int x, int y, Texture texture) {
-
+    public Tile(int x, int y, Texture texture, Dungeon dungeon) {
+        setDungeon(dungeon);
         this.x = x * WIDTH;
         this.y = y * HEIGHT;
         this.texture = texture;
-        textureType = texture.getClass().getSimpleName();
+
         setSize();
     }
     private void setSize() {
@@ -40,6 +39,12 @@ public abstract class Tile extends GameObject {
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
         }
 
+    }
+    @Override
+    public void update(double dt) {
+        super.update(dt);
+        findOrientation();
+        texture.update(dt);
     }
     public void setDungeon(Dungeon dungeon) {
         this.dungeon = dungeon;
@@ -60,39 +65,37 @@ public abstract class Tile extends GameObject {
         return dungeon.getTile(getGridPosX() + relativeX, getGridPosY() + relativeY);
     }
     public Tile getRelative(String direction) {
-        switch (direction) {
-            case "up":
-                return dungeon.getTile(getGridPosX(), getGridPosY() - 1);
-            case "topRight":
-                return dungeon.getTile(getGridPosX() + 1, getGridPosY() - 1);
-            case "right":
-                return dungeon.getTile(getGridPosX() + 1, getGridPosY());
-            case "downRight":
-                return dungeon.getTile(getGridPosX()+1, getGridPosY() + 1);
-            case "down":
-                return dungeon.getTile(getGridPosX(), getGridPosY() + 1);
-            case "downLeft":
-                return dungeon.getTile(getGridPosX()-1, getGridPosY() + 1);
-            case "left":
-                return dungeon.getTile(getGridPosX() - 1, getGridPosY());
-            case "upLeft":
-                return dungeon.getTile(getGridPosX()-1, getGridPosY() - 1);
-        }
-        return null;
+        return switch (direction) {
+            case "up" -> dungeon.getTile(getGridPosX(), getGridPosY() - 1);
+            case "topRight" -> dungeon.getTile(getGridPosX() + 1, getGridPosY() - 1);
+            case "right" -> dungeon.getTile(getGridPosX() + 1, getGridPosY());
+            case "downRight" -> dungeon.getTile(getGridPosX() + 1, getGridPosY() + 1);
+            case "down" -> dungeon.getTile(getGridPosX(), getGridPosY() + 1);
+            case "downLeft" -> dungeon.getTile(getGridPosX() - 1, getGridPosY() + 1);
+            case "left" -> dungeon.getTile(getGridPosX() - 1, getGridPosY());
+            case "upLeft" -> dungeon.getTile(getGridPosX() - 1, getGridPosY() - 1);
+            default -> null;
+        };
     }
     private void findOrientation(){
-        if(textureType.equals("TileSheet")) {
-            boolean[] tempBool = new boolean[]{
-                    getRelative("up").getClass().equals(getClass()),
-                    getRelative("upRight").getClass().equals(getClass()),
-                    getRelative("right").getClass().equals(getClass()),
-                    getRelative("downRight").getClass().equals(getClass()),
-                    getRelative("down").getClass().equals(getClass()),
-                    getRelative("downLeft").getClass().equals(getClass()),
-                    getRelative("left").getClass().equals(getClass()),
-                    getRelative("upLeft").getClass().equals(getClass())
+        if(texture instanceof TileSheet) {
+            Tile[] relativeTiles = new Tile[]{
+                getRelative("up"),
+                getRelative("upRight"),
+                getRelative("right"),
+                getRelative("downRight"),
+                getRelative("down"),
+                getRelative("downLeft"),
+                getRelative("left"),
+                getRelative("upLeft")
             };
-            ((TileSheet)texture).getTileOrientation(tempBool);
+            boolean[] tempBool = new boolean[8];
+            for (int i = 0; i < relativeTiles.length; i++) {
+                tempBool[i] = relativeTiles[i] != null && relativeTiles[i].getClass().equals(getClass());
+            }
+
+            ((TileSheet)texture).setCurrent(tempBool);
+
         }
     }
 }

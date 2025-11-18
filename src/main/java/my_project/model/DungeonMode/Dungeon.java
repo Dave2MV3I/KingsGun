@@ -49,7 +49,7 @@ public class Dungeon extends GraphicalObject {
             for (int col = 0; col < width; col++) {
                 switch (Integer.toBinaryString(map.getRGB(col, row))) { //aaaaaaaarrrrrrrrggggggggbbbbbbbb
                     case "11111111000000000000000000000000": //black: wall
-                        tiles[col][row] = new TileWall(col, row);
+                        tiles[col][row] = new TileWall(col, row, this);
                         break;
                     case "11111111111111110000000011111111": //magenta
 
@@ -70,7 +70,7 @@ public class Dungeon extends GraphicalObject {
 
                         break;
                     case "11111111111111111111111111111111": //white
-                        tiles[col][row] = new TileFloor(col, row);
+                        tiles[col][row] = new TileFloor(col, row, this);
                         break;
                 }
             }
@@ -87,5 +87,16 @@ public class Dungeon extends GraphicalObject {
     }
     public Tile getTileFromCoordinates(double x, double y){
         return getTile((int)(x/Tile.getWIDTH()), (int)(y/Tile.getHEIGHT()));
+    }
+    @Override
+    public void update(double dt) {
+        super.update(dt);
+        for (Tile[] row : tiles) {
+            for (Tile tile : row) {
+                if (tile != null) {
+                    tile.update(dt);
+                }
+            }
+        }
     }
 }

@@ -13,6 +13,11 @@ public class DungeonModeControl extends ModeControl {
     protected void activate() {
         dungeon = new Dungeon();
     }
+    @Override
+    public void update(double dt) {
+        super.update(dt);
+        dungeon.update(dt);
+    }
     public void setDungeon(Dungeon dungeon){
         this.dungeon = dungeon;
     }
@@ -22,4 +27,5 @@ public class DungeonModeControl extends ModeControl {
     public Tile[][] getDungeonTiles(){
         return dungeon.getTiles();
     }
+
 }

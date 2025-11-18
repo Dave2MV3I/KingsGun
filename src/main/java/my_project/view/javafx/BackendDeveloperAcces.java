@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class BackendDeveloperAcces {
     private JPanel panel1;
@@ -21,6 +23,16 @@ public class BackendDeveloperAcces {
             public void actionPerformed(ActionEvent e) {
                 controller.setMode(modeSelection.getText());
                 modeDisplay.setText(controller.getMode());
+            }
+        });
+        modeSelection.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                    controller.setMode(modeSelection.getText());
+                    modeDisplay.setText(controller.getMode());
+                }
             }
         });
     }

@@ -42,7 +42,7 @@ public class SpriteSheet extends Texture {
     protected void setImageToCurrent(){
         currentX %= subImages.length;
         currentY %= subImages[0].length;
-        setImage(subImages[currentX][currentY]);
+        setImage(getSubImage(currentX, currentY));
     }
 
     //Getter and Setter
@@ -58,6 +58,9 @@ public class SpriteSheet extends Texture {
     public void setCurrentY(int currentY) {
         this.currentY = currentY;
         setImageToCurrent();
+    }
+    public BufferedImage getSubImage(int x, int y) {
+        return subImages[x][y];
     }
 
     public int getCurrentX() {
