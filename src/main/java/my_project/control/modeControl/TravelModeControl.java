@@ -30,6 +30,7 @@ public class TravelModeControl extends ModeControl {
         if (checkAndHandleCollision(bandits.getContent())){
             bandits.getContent().loseHP(100);
         }
+        carriage.update(dt);
     }
 
     public boolean checkAndHandleCollision(GraphicalObject gO){
@@ -42,5 +43,8 @@ public class TravelModeControl extends ModeControl {
         } else {
             return false;
         }
+    }
+    public Carriage getCarriage(){
+        return carriage;
     }
 }

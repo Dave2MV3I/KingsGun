@@ -37,9 +37,11 @@ public class InputManager extends InteractiveGraphicalObject {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-        //if(e.getButton() == MouseEvent.BUTTON1 && mainController.getMode() == "map"){
-            //mainController.getModeControls().get("map").getModeView.manageMouseInput(e);}
+    public void mousePressed(MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON1 && mainController.getMode().equals("map")){
+            MapModeControl mapmodecontrol = (MapModeControl)mainController.getModeControls().get("map");
+            mapmodecontrol.getMapModeView().manageMouseInput(e);
+        }
     }
 
     @Override

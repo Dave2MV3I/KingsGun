@@ -89,8 +89,8 @@ public class MainView {
      * @param center wether the camera should be centered on the given position
      */
     public static void follow(double x, double y, boolean center) {
-        OFFSET_X = x;
-        OFFSET_Y = y;
+        OFFSET_X = -x;
+        OFFSET_Y = -y;
         centerCamera(center);
     }
     public static void follow(double x, double y) {

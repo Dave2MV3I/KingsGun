@@ -63,17 +63,11 @@ public class MapModeView extends ModeView {
             drawTool.drawFilledCircle(villagePos[i][0], villagePos[i][1], 10);
         }
 
-
         drawTool.setCurrentColor(new Color(13, 152, 241));
         drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/1.2,10);
     }
 
-    //@Override
-    public void update(double dt) {
-
-    }
-
     public void manageMouseInput(MouseEvent e) {
-
+        System.out.println("e ist da");
     }
 }

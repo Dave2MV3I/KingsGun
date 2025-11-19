@@ -31,4 +31,8 @@ public class Texture extends GraphicalObject {
     public double getHeightRelativeToWidth(double width){
         return getMyImage().getHeight()*(width/getMyImage().getWidth());
     }
+
+    public double getScaleRelativeToWidth(double width){
+            return width/getMyImage().getWidth();
+    }
 }
