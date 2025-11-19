@@ -61,7 +61,7 @@ public class GameObject extends GraphicalObject {
 
     /**
      * Can be Overridden to incorporate Collision detection
-     * @return wether the GameObject should move or not
+     * @return whether the GameObject should move or not
      */
     protected boolean movementCondition(){
         return true;

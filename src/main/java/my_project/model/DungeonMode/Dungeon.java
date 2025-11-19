@@ -1,6 +1,9 @@
 package my_project.model.DungeonMode;
 
 import KAGO_framework.model.GraphicalObject;
+import KAGO_framework.model.abitur.datenstrukturen.List;
+import my_project.control.modeControl.DungeonModeControl;
+import my_project.model.DungeonMode.Monsters.*;
 import my_project.model.DungeonMode.Monsters.Monster;
 import my_project.model.DungeonMode.Tiles.Tile;
 import my_project.model.DungeonMode.Tiles.TileFloor;
@@ -14,10 +17,47 @@ import java.awt.image.BufferedImage;
 public class Dungeon extends GraphicalObject {
     private Monster monster;
     private Tile[][] tiles;
+    private DungeonModeControl control;
+    List<Monster> monsters;
+    private static Monster lastMonster;
+    private Monster myMonster;
 
-    public Dungeon() {
+    public Dungeon(DungeonModeControl control) {
+        this.control = control;
+        monsters = control.monsters;
+
         //this.monster = new Monster();
         setMap("src/main/resources/graphic/Dungeon 1.png");
+        //int randomMonster = (int)(Math.random()*8);
+
+        double randomMonster = Math.random();
+        while(randomMonster < 0.4){
+            if (monsters.getContent() != lastMonster) {
+                monsters.next();
+                randomMonster = Math.random();
+            }
+        }
+        myMonster = monsters.getContent();
+    }
+
+    /**
+     * Adds all types of monsters to the linked list
+     */
+    public void instantiateMonsters(){
+        //TODO David: Instead of instantiating all monsters in the beginning and putting them into a list,
+        // having a list with class names or numbers for each class, choose a class mid-game and
+        // instantiate the needed monster of this class
+        monsters.append(new Dragon());
+        monsters.append(new Goblin());
+        monsters.append(new Orc());
+        monsters.append(new Dwarf());
+        monsters.append(new Elf());
+        monsters.append(new Ogre());
+        monsters.append(new Troll());
+
+        monsters.toLast();
+        lastMonster = monsters.getContent();
+        monsters.toFirst();
     }
 
     /**
@@ -29,7 +69,7 @@ public class Dungeon extends GraphicalObject {
      * White Pixel: Floor
      *
      * <br>
-     * Red Pixel: Moster spawn
+     * Red Pixel: Monster spawn
      * <br>
      * Magenta Pixel: Cosmetic Tile
      * <br>
