@@ -14,6 +14,9 @@ import java.awt.event.MouseEvent;
  * im ProgramController aufruft.
  */
 public class InputManager extends InteractiveGraphicalObject {
+    public static boolean[] keys = new boolean[65489];
+
+
 
     private final MainController mainController;
 
@@ -26,14 +29,24 @@ public class InputManager extends InteractiveGraphicalObject {
 
     }
 
+    public static boolean isPressed(int key) {
+        return keys[key];
+    }
+    public static boolean isPressed(String key) {
+        return keys[KeyEvent.getExtendedKeyCodeForChar(key.charAt(0))];
+    }
+
     @Override
-    public void mouseReleased(MouseEvent e) {
-        //if(e.getButton() == MouseEvent.BUTTON1 && mainController.getMode() == "map"){
-            //mainController.getModeControls().get("map").getModeView.manageMouseInput(e);}
+    public void mousePressed(MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON1 && mainController.getMode().equals("map")){
+            MapModeControl mapmodecontrol = (MapModeControl)mainController.getModeControls().get("map");
+            mapmodecontrol.getMapModeView().manageMouseInput(e);
+        }
     }
 
     @Override
     public void keyPressed (int key){
+        keys[key] = true;
         switch (key){
             case KeyEvent.VK_ESCAPE : mainController.processInput("settings");
             break;
@@ -44,5 +57,10 @@ public class InputManager extends InteractiveGraphicalObject {
             case KeyEvent.VK_P : mainController.processInput("centerCamera");
         }
     }
+    @Override
+    public void keyReleased(int key) {
+        keys[key] = false;
+    }
+
 
 }
