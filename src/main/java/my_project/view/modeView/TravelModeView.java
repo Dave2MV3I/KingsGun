@@ -24,7 +24,7 @@ public class TravelModeView extends ModeView {
     @Override
     public void draw(DrawTool drawTool) {
         for (int i = 0; i < 100; i++) {
-            roadTexture.autoDraw(drawTool, 0, i * 16, 256);
+            roadTexture.autoDraw(drawTool, 0, i * 32, 256);
         }
         carriage.draw(drawTool);
     }

@@ -35,7 +35,7 @@ public class Carriage extends GameObject {
         if(InputManager.isPressed("d")){
             moveX(60*dt);
         }
-        MainView.follow(0, y, false); //folgt immer der Kutsche
+        MainView.follow(0, y - 20, false); //folgt immer der Kutsche
     }
 
 }
