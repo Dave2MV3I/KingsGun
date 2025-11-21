@@ -38,4 +38,10 @@ public class AnimatedSpriteSheet extends SpriteSheet{
         }
         super.update(dt);
     }
+    public void setFrameCooldownX(double frameCooldownX) {
+        this.frameCooldownX = frameCooldownX;
+    }
+    public void setFrameCooldownY(double frameCooldownY) {
+        this.frameCooldownY = frameCooldownY;
+    }
 }

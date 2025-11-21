@@ -6,8 +6,8 @@ public class SpriteSheet extends Texture {
     BufferedImage[][] subImages;
     protected int currentX;
     protected int currentY;
-    protected double subImgWidth;
-    protected double subImgHeight;
+    protected double width;
+    protected double height;
 
 
     /** Creates a SpriteSheet Object
@@ -21,14 +21,14 @@ public class SpriteSheet extends Texture {
         subImages = new BufferedImage[cols][rows];
         currentX = 0;
         currentY = 0;
-        subImgWidth = (double) getMyImage().getWidth() /cols;
-        subImgHeight = (double) getMyImage().getHeight() /rows;
+        width = (double) getMyImage().getWidth() /cols;
+        height = (double) getMyImage().getHeight() /rows;
 
 
 
         for (int iX = 0; iX < cols; iX++) {
             for (int iY = 0; iY < rows; iY++) {
-                subImages[iX][iY] = getMyImage().getSubimage((int)(iX*subImgWidth), (int)(iY*subImgHeight), (int)(subImgWidth), (int)(subImgHeight));
+                subImages[iX][iY] = getMyImage().getSubimage((int)(iX* width), (int)(iY* height), (int)(width), (int)(height));
             }
         }
         setImageToCurrent();
@@ -71,10 +71,10 @@ public class SpriteSheet extends Texture {
     }
 
     public double getSubImgWidth() {
-        return subImgWidth;
+        return width;
     }
     public double getSubImgHeight() {
-        return subImgHeight;
+        return height;
     }
 
 }

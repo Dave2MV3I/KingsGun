@@ -6,7 +6,7 @@ import my_project.model.Graphics.TileSheet;
 
 public class TileWall extends Tile {
     public TileWall(int x, int y, Dungeon dungeon) {
-        super(x, y, new TileSheet("WallTileSheet.png"), dungeon);
+        super(x, y, new TileSheet("Wall Spritesheet.png"), dungeon);
         setSolid(true);
     }
 

@@ -28,5 +28,6 @@ public class DungeonModeView extends ModeView {
 
             }
         }
+        ((DungeonModeControl) modeControl).getPlayer().draw(drawTool);
     }
 }

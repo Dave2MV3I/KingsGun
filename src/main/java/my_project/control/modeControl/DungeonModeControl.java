@@ -4,10 +4,12 @@ import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.model.DungeonMode.Dungeon;
 import my_project.model.DungeonMode.Monsters.Dragon;
 import my_project.model.DungeonMode.Monsters.Monster;
+import my_project.model.DungeonMode.Player;
 import my_project.model.DungeonMode.Tiles.Tile;
 
 public class DungeonModeControl extends ModeControl {
     Dungeon dungeon;
+    Player player;
     public final List<Monster> monsters = new List<>();
 
     public DungeonModeControl() {
@@ -22,6 +24,7 @@ public class DungeonModeControl extends ModeControl {
     @Override
     protected void activate() {
         dungeon = new Dungeon(this);
+        player = new Player(0,0);
         if (monsters.isEmpty()) {
             dungeon.instantiateMonsters();
         }
@@ -31,6 +34,7 @@ public class DungeonModeControl extends ModeControl {
     public void update(double dt) {
         super.update(dt);
         dungeon.update(dt);
+        player.update(dt);
     }
 
     public void setDungeon(Dungeon dungeon){
@@ -43,6 +47,12 @@ public class DungeonModeControl extends ModeControl {
 
     public Tile[][] getDungeonTiles(){
         return dungeon.getTiles();
+    }
+    public Player getPlayer(){
+        return player;
+    }
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
 }
