@@ -15,49 +15,37 @@ import java.awt.image.BufferedImage;
  *
  */
 public class Dungeon extends GraphicalObject {
-    private Monster monster;
     private Tile[][] tiles;
-    private DungeonModeControl control;
-    List<Monster> monsters;
-    private static Monster lastMonster;
-    private Monster myMonster;
 
-    public Dungeon(DungeonModeControl control) {
+    private final DungeonModeControl control;
+    private Monster monster;
+
+    public Dungeon(DungeonModeControl control, List<Class<? extends Monster>> monsterClasses) {
         this.control = control;
-        monsters = control.monsters;
-
-        //this.monster = new Monster();
         setMap("src/main/resources/graphic/Dungeon 1.png");
-        //int randomMonster = (int)(Math.random()*8);
-
-        double randomMonster = Math.random();
-        while(randomMonster < 0.4){
-            if (monsters.getContent() != lastMonster) {
-                monsters.next();
-                randomMonster = Math.random();
-            }
+        // Choose random monster. Powerful monsters spawn with less probability.
+        monsterClasses.toFirst();
+        double nextMonsterProbability = Math.random();
+        while(nextMonsterProbability < 0.4){
+            if (monsterClasses.hasAccess()) {
+                monsterClasses.next();
+                nextMonsterProbability = Math.random();
+            } else monsterClasses.toLast();
         }
-        myMonster = monsters.getContent();
-    }
-
-    /**
-     * Adds all types of monsters to the linked list
-     */
-    public void instantiateMonsters(){
-        //TODO David: Instead of instantiating all monsters in the beginning and putting them into a list,
-        // having a list with class names or numbers for each class, choose a class mid-game and
-        // instantiate the needed monster of this class
-        monsters.append(new Dragon());
-        monsters.append(new Goblin());
-        monsters.append(new Orc());
-        monsters.append(new Dwarf());
-        monsters.append(new Elf());
-        monsters.append(new Ogre());
-        monsters.append(new Troll());
-
-        monsters.toLast();
-        lastMonster = monsters.getContent();
-        monsters.toFirst();
+        // Instantiate chosen monster
+        Class<? extends Monster> chosenMonster = monsterClasses.getContent();
+        try {
+            java.lang.reflect.Constructor<? extends Monster> constructor = chosenMonster.getDeclaredConstructor();
+            monster = constructor.newInstance();
+            System.out.println("Neues Monster gespawnt: " + chosenMonster);
+        } catch (NoSuchMethodException e) {
+            System.err.println("Error: Monster class does not have a parameterless constructor.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Catche InstantiationException, IllegalAccessException, InvocationTargetException ab
+            System.err.println("Error with instantiating the monster: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -128,6 +116,7 @@ public class Dungeon extends GraphicalObject {
     public Tile getTileFromCoordinates(double x, double y){
         return getTile((int)(x/Tile.getWIDTH()), (int)(y/Tile.getHEIGHT()));
     }
+    public Monster getMonster(){return this.monster;}
     @Override
     public void update(double dt) {
         super.update(dt);
