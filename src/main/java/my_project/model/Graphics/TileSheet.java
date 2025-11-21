@@ -36,11 +36,11 @@ public class TileSheet extends SpriteSheet{
         Vec2d current = getTileOrientation(currentBool);
         if (current == null) {
            current = nullTileOrientation;
-           System.out.println();
+           //System.out.println();
         }
         currentX = (int)current.x;
         currentY = (int)current.y;
-        System.out.println(currentX + " " + currentY);
+        //System.out.println(currentX + " " + currentY);
         setImageToCurrent();
     }
     public Vec2d getTileOrientation(boolean[] directions) {

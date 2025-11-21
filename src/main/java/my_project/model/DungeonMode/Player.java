@@ -2,6 +2,7 @@ package my_project.model.DungeonMode;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.view.DrawTool;
+import my_project.control.modeControl.DungeonModeControl;
 import my_project.model.CoreClasses.GameObject;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 import my_project.model.Graphics.SpriteSheet;
@@ -13,8 +14,13 @@ import javax.swing.text.View;
 import java.awt.event.KeyEvent;
 
 public class Player extends GameObject {
-    public Player(double x, double y) {
+    DungeonModeControl control;
+    public Player(double x, double y, DungeonModeControl dungeonModeControl) {
+        this.x = x;
+        this.y = y;
+        control = dungeonModeControl;
         this.texture = new AnimatedSpriteSheet("Player.png", 4, 4);
+        radius = 16;
         ((AnimatedSpriteSheet)texture).setCurrent(0,0);
     }
     @Override
@@ -54,5 +60,13 @@ public class Player extends GameObject {
     @Override
     public void draw(DrawTool drawTool) {
         texture.autoDraw(drawTool, x, y, 32);
+        drawHitbox(drawTool);
+    }
+    @Override
+    protected boolean movementCondition() {
+        if (control.getTileByCoord(this.x, this.y) == null){
+            return true;
+        }
+        return !control.getTileByCoord(this.x, this.y).isSolid();
     }
 }

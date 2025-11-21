@@ -24,7 +24,7 @@ public class DungeonModeControl extends ModeControl {
     @Override
     protected void activate() {
         dungeon = new Dungeon(this);
-        player = new Player(0,0);
+        player = new Player(256,64, this);
         if (monsters.isEmpty()) {
             dungeon.instantiateMonsters();
         }
@@ -47,6 +47,12 @@ public class DungeonModeControl extends ModeControl {
 
     public Tile[][] getDungeonTiles(){
         return dungeon.getTiles();
+    }
+    public Tile getTile(int x, int y){
+        return dungeon.getTile(x, y);
+    }
+    public Tile getTileByCoord(double x, double y){
+        return dungeon.getTileFromCoordinates(x, y);
     }
     public Player getPlayer(){
         return player;

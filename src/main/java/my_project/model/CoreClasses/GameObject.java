@@ -1,7 +1,10 @@
 package my_project.model.CoreClasses;
 
 import KAGO_framework.model.GraphicalObject;
+import KAGO_framework.view.DrawTool;
 import my_project.model.Graphics.Texture;
+
+import java.awt.*;
 
 /**Blueprint Class for all In-Game Objects
  *<br><br>
@@ -9,6 +12,7 @@ import my_project.model.Graphics.Texture;
  */
 public class GameObject extends GraphicalObject {
     protected Texture texture;
+    private final double moveBackPrecisionFactor = 0.1;
     private double velocityX, velocityY;
     public GameObject() {}
     private void setVelocity(double x, double y){
@@ -49,6 +53,9 @@ public class GameObject extends GraphicalObject {
      */
     protected void moveX(double mx) {
         x += mx;
+        while (!movementCondition()){
+            x -= mx * moveBackPrecisionFactor;
+        }
     }
     /**
      * Moves the GameObject on the Y-axis
@@ -57,6 +64,9 @@ public class GameObject extends GraphicalObject {
      */
     protected void moveY(double my) {
         y += my;
+        while (!movementCondition()){
+            y -= my * moveBackPrecisionFactor;
+        }
     }
 
     /**
@@ -76,4 +86,12 @@ public class GameObject extends GraphicalObject {
             moveY(velocityY * dt);
         }
     }
+    protected void drawHitbox(DrawTool drawTool) {
+        //TODO draw the *Auto Hitbox*
+        drawTool.setCurrentColor(new Color(255, 0, 0));
+        drawTool.drawRectangle(x, y, getWidth(), getHeight());
+        drawTool.setCurrentColor(new Color(0, 0, 255));
+        drawTool.drawCircle(x, y, getRadius());
+    }
 }
+
