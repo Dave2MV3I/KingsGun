@@ -1,5 +1,6 @@
 package my_project.view.modeView;
 
+import KAGO_framework.view.DrawTool;
 import my_project.control.modeControl.ModeControl;
 import my_project.control.modeControl.VillageModeControl;
 
@@ -8,4 +9,8 @@ public class VillageModeView extends ModeView {
         super(modeControl);
     }
 
+    @Override
+    public void draw(DrawTool drawTool) {
+
+    }
 }

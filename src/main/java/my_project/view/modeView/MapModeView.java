@@ -33,7 +33,7 @@ public class MapModeView extends ModeView {
             }else {
                 villagePos[i][0] = Config.WINDOW_WIDTH / 2 + (int) (Math.random() * 150) - 75;
             }
-            villagePos[i][1] = (int) (((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillages+1)) * (i) + Config.WINDOW_HEIGHT/6;
+            villagePos[i][1] = (int) (Config.WINDOW_HEIGHT/1.2 -  ((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillages+1) * (i));
         }
     }
 
@@ -69,5 +69,14 @@ public class MapModeView extends ModeView {
 
     public void manageMouseInput(MouseEvent e) {
         System.out.println("e ist da");
+        for(int i = 1; i < amountVillages+2; i++) {
+            if (Math.sqrt(Math.pow(e.getX()-villagePos[i][0],2)+Math.pow(e.getY()-villagePos[i][1],2)) < 30){
+                if(i == amountVillages+1) {
+                    System.out.println("Castle");
+                } else {
+                    System.out.println("Village " + i + " ist da");
+                }
+            }
+        }
     }
 }

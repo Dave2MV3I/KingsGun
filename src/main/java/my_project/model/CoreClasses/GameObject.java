@@ -3,6 +3,7 @@ package my_project.model.CoreClasses;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.model.Graphics.Texture;
+import my_project.view.MainView;
 
 import java.awt.*;
 
@@ -92,6 +93,12 @@ public class GameObject extends GraphicalObject {
         drawTool.drawRectangle(x, y, getWidth(), getHeight());
         drawTool.setCurrentColor(new Color(0, 0, 255));
         drawTool.drawCircle(x, y, getRadius());
+    }
+    protected void autoDrawHitbox(DrawTool drawTool) {
+        drawTool.setCurrentColor(new Color(255, 0, 0));
+        drawTool.drawRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWidth()), MainView.scale(getWidth()));
+        drawTool.setCurrentColor(new Color(0, 0, 255));
+        drawTool.drawCircle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getRadius()));
     }
 }
 

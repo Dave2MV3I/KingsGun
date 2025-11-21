@@ -19,7 +19,7 @@ public class DungeonModeView extends ModeView {
         drawTool.drawFilledRectangle(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         drawDungeon(drawTool);
         super.draw(drawTool);
-
+        ((DungeonModeControl)modeControl).getDungeon().getMonster().draw(drawTool);
     }
     private void drawDungeon(DrawTool drawTool) {
         for (Tile[] tiles : ((DungeonModeControl)modeControl).getDungeonTiles()) {
