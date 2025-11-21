@@ -59,14 +59,18 @@ public class Player extends GameObject {
     }
     @Override
     public void draw(DrawTool drawTool) {
-        texture.autoDraw(drawTool, x - texture.getWidth()/2, y - 28, 32);
+        texture.autoDraw(drawTool, x - texture.getWidth()/2, y - 25, 32);
         autoDrawHitbox(drawTool);
     }
     @Override
     protected boolean movementCondition() {
-        if (control.getTileByCoord(this.x, this.y) == null){
-            return true;
+        return !(checkForWall(x, y) || checkForWall(x-16, y) || checkForWall(x, y-16) || checkForWall(x+16, y) || checkForWall(x, y+16));
         }
-        return !control.getTileByCoord(this.x, this.y).isSolid();
+    private boolean checkForWall(double x, double y){
+        if (control.getTileByCoord(x, y) == null){
+            return false;
+        }
+        return (control.getTileByCoord(x, y).isSolid() && control.getTileByCoord(x, y).collidesWith(this));
+
     }
 }
