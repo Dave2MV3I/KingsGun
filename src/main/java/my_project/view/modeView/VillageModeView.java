@@ -9,7 +9,6 @@ public class VillageModeView extends ModeView {
         super(modeControl);
     }
 
-    @Override
     public void draw(DrawTool drawTool) {
 
     }

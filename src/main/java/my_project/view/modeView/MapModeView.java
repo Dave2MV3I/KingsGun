@@ -24,16 +24,17 @@ public class MapModeView extends ModeView {
      * @param amountVillages
      */
     public void setAmountVillages(int amountVillages) {
-        System.out.println("Amount of villages: " + amountVillages);
-        this.amountVillages = amountVillages;
-        villagePos = new int[amountVillages+2][2];
-        for(int i = 0; i < amountVillages+2; i++){
-            if(i == 0 || i == amountVillages+1)  {
-                villagePos[i][0] = Config.WINDOW_WIDTH / 2;
-            }else {
-                villagePos[i][0] = Config.WINDOW_WIDTH / 2 + (int) (Math.random() * 150) - 75;
+        if(this.amountVillages == 0) {
+            this.amountVillages = amountVillages;
+            villagePos = new int[amountVillages + 2][2];
+            for (int i = 0; i < amountVillages + 2; i++) {
+                if (i == 0 || i == amountVillages + 1) {
+                    villagePos[i][0] = Config.WINDOW_WIDTH / 2;
+                } else {
+                    villagePos[i][0] = Config.WINDOW_WIDTH / 2 + (int) (Math.random() * 150) - 75;
+                }
+                villagePos[i][1] = (int) (Config.WINDOW_HEIGHT / 1.2 - ((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillages + 1) * (i));
             }
-            villagePos[i][1] = (int) (Config.WINDOW_HEIGHT/1.2 -  ((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillages+1) * (i));
         }
     }
 
