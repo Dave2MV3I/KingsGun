@@ -20,7 +20,7 @@ public class Player extends GameObject {
         this.y = y;
         control = dungeonModeControl;
         this.texture = new AnimatedSpriteSheet("Player.png", 4, 4);
-        radius = 16;
+        radius = 3;
         ((AnimatedSpriteSheet)texture).setCurrent(0,0);
     }
     @Override
@@ -55,12 +55,12 @@ public class Player extends GameObject {
         setVelocityY(lVy);
         texture.update(dt);
         super.update(dt);
-        MainView.follow(x+texture.getWidth()/2, y+texture.getY()/2, true);
+        MainView.follow(x, y, true);
     }
     @Override
     public void draw(DrawTool drawTool) {
-        texture.autoDraw(drawTool, x, y, 32);
-        drawHitbox(drawTool);
+        texture.autoDraw(drawTool, x - texture.getWidth()/2, y - 28, 32);
+        autoDrawHitbox(drawTool);
     }
     @Override
     protected boolean movementCondition() {
