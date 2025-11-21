@@ -9,15 +9,19 @@ import my_project.view.MainView;
 public class Carriage extends GameObject {
     private AmmunitionInventory ammoInvent;
     private Gun gun;
+    private double hP;
     public Carriage() {
         ammoInvent = new AmmunitionInventory();
         gun = new Gun();
         this.texture = new Texture("carriage.png");
-        x = 32;
+        x = 96;
         y = 500;
+        hP = 100;
+
     }
     public void draw(DrawTool drawtool){
         texture.autoDraw(drawtool, x, y, 64);
+        showHP(drawtool);
     }
 
     @Override
@@ -27,15 +31,26 @@ public class Carriage extends GameObject {
             moveY(-1);
         }
         if(InputManager.isPressed("a")){
-            moveX(-60*dt);
+            moveX(-20*dt);
         }
         if(InputManager.isPressed("s")){
             moveY(1);
         }
         if(InputManager.isPressed("d")){
-            moveX(60*dt);
+            moveX(20*dt);
         }
         MainView.follow(0, y - 20, false); //folgt immer der Kutsche
+    }
+
+    public void loseHP(double damage){
+        hP = hP - damage;
+    }
+
+    public void showHP(DrawTool drawTool){
+        drawTool.setCurrentColor(255,255,255,255);
+        drawTool.drawFilledRectangle(MainView.translateAndScaleX(x+texture.getWidth()/2), MainView.translateAndScaleY(y), MainView.scale(60), MainView.scale(30));
+        drawTool.setCurrentColor(0,0,255,255);
+        drawTool.drawText(MainView.translateAndScaleX(x+texture.getWidth()/2), MainView.translateAndScaleY(y), "" + hP);
     }
 
 }

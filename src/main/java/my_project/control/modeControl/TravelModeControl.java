@@ -20,6 +20,7 @@ public class TravelModeControl extends ModeControl {
     }
     @Override
     protected void activate() {
+        bandits.toFirst();
         bandits.append(new Archer());
         System.out.println("created Bandit");
     }
@@ -29,7 +30,9 @@ public class TravelModeControl extends ModeControl {
 
         if (checkAndHandleCollision(bandits.getContent())){
             bandits.getContent().loseHP(100);
+
         }
+        bandits.getContent().update(dt);
         carriage.update(dt);
     }
 
@@ -46,5 +49,9 @@ public class TravelModeControl extends ModeControl {
     }
     public Carriage getCarriage(){
         return carriage;
+    }
+    public Bandit getBandit(){
+        bandits.toFirst();
+        return bandits.getContent();
     }
 }
