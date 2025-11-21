@@ -56,9 +56,13 @@ public class MainController extends GraphicalObject {
         mainView.getBackEndDeveloperAcces().setFPS(fps);
     }
     public void setMode(String mode) {
-        modeControls.get(currentMode).setActive(false);
-        currentMode = mode.toLowerCase();
-        modeControls.get(currentMode).setActive(true);
+        if (modeControls.containsKey(mode)) {
+            modeControls.get(currentMode).setActive(false);
+            currentMode = mode.toLowerCase();
+            modeControls.get(currentMode).setActive(true);
+        }else{
+            System.err.println("mode not found: " + mode);
+        }
     }
     public String getMode() {
         return currentMode;
