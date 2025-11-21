@@ -4,6 +4,7 @@ import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.control.modeControl.MapModeControl;
 import my_project.control.modeControl.ModeControl;
+import my_project.model.Graphics.Texture;
 import my_project.view.InputManager;
 
 import java.awt.*;
@@ -12,11 +13,12 @@ import java.awt.event.MouseEvent;
 public class MapModeView extends ModeView {
     private int amountVillages;
     private int[][] villagePos;
+    private Texture mapTexture;
 
     public MapModeView(MapModeControl modeControl) {
         super(modeControl);
         //amountVillages = modeControl.getVillageControl().getAmountVillage();
-
+        mapTexture = new Texture("Map.png");
     }
 
     /**
@@ -40,15 +42,14 @@ public class MapModeView extends ModeView {
 
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(new Color(184, 111, 80));
-        drawTool.drawFilledRectangle(0,0,Config.WINDOW_WIDTH,Config.WINDOW_HEIGHT);
+        mapTexture.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
 
         for(int i = 0; i < villagePos.length - 1; i++) {
             drawTool.setCurrentColor(new Color(24, 20, 37));
             drawTool.setLineWidth(10);
             drawTool.drawLine(villagePos[i][0], villagePos[i][1], villagePos[i+1][0], villagePos[i+1][1]);
-            drawTool.setCurrentColor(new Color(228, 166, 114));
-            drawTool.setLineWidth(8);
+            drawTool.setCurrentColor(new Color(184, 111, 80));
+            drawTool.setLineWidth(7);
             drawTool.drawLine(villagePos[i][0], villagePos[i][1], villagePos[i+1][0], villagePos[i+1][1]);
         }
 
