@@ -39,7 +39,7 @@ public class BackendDeveloperAcces {
         comboBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.setMode(comboBox1.getSelectedItem().toString());
+                controller.loadMode(comboBox1.getSelectedItem().toString());
                 modeDisplay.setText(controller.getMode());
             }
         });

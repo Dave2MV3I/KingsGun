@@ -5,8 +5,9 @@ import my_project.model.DungeonMode.Dungeon;
 import my_project.model.DungeonMode.Monsters.*;
 import my_project.model.DungeonMode.Player;
 import my_project.model.DungeonMode.Tiles.Tile;
+import my_project.view.modeView.DungeonModeView;
 
-public class DungeonModeControl extends ModeControl {
+public class DungeonModeControl extends ModeControl<DungeonModeView> {
     Dungeon dungeon;
     Player player;
     private final List<Class<? extends Monster>> monsterClasses = new List<>();

@@ -37,6 +37,7 @@ public class MainController extends GraphicalObject {
         modeControls.put("village", new VillageModeControl());
         modeControls.put("travel", new TravelModeControl());
         modeControls.put("dungeon", new DungeonModeControl());
+        modeControls.put("loading", new LoadingModeControl(this));
 
         mainView = new MainView(this);
 
@@ -64,6 +65,19 @@ public class MainController extends GraphicalObject {
             System.err.println("mode not found: " + mode);
         }
     }
+
+    public void loadMode(String mode) {
+        if (modeControls.containsKey(mode)) {
+            modeControls.get(currentMode).setActive(false);
+            currentMode = "loading";
+            modeControls.get(currentMode).setActive(true);
+            ((LoadingModeControl)modeControls.get(currentMode)).loadMode(mode);
+
+        }else{
+            System.err.println("mode not found: " + mode);
+        }
+    }
+
     public String getMode() {
         return currentMode;
     }

@@ -8,7 +8,7 @@ import my_project.model.DungeonMode.Tiles.Tile;
 
 import java.awt.*;
 
-public class DungeonModeView extends ModeView {
+public class DungeonModeView extends ModeView<DungeonModeControl> {
     public DungeonModeView(DungeonModeControl modeControl) {
         super(modeControl);
     }
@@ -19,15 +19,15 @@ public class DungeonModeView extends ModeView {
         drawTool.drawFilledRectangle(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         drawDungeon(drawTool);
         super.draw(drawTool);
-        ((DungeonModeControl)modeControl).getDungeon().getMonster().draw(drawTool);
+        modeControl.getDungeon().getMonster().draw(drawTool);
     }
     private void drawDungeon(DrawTool drawTool) {
-        for (Tile[] tiles : ((DungeonModeControl)modeControl).getDungeonTiles()) {
+        for (Tile[] tiles : modeControl.getDungeonTiles()) {
             for (Tile tile : tiles) {
                 if (tile != null) tile.draw(drawTool);
 
             }
         }
-        ((DungeonModeControl) modeControl).getPlayer().draw(drawTool);
+        modeControl.getPlayer().draw(drawTool);
     }
 }

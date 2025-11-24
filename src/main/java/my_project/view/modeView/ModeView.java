@@ -6,9 +6,9 @@ import my_project.control.modeControl.ModeControl;
  *<br><br>
  *Joshua Becker
  */
-public abstract class ModeView {
-    protected ModeControl modeControl;
-    public ModeView(ModeControl modeControl) {
+public abstract class ModeView<MC extends ModeControl> {
+    protected MC modeControl;
+    public ModeView(MC modeControl) {
         this.modeControl = modeControl;
         modeControl.setModeView(this);
     }

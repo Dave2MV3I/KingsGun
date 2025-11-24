@@ -22,6 +22,8 @@ public class Player extends GameObject {
         this.texture = new AnimatedSpriteSheet("Player.png", 4, 4);
         radius = 3;
         ((AnimatedSpriteSheet)texture).setCurrent(0,0);
+
+        MainView.follow(x, y, true);
     }
     @Override
     public void update(double dt) {

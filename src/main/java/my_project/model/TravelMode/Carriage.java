@@ -16,8 +16,7 @@ public class Carriage extends GameObject {
         this.texture = new Texture("carriage.png");
         x = 96;
         y = 500;
-        hP = 100;
-
+        hP = 100 * Math.random();
     }
     public void draw(DrawTool drawtool){
         texture.autoDraw(drawtool, x, y, 64);

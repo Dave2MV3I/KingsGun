@@ -5,8 +5,9 @@ import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.model.TravelMode.Bandits.Archer;
 import my_project.model.TravelMode.Bandits.Bandit;
 import my_project.model.TravelMode.Carriage;
+import my_project.view.modeView.TravelModeView;
 
-public class TravelModeControl extends ModeControl {
+public class TravelModeControl extends ModeControl<TravelModeView> {
     private Carriage carriage;
     private List<Bandit> bandits;
     private double time;
@@ -29,13 +30,16 @@ public class TravelModeControl extends ModeControl {
     @Override
     public void update(double dt){
         time = time + dt;
-
+        carriage.update(dt);
         if (checkAndHandleCollision(bandits.getContent())){
             bandits.getContent().loseHP(100);
 
         }
-        bandits.getContent().update(dt);
-        carriage.update(dt);
+        if (bandits.getContent() != null){ //I added this, so there would be no errors when there isn't a bandit.
+            bandits.getContent().update(dt);
+        }
+
+
     }
 
     public boolean checkAndHandleCollision(GraphicalObject gO){

@@ -1,6 +1,8 @@
 package my_project.control.modeControl;
 
-public class CastleModeControl extends ModeControl {
+import my_project.view.modeView.CastleModeView;
+
+public class CastleModeControl extends ModeControl<CastleModeView> {
     @Override
     protected void activate() {
     }

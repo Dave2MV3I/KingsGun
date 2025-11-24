@@ -42,7 +42,7 @@ public class MainView {
         modeViews.put("village", new VillageModeView((VillageModeControl)modeControls.get("village")));
         modeViews.put("travel", new TravelModeView((TravelModeControl)modeControls.get("travel")));
         modeViews.put("dungeon", new DungeonModeView((DungeonModeControl)modeControls.get("dungeon")));
-
+        modeViews.put("loading", new LoadingModeView((LoadingModeControl)modeControls.get("loading")));
     }
 
     public void draw(DrawTool drawTool) {

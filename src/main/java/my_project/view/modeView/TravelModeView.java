@@ -9,7 +9,7 @@ import my_project.model.TravelMode.Bandits.Bandit;
 import my_project.model.TravelMode.Carriage;
 import my_project.view.MainView;
 
-public class TravelModeView extends ModeView {
+public class TravelModeView extends ModeView<TravelModeControl> {
     private Texture roadTexture;
     public double yPos;
     private double scale;
@@ -19,8 +19,8 @@ public class TravelModeView extends ModeView {
 
         super(modeControl);
         roadTexture = new Texture("road_3.png");
-        carriage = ((TravelModeControl)modeControl).getCarriage();
-        bandit = ((TravelModeControl)modeControl).getBandit();
+        carriage = modeControl.getCarriage();
+        bandit = modeControl.getBandit();
         yPos = 600;
         MainView.setScale(roadTexture.getScaleRelativeToWidth(Config.WINDOW_WIDTH));
     }
@@ -31,7 +31,7 @@ public class TravelModeView extends ModeView {
         }
         if (bandit != null) {
             bandit.draw(drawTool);
-        }else bandit = ((TravelModeControl)modeControl).getBandit();
+        }else bandit = modeControl.getBandit();
 
         carriage.draw(drawTool);
 

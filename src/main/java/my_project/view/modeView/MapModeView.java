@@ -10,7 +10,7 @@ import my_project.view.InputManager;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class MapModeView extends ModeView {
+public class MapModeView extends ModeView<MapModeControl> {
     private int amountVillages;
     private int[][] villagePos;
     private Texture mapTexture;

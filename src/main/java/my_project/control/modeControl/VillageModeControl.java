@@ -2,11 +2,12 @@ package my_project.control.modeControl;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.model.VillageMode.Village;
+import my_project.view.modeView.VillageModeView;
 
 /**
  * Tomole
  */
-public class VillageModeControl extends ModeControl {
+public class VillageModeControl extends ModeControl<VillageModeView> {
     private List<Village> villages;
     private int amountVillage;
 

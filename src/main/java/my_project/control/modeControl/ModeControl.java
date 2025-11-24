@@ -7,9 +7,9 @@ import my_project.view.modeView.ModeView;
  *<br><br>
  *Joshua Becker
  */
-public abstract class ModeControl{
+public abstract class ModeControl<MV extends ModeView>{
     protected MainController mainController;
-    protected ModeView modeView;
+    protected MV modeView;
     boolean active;
     protected double timer;
 
@@ -24,10 +24,10 @@ public abstract class ModeControl{
      * Links the Controller to a View of a corresponding gamemode
      * DO NOT LINK CONTROLLERS AND VIEW THAT ARE NOT OF THE SAME GAMEMODE!
      */
-    public void setModeView(ModeView modeView){
+    public void setModeView(MV modeView){
         this.modeView = modeView;
     }
-    public ModeView getModeView(){return modeView;}
+    public MV getModeView(){return modeView;}
     public void update(double dt){
         timer += dt;
     }
@@ -52,4 +52,10 @@ public abstract class ModeControl{
     /** Method to be executed whenever the ModeController is deactivated
      */
     protected abstract void deactivate();
+
+    /**
+     * Returns how long this mode has been active
+     * @return duration in seconds
+     */
+    public double getTimer(){return timer;}
 }
