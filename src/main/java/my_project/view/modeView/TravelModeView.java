@@ -12,15 +12,10 @@ import my_project.view.MainView;
 public class TravelModeView extends ModeView<TravelModeControl> {
     private Texture roadTexture;
     public double yPos;
-    private double scale;
-    private Carriage carriage;
-    private Bandit bandit;
     public TravelModeView(TravelModeControl modeControl) {
 
         super(modeControl);
         roadTexture = new Texture("road_3.png");
-        carriage = modeControl.getCarriage();
-        bandit = modeControl.getBandit();
         yPos = 600;
         MainView.setScale(roadTexture.getScaleRelativeToWidth(Config.WINDOW_WIDTH));
     }
@@ -29,11 +24,11 @@ public class TravelModeView extends ModeView<TravelModeControl> {
         for (int i = 0; i < 100; i++) {
             roadTexture.autoDraw(drawTool, 0, i * 32, 256);
         }
-        if (bandit != null) {
-            bandit.draw(drawTool);
-        }else bandit = modeControl.getBandit();
+        if (modeControl.getBandit() != null) {
+            modeControl.getBandit().draw(drawTool);
+        }
 
-        carriage.draw(drawTool);
+        modeControl.getCarriage().draw(drawTool);
 
     }
 
