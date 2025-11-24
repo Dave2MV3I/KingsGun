@@ -14,11 +14,13 @@ public class MapModeView extends ModeView {
     private int amountVillages;
     private int[][] villagePos;
     private Texture mapTexture;
+    private Texture mapSymbolVillage;
 
     public MapModeView(MapModeControl modeControl) {
         super(modeControl);
         //amountVillages = modeControl.getVillageControl().getAmountVillage();
         mapTexture = new Texture("Map.png");
+        mapSymbolVillage = new Texture("MapSymbolVillage.png");
     }
 
     /**
@@ -45,8 +47,8 @@ public class MapModeView extends ModeView {
         mapTexture.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
 
         for(int i = 0; i < villagePos.length - 1; i++) {
-            drawTool.setCurrentColor(new Color(24, 20, 37));
-            drawTool.setLineWidth(10);
+            drawTool.setCurrentColor(new Color(115, 62, 57));
+            drawTool.setLineWidth(21);
             drawTool.drawLine(villagePos[i][0], villagePos[i][1], villagePos[i+1][0], villagePos[i+1][1]);
             drawTool.setCurrentColor(new Color(184, 111, 80));
             drawTool.setLineWidth(7);
@@ -54,7 +56,7 @@ public class MapModeView extends ModeView {
         }
 
         drawTool.setCurrentColor(new Color(255, 0, 0));
-        drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/6,10);
+        drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/6,15);
         drawTool.setCurrentColor(new Color(38, 43, 68));
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10,100,40);
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10-40,35,40);
@@ -62,11 +64,16 @@ public class MapModeView extends ModeView {
 
         drawTool.setCurrentColor(new Color(54, 182, 11));
         for(int i = 1; i < amountVillages+1; i++) {
-            drawTool.drawFilledCircle(villagePos[i][0], villagePos[i][1], 10);
+            drawTool.drawFilledCircle(villagePos[i][0], villagePos[i][1], 15);
+            if (villagePos[i][0] > Config.WINDOW_WIDTH/2) {
+                mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] + 20, villagePos[i][1]-20, 70);
+            }else {
+                mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] - 90, villagePos[i][1]-20, 70);
+            }
         }
 
         drawTool.setCurrentColor(new Color(13, 152, 241));
-        drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/1.2,10);
+        drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/1.2,15);
     }
 
     public void manageMouseInput(MouseEvent e) {
