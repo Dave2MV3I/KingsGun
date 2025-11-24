@@ -16,10 +16,12 @@ public class TravelModeControl extends ModeControl {
     }
     @Override
     protected void deactivate() {
-        bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
+
     }
     @Override
     protected void activate() {
+        carriage = new Carriage();
+        bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
         bandits.toFirst();
         bandits.append(new Archer());
         System.out.println("created Bandit");
