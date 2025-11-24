@@ -46,7 +46,6 @@ public class Archer extends Bandit {
     public void update(double dt){
         if (Math.random()< 0.5){
             shoot(x, y);
-            System.out.println("jzugsdjhgfrt");
         }
     }
 
