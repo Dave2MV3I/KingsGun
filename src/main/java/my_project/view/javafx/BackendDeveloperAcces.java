@@ -16,6 +16,7 @@ public class BackendDeveloperAcces {
     private JTextField modeSelection;
     private JLabel fpsDisplay;
     private JComboBox comboBox1;
+    private JButton EXITPROGRAMMButton;
 
     public BackendDeveloperAcces(MainController controller) {
         modeDisplay.setText(controller.getMode());
@@ -41,6 +42,12 @@ public class BackendDeveloperAcces {
             public void actionPerformed(ActionEvent e) {
                 controller.loadMode(comboBox1.getSelectedItem().toString());
                 modeDisplay.setText(controller.getMode());
+            }
+        });
+        EXITPROGRAMMButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }

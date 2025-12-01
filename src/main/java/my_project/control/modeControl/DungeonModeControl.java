@@ -32,7 +32,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     protected void activate() {
         dungeon = new Dungeon(this, monsterClasses);
         player = new Player(256,64, this);
-
+        dungeon.update(0);
     }
 
     @Override

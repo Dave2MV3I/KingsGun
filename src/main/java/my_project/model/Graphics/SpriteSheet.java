@@ -76,5 +76,10 @@ public class SpriteSheet extends Texture {
     public double getSubImgHeight() {
         return height;
     }
-
+    public int getRows(){
+        return subImages[0].length;
+    }
+    public int getCols(){
+        return subImages.length;
+    }
 }
