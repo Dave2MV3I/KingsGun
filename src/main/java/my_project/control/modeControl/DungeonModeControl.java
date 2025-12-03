@@ -65,5 +65,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     public void setPlayer(Player player){
         this.player = player;
     }
-
+    public Monster getMonster(){
+        return dungeon.getMonster();
+    }
 }

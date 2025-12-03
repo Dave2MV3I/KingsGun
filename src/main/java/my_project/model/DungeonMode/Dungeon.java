@@ -22,7 +22,7 @@ public class Dungeon extends GraphicalObject {
 
     public Dungeon(DungeonModeControl control, List<Class<? extends Monster>> monsterClasses) {
         this.control = control;
-        setMap("src/main/resources/graphic/Dungeon 1.png");
+        setMap("src/main/resources/graphic/Dungeon 1 rework.png");
         // Choose random monster. Powerful monsters spawn with less probability.
         monsterClasses.toFirst();
         double nextMonsterProbability = Math.random();
@@ -111,7 +111,10 @@ public class Dungeon extends GraphicalObject {
         return tiles;
     }
     public Tile getTile(int x, int y){
-        return tiles[x][y];
+        if (x >= 0 && x < tiles.length && y >= 0 && y < tiles[0].length) {
+            return tiles[x][y];
+        }
+        return null;
     }
     public Tile getTileFromCoordinates(double x, double y){
         return getTile((int)(x/Tile.getWIDTH()), (int)(y/Tile.getHEIGHT()));
