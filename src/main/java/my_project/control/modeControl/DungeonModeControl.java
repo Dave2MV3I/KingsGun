@@ -40,6 +40,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         super.update(dt);
         dungeon.update(dt);
         player.update(dt);
+        getMonster().update(dt);
     }
 
     public void setDungeon(Dungeon dungeon){
