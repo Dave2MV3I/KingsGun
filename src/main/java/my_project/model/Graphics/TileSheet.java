@@ -64,6 +64,9 @@ public class TileSheet extends SpriteSheet{
             }
         }
     }
+    private void setTileOrientationException(BufferedImage tiles){
+        //TODO set tileOrientationException
+    }
     private void setTileOrientation(BufferedImage tile, int x, int y) {
 
         boolean[] directions = new boolean[]{
