@@ -14,6 +14,7 @@ public class TileSheet extends SpriteSheet{
     public TileSheet(String tileSheet) {
         super(tileSheet, 6, 7);
         setTileOrientations();
+        addTileOrientationExceptions(createImage("src/main/resources/graphic/TileSheetExceptions.png"));
         //setCurrent(1,1);
     }
     /**
@@ -64,8 +65,45 @@ public class TileSheet extends SpriteSheet{
             }
         }
     }
-    private void setTileOrientationException(BufferedImage tiles){
+    private void addTileOrientationExceptions(BufferedImage exceptions){
         //TODO set tileOrientationException
+        for (int iY = 0; iY < (exceptions.getHeight()/3); iY++) {
+            setTileOrientationException(exceptions.getSubimage(0, iY * 3,6,3));
+        }
+    }
+    private void setTileOrientationException(BufferedImage group) {
+        BufferedImage exceptionSheet = group.getSubimage(0, 0, 3, 3);
+        BufferedImage replacementSheet = group.getSubimage(3, 0, 3, 3);
+        boolean[] exceptionDirection = new boolean[]{
+                getPixelvalue(exceptionSheet, 1, 0),
+                getPixelvalue(exceptionSheet, 2, 0),
+                getPixelvalue(exceptionSheet, 2, 1),
+                getPixelvalue(exceptionSheet, 2, 2),
+                getPixelvalue(exceptionSheet, 1, 2),
+                getPixelvalue(exceptionSheet, 0, 2),
+                getPixelvalue(exceptionSheet, 0, 1),
+                getPixelvalue(exceptionSheet, 0, 0)
+        };
+        boolean[] replacementsDirection = new boolean[]{
+                getPixelvalue(replacementSheet, 1, 0),
+                getPixelvalue(replacementSheet, 2, 0),
+                getPixelvalue(replacementSheet, 2, 1),
+                getPixelvalue(replacementSheet, 2, 2),
+                getPixelvalue(replacementSheet, 1, 2),
+                getPixelvalue(replacementSheet, 0, 2),
+                getPixelvalue(replacementSheet, 0, 1),
+                getPixelvalue(replacementSheet, 0, 0)
+        };
+        Vec2d replacementPosition = getTileOrientation(replacementsDirection);
+        if (replacementPosition != null) {
+            setTileOrientation(exceptionDirection, (int)(replacementPosition.x), (int)(replacementPosition.y));
+        }else {
+            System.out.println("Tile Orientation Exception: ");
+            outDirections(exceptionDirection);
+            System.out.println("Replacement: ");
+            outDirections(replacementsDirection);
+            System.out.println("");
+        }
     }
     private void setTileOrientation(BufferedImage tile, int x, int y) {
 
@@ -93,6 +131,11 @@ public class TileSheet extends SpriteSheet{
     }
     private int booltoBin(boolean bool){
         return bool ? 1 : 0;
+    }
+    private void outDirections(boolean[] surroundingTiles){
+        System.out.println(booltoBin(surroundingTiles[7])+ " " + booltoBin(surroundingTiles[0]) + " " + booltoBin(surroundingTiles[1]));
+        System.out.println(booltoBin(surroundingTiles[6])+ " " + "T" + " " + booltoBin(surroundingTiles[2]));
+        System.out.println(booltoBin(surroundingTiles[5])+ " " + booltoBin(surroundingTiles[4])+ " " + booltoBin(surroundingTiles[3]));
     }
     private boolean getPixelvalue(BufferedImage tile, int px, int py) {
         return switch (Integer.toBinaryString(tile.getRGB(px, py))) { //aaaaaaaarrrrrrrrggggggggbbbbbbbb
