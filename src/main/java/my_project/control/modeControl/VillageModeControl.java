@@ -2,7 +2,10 @@ package my_project.control.modeControl;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.model.VillageMode.Village;
+import my_project.view.modeView.MapModeView;
 import my_project.view.modeView.VillageModeView;
+
+import java.awt.event.MouseEvent;
 
 /**
  * Tomole
@@ -10,6 +13,7 @@ import my_project.view.modeView.VillageModeView;
 public class VillageModeControl extends ModeControl<VillageModeView> {
     private List<Village> villages;
     private int amountVillage;
+    private int currentVillage = 0;
 
     public VillageModeControl() {
         amountVillage = 5;
@@ -30,10 +34,11 @@ public class VillageModeControl extends ModeControl<VillageModeView> {
 
     public List<Village> getVillages() {return villages;}
     public int getAmountVillage() {return amountVillage;}
+    public VillageModeView getVillageModeView() {return modeView;}
 
     @Override
     protected void activate() {
-
+        modeView.activationVillage(villages.getContent());
     }
     @Override
     protected void deactivate() {
