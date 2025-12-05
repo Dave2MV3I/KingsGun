@@ -81,4 +81,10 @@ public class SpriteSheet extends Texture {
     public int getCols(){
         return subImages.length;
     }
+
+    public void setRandom() {
+        currentX = (int)(Math.random()*getCols());
+        currentY = (int)(Math.random()*getRows());
+        setImageToCurrent();
+    }
 }

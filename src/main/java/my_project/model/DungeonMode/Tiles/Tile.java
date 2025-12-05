@@ -10,8 +10,8 @@ import java.awt.*;
 import java.util.Objects;
 
 public abstract class Tile extends GameObject {
-    private static final double WIDTH = 16;
-    private static final double HEIGHT = 16;
+    private static final double WIDTH = 32;
+    private static final double HEIGHT = 32;
     private Dungeon dungeon;
     private boolean isSolid;
 
