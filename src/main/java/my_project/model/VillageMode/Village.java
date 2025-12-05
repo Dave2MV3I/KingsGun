@@ -8,4 +8,8 @@ public class Village {
     public Village() {
 
     }
+
+    public String getVillageMap() {
+        return dungeonMap;
+    }
 }
