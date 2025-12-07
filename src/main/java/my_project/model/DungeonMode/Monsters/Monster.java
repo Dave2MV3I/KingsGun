@@ -25,6 +25,9 @@ public abstract class Monster extends GameObject {
 
         //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
     }
+    protected Monster(){
+        //Ich habe das hier hin gemacht, sodass ich das Spiel starten kann - Joshua
+    }
 
     @Override
     public void draw(DrawTool drawTool){

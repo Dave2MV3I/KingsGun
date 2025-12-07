@@ -38,6 +38,7 @@ public class MainView {
         frame = mainController.createJFrame(backendDeveloperAcces.getContentPane());
 
         modeViews = new HashMap<>();
+        modeViews.put("start", new startModeView((startModeControl)modeControls.get("start")));
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
         modeViews.put("village", new VillageModeView((VillageModeControl)modeControls.get("village")));
         modeViews.put("travel", new TravelModeView((TravelModeControl)modeControls.get("travel")));
