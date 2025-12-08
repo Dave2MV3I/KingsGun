@@ -2,25 +2,25 @@ package my_project.view;
 
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
-import my_project.Modes.DungeonMode.DungeonModeControl;
-import my_project.Modes.LoadingMode.LoadingModeControl;
-import my_project.Modes.LoadingMode.LoadingModeView;
-import my_project.Modes.MapMode.MapModeControl;
-import my_project.Modes.MapMode.MapModeView;
-import my_project.Modes.ModeView;
-import my_project.Modes.StartMode.startModeControl;
-import my_project.Modes.StartMode.startModeView;
+import my_project.modes.dungeonMode.DungeonModeControl;
+import my_project.modes.loadingMode.LoadingModeControl;
+import my_project.modes.loadingMode.LoadingModeView;
+import my_project.modes.mapMode.MapModeControl;
+import my_project.modes.mapMode.MapModeView;
+import my_project.modes.ModeView;
+import my_project.modes.startMode.startModeControl;
+import my_project.modes.startMode.startModeView;
 import my_project.control.MainController;
-import my_project.Modes.ModeControl;
-import my_project.Settings.SettingsModel;
-import my_project.Modes.DungeonMode.DungeonModeView;
-import my_project.Modes.TravelMode.TravelModeControl;
-import my_project.Modes.TravelMode.TravelModeView;
-import my_project.Modes.VillageMode.VillageModeControl;
-import my_project.Modes.VillageMode.VillageModeView;
-import my_project.Settings.javafx.BackendDeveloperAcces;
+import my_project.modes.ModeControl;
+import my_project.settings.SettingsModel;
+import my_project.modes.dungeonMode.DungeonModeView;
+import my_project.modes.travelMode.TravelModeControl;
+import my_project.modes.travelMode.TravelModeView;
+import my_project.modes.villageMode.*;
+import my_project.view.javafx.BackendDeveloperAcces;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 
 /**
