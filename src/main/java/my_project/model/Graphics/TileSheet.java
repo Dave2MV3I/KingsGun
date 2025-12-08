@@ -4,6 +4,8 @@ import com.sun.javafx.geom.Vec2d;
 
 import java.awt.image.BufferedImage;
 
+
+
 public class TileSheet extends SpriteSheet{
     private Vec2d[][][][][][][][] tileOrientations;
     private boolean[] currentBool;
@@ -12,6 +14,8 @@ public class TileSheet extends SpriteSheet{
         super(tileSheet, 6, 7);
         setTileOrientations();
         addTileOrientationExceptions(createImage("src/main/resources/graphic/TileSheetExceptions.png"));
+        addTileOrientationExceptions(createImage("src/main/resources/graphic/CornerTileExceptions.png"));
+
         //setCurrent(1,1);
     }
     /**

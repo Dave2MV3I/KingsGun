@@ -1,8 +1,8 @@
 package my_project.model.Graphics;
 
-import KAGO_framework.model.GraphicalObject;
-import KAGO_framework.view.DrawTool;
-import my_project.view.MainView;
+import KAGO_framework.model.*;
+import KAGO_framework.view.*;
+import my_project.view.*;
 
 public class Texture extends GraphicalObject {
     /** Creates a Texture Object
