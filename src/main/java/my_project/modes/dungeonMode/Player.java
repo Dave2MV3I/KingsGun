@@ -8,12 +8,12 @@ import my_project.view.MainView;
 
 import java.awt.event.KeyEvent;
 
-public class Player extends GameObject {
+public class Player extends DungeonEntity {
     DungeonModeControl control;
     public Player(double x, double y, DungeonModeControl dungeonModeControl) {
+        super(dungeonModeControl);
         this.x = x;
         this.y = y;
-        control = dungeonModeControl;
         this.texture = new AnimatedSpriteSheet("Player.png", 4, 4);
         radius = 3;
         ((AnimatedSpriteSheet)texture).setCurrent(0,0);
@@ -59,15 +59,5 @@ public class Player extends GameObject {
         texture.autoDraw(drawTool, x - texture.getWidth()/2, y - 25, 32);
         autoDrawHitbox(drawTool);
     }
-    @Override
-    protected boolean movementCondition() {
-        return !(checkForWall(x, y) || checkForWall(x-16, y) || checkForWall(x, y-16) || checkForWall(x+16, y) || checkForWall(x, y+16));
-        }
-    private boolean checkForWall(double x, double y){
-        if (control.getTileByCoord(x, y) == null){
-            return false;
-        }
-        return (control.getTileByCoord(x, y).isSolid() && control.getTileByCoord(x, y).collidesWith(this));
 
-    }
 }
