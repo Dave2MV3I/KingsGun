@@ -12,10 +12,21 @@ public enum Attack {
     SPEAR_ATTACK{ // TODO (IDEE): Je länger man einen Button hält (Waffe aufladen) oder je schneller man sich bewegt, desto mehr Schaden
         double minDamage = 10;
         double maxDamage = 50;
+    },
+    SWORD_ATTACK{
+        double minDamage = 10;
+        double maxDamage = 20;
+        double attackSpeed = 1;
+    },
+    FIRE_ATTACK{
+        double minDamage = 70;
+        double maxDamage = 90;
+        double attackSpeed = 0.8;
     };
 
-    public double minDamage;
-    public double maxDamage;
+    private double minDamage;
+    private double maxDamage;
+    private double attackSpeed = 0.5;
 
     public double calculateDamage(){
         return minDamage + Math.random()*(maxDamage-minDamage);
