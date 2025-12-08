@@ -22,11 +22,14 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         if (loadedView != null) {
             loadedView.draw(drawTool);
         }
-        drawTool.setCurrentColor(new Color(0,0,0, (int)((1- progressionFactor) * 255)));
+        double loadingValue = progressionFactor < 0.5 ? (progressionFactor*2) : (1-((progressionFactor-0.5)*2));
+        drawTool.setCurrentColor(new Color(0,0,0, (int)(loadingValue * 255)));
         drawTool.drawFilledRectangle(0,0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 
         drawTool.formatText("Arial", Font.BOLD, 100);
-        drawTool.drawText(0,100, "Loading " + modeControl.getLoadedControl().getClass().getSimpleName());
+        if (loadedView != null) {
+            drawTool.drawText(0, 100, "Loading " + modeControl.getLoadedControl().getClass().getSimpleName());
+        }
         drawTool.setCurrentColor(new Color(255, 255, 255));
         drawTool.drawFilledRectangle(50,Config.WINDOW_HEIGHT - 300,(Config.WINDOW_WIDTH-100) * progressionFactor, 50);
     }

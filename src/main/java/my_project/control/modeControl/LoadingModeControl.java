@@ -6,7 +6,9 @@ import my_project.view.modeView.LoadingModeView;
 
 public class LoadingModeControl extends ModeControl<LoadingModeView> {
     private String loadedMode;
+    private String loadToMode;
     private ModeControl loadedControl;
+    private ModeControl loadToControl;
     private MainController mainController;
     private double transitionTime = 3; //In seconds
     public LoadingModeControl(MainController mainController) {
@@ -23,6 +25,8 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
         super.update(dt);
         if (timer > transitionTime) {
             mainController.setMode(loadedMode);
+        }else if (timer > transitionTime/2){
+            activateLoadedMode(loadToMode);
         }
     }
 
@@ -36,13 +40,14 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
     public ModeControl getLoadedControl() {
         return loadedControl;
     }
-    public void loadMode(String mode) {
-        loadedMode = mode;
-        loadedControl = mainController.getModeControls().get(mode);
-        loadedControl.setActive(true);
-        modeView.setLoadedView(loadedControl.getModeView());
+    public void loadMode(String modeTo) {
+        loadToMode = modeTo;
     }
     public void loadMode(String modeFrom, String modeTo) {
+        loadedMode = modeFrom;
+        loadToMode = modeTo;
+    }
+    private void activateLoadedMode(String modeTo) {
         loadedMode = modeTo;
         loadedControl = mainController.getModeControls().get(modeTo);
         loadedControl.setActive(true);

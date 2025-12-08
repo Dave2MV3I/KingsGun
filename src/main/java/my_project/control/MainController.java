@@ -30,9 +30,10 @@ public class MainController extends GraphicalObject {
 
     // Constructor
     public MainController() {
-        currentMode = "map";
+        currentMode = "start";
         modeControls = new HashMap<>(); // create Hashmap to cantain all controllers of game modes
         // add mode controllers to Hashmap
+        modeControls.put("start", new startModeControl());
         modeControls.put("map", new MapModeControl());
         modeControls.put("village", new VillageModeControl());
         modeControls.put("travel", new TravelModeControl());
@@ -68,10 +69,11 @@ public class MainController extends GraphicalObject {
 
     public void loadMode(String mode) {
         if (modeControls.containsKey(mode)) {
+            String previous = currentMode;
             modeControls.get(currentMode).setActive(false);
             currentMode = "loading";
             modeControls.get(currentMode).setActive(true);
-            ((LoadingModeControl)modeControls.get(currentMode)).loadMode(mode);
+            ((LoadingModeControl)modeControls.get(currentMode)).loadMode(previous, mode);
 
         }else{
             System.err.println("mode not found: " + mode);
