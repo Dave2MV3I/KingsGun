@@ -1,9 +1,6 @@
 package my_project.model.Graphics;
 
-import KAGO_framework.model.abitur.datenstrukturen.BinaryTree;
 import com.sun.javafx.geom.Vec2d;
-import my_project.model.DungeonMode.Tiles.TileFloor;
-import my_project.model.DungeonMode.Tiles.TileWall;
 
 import java.awt.image.BufferedImage;
 

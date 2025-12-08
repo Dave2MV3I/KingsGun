@@ -2,10 +2,15 @@ package my_project.control;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
-import my_project.control.modeControl.*;
-import my_project.model.CoreClasses.SettingsController;
+import my_project.Modes.DungeonMode.DungeonModeControl;
+import my_project.Modes.LoadingMode.LoadingModeControl;
+import my_project.Modes.MapMode.MapModeControl;
+import my_project.Modes.ModeControl;
+import my_project.Modes.StartMode.startModeControl;
+import my_project.Settings.SettingsController;
+import my_project.Modes.TravelMode.TravelModeControl;
+import my_project.Modes.VillageMode.VillageModeControl;
 import my_project.view.MainView;
-import my_project.view.modeView.*;
 
 import javax.swing.*;
 import java.awt.*;

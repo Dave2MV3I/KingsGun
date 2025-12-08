@@ -2,11 +2,8 @@ package my_project.view;
 
 import KAGO_framework.model.InteractiveGraphicalObject;
 import my_project.control.MainController;
-import my_project.control.ProgramController;
-import my_project.control.modeControl.MapModeControl;
-import my_project.control.modeControl.VillageModeControl;
-import my_project.view.modeView.MapModeView;
-import my_project.view.modeView.VillageModeView;
+import my_project.Modes.MapMode.MapModeControl;
+import my_project.Modes.VillageMode.VillageModeControl;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
