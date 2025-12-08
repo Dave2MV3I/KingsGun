@@ -47,6 +47,8 @@ public class MainView {
     }
 
     public void draw(DrawTool drawTool) {
+        drawTool.setCurrentColor(new Color(24, 20, 37));
+        drawTool.drawFilledRectangle(0,0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         modeViews.get(mainController.getMode()).draw(drawTool);
         drawTool.setCurrentColor(0,0,0,(int)((1 - SettingsModel.getBrightness())*255));
         drawTool.drawFilledRectangle(0,0,Config.WINDOW_WIDTH,Config.WINDOW_HEIGHT);
