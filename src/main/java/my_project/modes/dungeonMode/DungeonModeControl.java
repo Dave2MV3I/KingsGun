@@ -1,9 +1,9 @@
 package my_project.modes.dungeonMode;
 
-import KAGO_framework.model.abitur.datenstrukturen.List;
+import KAGO_framework.model.abitur.datenstrukturen.*;
 import my_project.modes.dungeonMode.Monsters.*;
-import my_project.modes.dungeonMode.Tiles.Tile;
-import my_project.modes.ModeControl;
+import my_project.modes.dungeonMode.Tiles.*;
+import my_project.modes.*;
 
 public class DungeonModeControl extends ModeControl<DungeonModeView> {
     Dungeon dungeon;
