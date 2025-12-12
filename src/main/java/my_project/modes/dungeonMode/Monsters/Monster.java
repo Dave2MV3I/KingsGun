@@ -2,6 +2,8 @@ package my_project.modes.dungeonMode.Monsters;
 
 import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
+import my_project.modes.dungeonMode.DungeonEntity;
+import my_project.modes.dungeonMode.DungeonModeControl;
 import my_project.modes.dungeonMode.Tasks.Attack;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 
@@ -13,10 +15,11 @@ import java.awt.*;
  * David Glusmann
  */
 
-public abstract class Monster extends GameObject {
+public abstract class Monster extends DungeonEntity {
     protected Attack[] myAttacks;
 
-    public Monster(Attack[] attacks){
+    public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
+        super(dungeonModeControl);
         myAttacks = attacks;
 
         radius = 16;
@@ -24,9 +27,6 @@ public abstract class Monster extends GameObject {
         ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.5);
 
         //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
-    }
-    protected Monster(){
-        //Ich habe das hier hin gemacht, sodass ich das Spiel starten kann - Joshua
     }
 
     @Override
