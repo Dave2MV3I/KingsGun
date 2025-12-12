@@ -4,6 +4,7 @@ import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
 import my_project.modes.dungeonMode.DungeonEntity;
 import my_project.modes.dungeonMode.DungeonModeControl;
+import my_project.modes.dungeonMode.Player;
 import my_project.modes.dungeonMode.Tasks.Attack;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 
@@ -17,6 +18,7 @@ import java.awt.*;
 
 public abstract class Monster extends DungeonEntity {
     protected Attack[] myAttacks;
+    protected Player player;
 
     public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
         super(dungeonModeControl);
@@ -26,6 +28,7 @@ public abstract class Monster extends DungeonEntity {
         texture = new AnimatedSpriteSheet("testSlime.png", 1, 2);
         ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.5);
 
+        this.player = dungeonModeControl.getPlayer();
         //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
     }
 
@@ -42,6 +45,7 @@ public abstract class Monster extends DungeonEntity {
     public void update(double dt) {
         super.update(dt);
         texture.update(dt);
+        if(getDistanceTo(player) <= 0) this.attack(); // TODO Sollte nicht nagreifen können, 32
     }
 
     public void setPosition(int x, int y){
@@ -49,4 +53,12 @@ public abstract class Monster extends DungeonEntity {
         this.y = y;
     }
 
+    private void attack(){
+        int numAttacks = myAttacks.length;
+        int rndAttack = (int)(Math.random()*numAttacks);
+        Attack attack = myAttacks[rndAttack];
+        System.out.println(attack.calculateDamage() + " damage");
+
+        // TODO Queue machen
+    }
 }
