@@ -23,7 +23,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
 
     @Override
     protected void deactivate() {
-        dungeon = null;
+
     }
 
     @Override
