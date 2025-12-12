@@ -33,9 +33,11 @@ public class Dungeon extends GraphicalObject {
         // Instantiate chosen monster
         Class<? extends Monster> chosenMonster = monsterClasses.getContent();
         try {
-            java.lang.reflect.Constructor<? extends Monster> constructor = chosenMonster.getDeclaredConstructor();
+            java.lang.reflect.Constructor<? extends Monster> constructor = chosenMonster.getDeclaredConstructor(DungeonModeControl.class);
+            constructor.setAccessible(true);
             monster = constructor.newInstance(control);
             System.out.println("Neues Monster gespawnt: " + chosenMonster);
+            monster.setPosition(256,128);
         } catch (NoSuchMethodException e) {
             System.err.println("Error: Monster class does not have a parameterless constructor.");
             e.printStackTrace();

@@ -33,7 +33,7 @@ public abstract class Monster extends DungeonEntity {
     public void draw(DrawTool drawTool){
         drawTool.drawFilledRectangle(this.x, this.y, 10, 10);
         drawTool.drawFilledRectangle(this.x+5, this.y+5, 10, 10);
-        texture.autoDraw(drawTool, x, y, 32);
+        texture.autoDraw(drawTool, x-radius, y-radius, 32);
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
     }
@@ -42,6 +42,11 @@ public abstract class Monster extends DungeonEntity {
     public void update(double dt) {
         super.update(dt);
         texture.update(dt);
+    }
+
+    public void setPosition(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
 }
