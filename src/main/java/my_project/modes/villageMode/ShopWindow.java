@@ -21,7 +21,7 @@ public class ShopWindow {
     public ShopWindow() {
         initiateShopQueue();
         updateShopText();
-        ImageIcon image = new ImageIcon("src/main/resources/graphic/testSlime.png");
+        ImageIcon image = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
         shopOption.setIcon(image);
 
         discardButton.addActionListener(new ActionListener() {
