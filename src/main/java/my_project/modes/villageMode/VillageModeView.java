@@ -2,6 +2,8 @@ package my_project.modes.villageMode;
 
 import KAGO_framework.view.DrawTool;
 
+import my_project.Config;
+import my_project.model.Graphics.Texture;
 import my_project.modes.ModeView;
 
 import javax.swing.*;
@@ -11,10 +13,11 @@ import java.awt.event.MouseEvent;
 public class VillageModeView extends ModeView<VillageModeControl> {
     private Village currentVillage;
     private JFrame shopFrame;
+    private Texture villageBackground;
 
     public VillageModeView(VillageModeControl modeControl) {
         super(modeControl);
-
+        villageBackground = new Texture("VillageBackground.png");
     }
 
     public void activationVillage(Village village) {
@@ -25,11 +28,12 @@ public class VillageModeView extends ModeView<VillageModeControl> {
 
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(new Color(255, 255, 255));
-        drawTool.drawFilledRectangle(300, 300, 300, 300);
+        villageBackground.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
+        //drawTool.drawFilledRectangle(570, 200, 300, 300);
     }
 
     public void manageMouseInput(MouseEvent e) {
-        if (e.getX() > 300 && e.getX() < 600 && e.getY() > 300 && e.getY() < 600) {
+        if (e.getX() > 570 && e.getX() < 870 && e.getY() > 200 && e.getY() < 500) {
             shopFrame.setVisible(true);
         }
         if (e.getX() > 300 && e.getX() < 600 && e.getY() > 300 && e.getY() < 600) {

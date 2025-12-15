@@ -7,6 +7,7 @@ import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
 import my_project.modes.travelMode.Ammunition.NormalAmmunition;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,8 +22,12 @@ public class ShopWindow {
     public ShopWindow() {
         initiateShopQueue();
         updateShopText();
-        ImageIcon image = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
-        shopOption.setIcon(image);
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
+        shopOption.setIcon(imageIcon);
+
+        //Image image = imageIcon.getImage();
+        //shopPanal.getGraphics().drawImage(image,100,100,100,100,null);
 
         discardButton.addActionListener(new ActionListener() {
             @Override

@@ -19,6 +19,7 @@ import java.awt.*;
 public abstract class Monster extends DungeonEntity {
     protected Attack[] myAttacks;
     protected Player player;
+    private double coolDown = 2;
 
     public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
         super(dungeonModeControl);
@@ -45,7 +46,8 @@ public abstract class Monster extends DungeonEntity {
     public void update(double dt) {
         super.update(dt);
         texture.update(dt);
-        if(getDistanceTo(player) <= 32) this.attack(); // TODO Damage dem Spieler zuführen
+        coolDown -= dt;
+        if(getDistanceTo(player) <= 32 && coolDown <= 0) this.attack();
     }
 
     public void setPosition(int x, int y){
@@ -57,8 +59,13 @@ public abstract class Monster extends DungeonEntity {
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
         Attack attack = myAttacks[rndAttack];
-        System.out.println(attack.calculateDamage() + " damage");
+        double damage = attack.calculateDamage();
+        //System.out.println(damage + " damage");
+        player.damage(damage);
+        System.out.println(player.getHealth());
+        coolDown = 2;
 
-        // TODO Queue machen
+        // TODO Queue machen für Aktivitäten wie gehen und angreifen (Methode attack sollte im enum sein, nicht hier)
+        // TODO Drache schwer zu kriegen machen
     }
 }
