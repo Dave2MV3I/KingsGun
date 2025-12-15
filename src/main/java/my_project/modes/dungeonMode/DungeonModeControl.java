@@ -28,8 +28,8 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
 
     @Override
     protected void activate() {
-        dungeon = new Dungeon(this, monsterClasses);
         player = new Player(256,128, this);
+        dungeon = new Dungeon(this, monsterClasses);
         dungeon.update(0);
     }
 

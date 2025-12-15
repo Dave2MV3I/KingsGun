@@ -9,6 +9,7 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
     private ModeControl loadedControl;
     private ModeControl loadToControl;
     private MainController mainController;
+    private boolean modeGotLoaded;
     private double transitionTime = 3; //In seconds
     public LoadingModeControl(MainController mainController) {
         super();
@@ -17,13 +18,13 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
 
     @Override
     protected void activate() {
-
+        modeGotLoaded = false;
     }
     @Override
     public void update(double dt){
         super.update(dt);
         if (timer > transitionTime) {
-            mainController.setMode(loadedMode);
+            mainController.setMode(loadedMode, false);
         }else if (timer > transitionTime/2){
             activateLoadedMode(loadToMode);
         }
@@ -47,10 +48,13 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
         loadToMode = modeTo;
     }
     private void activateLoadedMode(String modeTo) {
-        loadedMode = modeTo;
-        loadedControl = mainController.getModeControls().get(modeTo);
-        loadedControl.setActive(true);
-        modeView.setLoadedView(loadedControl.getModeView());
+        if (!modeGotLoaded) {
+            loadedMode = modeTo;
+            loadedControl = mainController.getModeControls().get(modeTo);
+            loadedControl.setActive(true);
+            modeView.setLoadedView(loadedControl.getModeView());
+            modeGotLoaded = true;
+        }
     }
 
 }
