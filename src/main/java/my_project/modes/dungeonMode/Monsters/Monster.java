@@ -45,7 +45,7 @@ public abstract class Monster extends DungeonEntity {
     public void update(double dt) {
         super.update(dt);
         texture.update(dt);
-        if(getDistanceTo(player) <= 32) this.attack(); // TODO Sollte nicht nagreifen können, 32
+        if(getDistanceTo(player) <= 32) this.attack(); // TODO Damage dem Spieler zuführen
     }
 
     public void setPosition(int x, int y){
