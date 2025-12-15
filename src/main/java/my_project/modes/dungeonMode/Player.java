@@ -9,7 +9,7 @@ import my_project.view.MainView;
 import java.awt.event.KeyEvent;
 
 public class Player extends DungeonEntity {
-    DungeonModeControl control;
+
     public Player(double x, double y, DungeonModeControl dungeonModeControl) {
         super(dungeonModeControl);
         this.x = x;
@@ -52,6 +52,7 @@ public class Player extends DungeonEntity {
         setVelocityY(lVy);
         texture.update(dt);
         super.update(dt);
+        control.getTileByCoord(x, y).setBrightness(1);
         MainView.follow(x, y, true);
     }
     @Override

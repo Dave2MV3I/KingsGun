@@ -5,6 +5,7 @@ import my_project.model.GameObject;
 import my_project.modes.dungeonMode.Dungeon;
 import my_project.model.Graphics.Texture;
 import my_project.model.Graphics.TileSheet;
+import my_project.view.MainView;
 
 import java.awt.*;
 
@@ -13,6 +14,8 @@ public abstract class Tile extends GameObject {
     private static final double HEIGHT = 32;
     private Dungeon dungeon;
     private boolean isSolid;
+    protected double brightness; // 0.0 - 1.0
+    protected double spreadFactor;
 
 
     public Tile(int x, int y, Texture texture, Dungeon dungeon) {
@@ -20,8 +23,9 @@ public abstract class Tile extends GameObject {
         this.x = x * WIDTH;
         this.y = y * HEIGHT;
         this.texture = texture;
-
+        this.brightness = Math.random();
         setSize();
+        spreadFactor = 0.8;
     }
     private void setSize() {
         this.width = WIDTH;
@@ -37,16 +41,55 @@ public abstract class Tile extends GameObject {
     public void draw(DrawTool drawTool) {
         if(this.texture != null) {
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
-            //drawOrientation(drawTool, x, y);
+            drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-brightness))));
+            drawTool.drawFilledRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWIDTH()), MainView.scale(getHEIGHT()));
+            brightness = brightness * 0.9;
         }
 
     }
     @Override
     public void update(double dt) {
         super.update(dt);
+        spreadBrightness();
 
         setOrientation(findOrientation());
         texture.update(dt);
+    }
+    public void setBrightness(double brightness) {
+        this.brightness = Math.min(Math.max(brightness, 0), 1);
+    }
+    public void drawBrightness(DrawTool drawTool) {
+        //TODO make BrightnessGradient
+        double ftr = 0.0;
+        double fbr = 0.0;
+        double fbl = 0.0;
+        double ftl = 0.0;
+        drawScaledRectangle(drawTool, x, y, getWIDTH()/2, getHEIGHT()/2);
+        drawScaledRectangle(drawTool, x+getWIDTH()/2, y, getWIDTH()/2, getHEIGHT()/2);
+        drawScaledRectangle(drawTool, x+getWIDTH()/2, y+getHEIGHT()/2, getWIDTH()/2, getHEIGHT()/2);
+        drawScaledRectangle(drawTool, x, y+getHEIGHT()/2, getWIDTH()/2, getHEIGHT()/2);
+
+    }
+    private void drawScaledRectangle(DrawTool drawTool, double rx, double ry, double rw, double rh) {
+        drawTool.drawFilledRectangle( rx, ry, rw, rh);
+    }
+    public void increaseBrightnessTo(double brightness) {
+        if (this.brightness > brightness) return;
+        this.brightness = Math.min(Math.max(brightness, 0), 1);
+    }
+    public void spreadBrightness() {
+        if (brightness > 0) {
+            double diagonalSpreadFactor = spreadFactor / Math.sqrt(2);
+            if (getRelative("up") != null) getRelative("up").increaseBrightnessTo(this.brightness * spreadFactor);
+            if (getRelative("upRight") != null) getRelative("upRight").increaseBrightnessTo(this.brightness * diagonalSpreadFactor);
+            if (getRelative("right") != null) getRelative("right").increaseBrightnessTo(this.brightness * spreadFactor);
+            if (getRelative("downRight") != null) getRelative("downRight").increaseBrightnessTo(this.brightness * diagonalSpreadFactor);
+            if (getRelative("down") != null) getRelative("down").increaseBrightnessTo(this.brightness * spreadFactor);
+            if (getRelative("downLeft") != null) getRelative("downLeft").increaseBrightnessTo(this.brightness * diagonalSpreadFactor);
+            if (getRelative("left") != null) getRelative("left").increaseBrightnessTo(this.brightness * spreadFactor);
+            if (getRelative("upLeft") != null) getRelative("upLeft").increaseBrightnessTo(this.brightness * diagonalSpreadFactor);
+        }
+
     }
     public void setDungeon(Dungeon dungeon) {
         this.dungeon = dungeon;

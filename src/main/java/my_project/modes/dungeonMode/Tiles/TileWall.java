@@ -7,6 +7,7 @@ public class TileWall extends Tile {
     public TileWall(int x, int y, Dungeon dungeon) {
         super(x, y, new TileSheet("WallTileSheet32x32T.png"), dungeon);
         setSolid(true);
+        spreadFactor = 0.1;
     }
 
 }
