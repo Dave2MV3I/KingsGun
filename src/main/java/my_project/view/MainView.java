@@ -64,6 +64,9 @@ public class MainView {
         drawTool.setCurrentColor(0,0,0,(int)((1 - SettingsModel.getBrightness())*255));
         drawTool.drawFilledRectangle(0,0,Config.WINDOW_WIDTH,Config.WINDOW_HEIGHT);
     }
+    public String concatinateEve(String toConcat) {
+        return toString() + toConcat;
+    }
 
 
     //Getter and Setters
@@ -127,6 +130,7 @@ public class MainView {
         }else {
             SCREEN_OFFSET_X = 0;
             SCREEN_OFFSET_Y = 0;
+            
         }
     }
     public static boolean isCameraCentered() {

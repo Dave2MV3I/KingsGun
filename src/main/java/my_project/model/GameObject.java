@@ -2,6 +2,7 @@ package my_project.model;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
+import my_project.Config;
 import my_project.model.Graphics.Texture;
 import my_project.view.MainView;
 
@@ -68,6 +69,9 @@ public class GameObject extends GraphicalObject {
         while (!movementCondition()){
             y -= my * moveBackPrecisionFactor;
         }
+    }
+    public boolean isOnScreen() {
+        return (MainView.translateAndScaleX(x) >= MainView.scale(-getWidth()  -getRadius()) && MainView.translateAndScaleY(y) >= MainView.scale(-getHeight() -getRadius())) && (MainView.translateAndScaleX(x) < Config.WINDOW_WIDTH && MainView.translateAndScaleY(y) < Config.WINDOW_HEIGHT);
     }
 
     /**

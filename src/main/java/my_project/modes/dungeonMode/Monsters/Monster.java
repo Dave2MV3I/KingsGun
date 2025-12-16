@@ -50,7 +50,7 @@ public abstract class Monster extends DungeonEntity {
         if(getDistanceTo(player) <= 32 && coolDown <= 0) this.attack();
     }
 
-    public void setPosition(int x, int y){
+    public void setPosition(double x, double y){
         this.x = x;
         this.y = y;
     }

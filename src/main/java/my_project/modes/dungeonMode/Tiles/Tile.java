@@ -23,9 +23,9 @@ public abstract class Tile extends GameObject {
         this.x = x * WIDTH;
         this.y = y * HEIGHT;
         this.texture = texture;
-        this.brightness = Math.random();
+        this.brightness = 0;
         setSize();
-        spreadFactor = 0.8;
+        spreadFactor = 0.5;
     }
     private void setSize() {
         this.width = WIDTH;
@@ -39,10 +39,11 @@ public abstract class Tile extends GameObject {
     }
     @Override
     public void draw(DrawTool drawTool) {
-        if(this.texture != null) {
+        if(this.texture != null && isOnScreen()) {
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
             drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-brightness))));
-            drawTool.drawFilledRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWIDTH()), MainView.scale(getHEIGHT()));
+            //drawTool.drawFilledRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWIDTH()), MainView.scale(getHEIGHT()));
+            drawBrightness(drawTool);
             brightness = brightness * 0.9;
         }
 
@@ -60,18 +61,70 @@ public abstract class Tile extends GameObject {
     }
     public void drawBrightness(DrawTool drawTool) {
         //TODO make BrightnessGradient
-        double ftr = 0.0;
-        double fbr = 0.0;
-        double fbl = 0.0;
-        double ftl = 0.0;
-        drawScaledRectangle(drawTool, x, y, getWIDTH()/2, getHEIGHT()/2);
-        drawScaledRectangle(drawTool, x+getWIDTH()/2, y, getWIDTH()/2, getHEIGHT()/2);
-        drawScaledRectangle(drawTool, x+getWIDTH()/2, y+getHEIGHT()/2, getWIDTH()/2, getHEIGHT()/2);
-        drawScaledRectangle(drawTool, x, y+getHEIGHT()/2, getWIDTH()/2, getHEIGHT()/2);
+        double leftBrightness = this.brightness;
+        double rightBrightness = this.brightness;
+        double upBrightness = this.brightness;
+        double downBrightness = this.brightness;
+        if(getRelative("left") != null) {
+            leftBrightness = (getRelative("left").brightness + brightness)/2;
+        }
+        if(getRelative("right") != null) {
+            rightBrightness = (getRelative("right").brightness + brightness)/2;
+        }
+        if(getRelative("up") != null) {
+            upBrightness = (getRelative("up").brightness + brightness)/2;
+        }
+        if(getRelative("down") != null) {
+            downBrightness = (getRelative("down").brightness + brightness)/2;
+        }
+
+        double fract = 32;
+        for (int j = 0; j < fract; j++) {
+            double udFactor = j / fract;
+            double udSubBright = interpolate(upBrightness, brightness, downBrightness, (udFactor-0.5)*2);
+            udSubBright = Math.max(Math.min(udSubBright, 1.0), 0);
+            for (int i = 0; i < fract; i++) {
+                double lrFactor = i / fract;
+                double lrSubBrght = interpolate(leftBrightness, brightness, rightBrightness, (lrFactor-0.5) * 2);
+                lrSubBrght = Math.max(Math.min(lrSubBrght, 1.0), 0);
+                //drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-brght))));
+
+                String gradientAlgorithm = "max";
+                double subBright = switch (gradientAlgorithm) {
+                    case "average" -> (udSubBright + lrSubBrght) / 2;
+                    case "min" -> Math.min(udSubBright, lrSubBrght);
+                    case "max" -> Math.max(udSubBright, lrSubBrght);
+                    case "lumen" -> (udSubBright + lrSubBrght) / 2 + Math.abs(udSubBright - lrSubBrght);
+                    default -> brightness;
+                };
+                //double subBright = (udSubBright + lrSubBrght)/2;
+                //double subBright = (udSubBright + lrSubBrght)/2 + Math.abs(udSubBright - lrSubBrght);
+                //double
+                if (subBright < 1) {
+                    drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-subBright))));
+                } else {
+                    drawTool.setCurrentColor(new Color(255, 255, 255, (int)(255*(subBright-1))));
+                }
+
+                drawScaledRectangle(drawTool, x + getWIDTH() / fract * i, y + getHEIGHT() / fract * j, getWIDTH() / fract, getHEIGHT() / fract);
+            }
+        }
 
     }
+    private double interpolate(double a, double b, double c, double t) {
+        if (t < 0) {
+            return interpolate(a, b, t + 1);
+        }else if (t > 0) {
+            return interpolate(b, c, t);
+        } else {
+            return b;
+        }
+    };
+    private double interpolate(double a, double b, double t) {
+        return a + t * (b - a);
+    }
     private void drawScaledRectangle(DrawTool drawTool, double rx, double ry, double rw, double rh) {
-        drawTool.drawFilledRectangle( rx, ry, rw, rh);
+        drawTool.drawFilledRectangle( MainView.translateAndScaleX(rx), MainView.translateAndScaleY(ry), MainView.scale(rw), MainView.scale(rh));
     }
     public void increaseBrightnessTo(double brightness) {
         if (this.brightness > brightness) return;
