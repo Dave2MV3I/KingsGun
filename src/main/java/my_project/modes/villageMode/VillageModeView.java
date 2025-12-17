@@ -36,8 +36,11 @@ public class VillageModeView extends ModeView<VillageModeControl> {
         if (e.getX() > 570 && e.getX() < 870 && e.getY() > 200 && e.getY() < 500) {
             shopFrame.setVisible(true);
         }
-        if (e.getX() > 300 && e.getX() < 600 && e.getY() > 300 && e.getY() < 600) {
-
+        if (e.getX() > 0 && e.getX() < 300 && e.getY() > 500 && e.getY() < 900) {
+            modeControl.getMainController().loadMode("map");
+        }
+        if (e.getX() > Config.WINDOW_WIDTH-300 && e.getX() < Config.WINDOW_WIDTH && e.getY() > 500 && e.getY() < 900) {
+            modeControl.getMainController().loadMode("dungeon");
         }
     }
 }
