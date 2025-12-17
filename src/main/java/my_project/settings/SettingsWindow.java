@@ -18,6 +18,8 @@ public class SettingsWindow {
     private JLabel musicLabel;
     private JLabel soundLabel;
     private JLabel brightnessLabel;
+    private JSlider performanceSlider;
+    private JLabel performanceLabel;
 
     private SettingsController settingController;
 
@@ -44,6 +46,13 @@ public class SettingsWindow {
             @Override
             public void stateChanged(ChangeEvent event) {
                 settingController.setSetting("brightness", (float) brightnessSlider.getValue() /100);
+            }
+        });
+
+        performanceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent event) {
+                settingController.setSetting("performance", (float) performanceSlider.getValue());
             }
         });
     }

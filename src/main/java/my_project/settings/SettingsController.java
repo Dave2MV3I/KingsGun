@@ -27,7 +27,7 @@ public class SettingsController {
     }
 
     /**
-     * Method for changing Settings with float values.
+     * Method for changing visual and auditory game settings with float values.
      * @param setting options: musicVolume, soundVolume, brightness
      * @param value the new value to be assigned
      */
@@ -39,6 +39,7 @@ public class SettingsController {
                 break;
             case "brightness" : SettingsModel.setBrightness(value);
                 break;
+            case "performance" : SettingsModel.setPerformance(value);
         }
     }
 
