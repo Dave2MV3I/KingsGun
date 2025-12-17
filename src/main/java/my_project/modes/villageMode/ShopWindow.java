@@ -19,15 +19,17 @@ public class ShopWindow {
     private JButton takeButton;
     private JLabel shopOption;
 
+    private ImageIcon normalIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
+    private ImageIcon electricIcon = new ImageIcon("src/main/resources/graphic/ElektricAmmo.png");
+    private ImageIcon explodingIcon = new ImageIcon("src/main/resources/graphic/ExplodingAmmo.png");
+
     public ShopWindow() {
         initiateShopQueue();
         updateShopText();
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
-        imageIcon.setImage(imageIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
-        shopOption.setIcon(imageIcon);
 
-        //Image image = imageIcon.getImage();
-        //shopPanal.getGraphics().drawImage(image,100,100,100,100,null);
+        normalIcon.setImage(normalIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
+        electricIcon.setImage(electricIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
+        explodingIcon.setImage(explodingIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
 
         discardButton.addActionListener(new ActionListener() {
             @Override
@@ -52,10 +54,13 @@ public class ShopWindow {
         String ammoType = "";
         if (shopItems.front() instanceof NormalAmmunition) {
             ammoType = "Normal Ammunition";
+            shopOption.setIcon(normalIcon);
         }else if (shopItems.front() instanceof ElectricAmmunition) {
             ammoType = "Electric Ammunition";
+            shopOption.setIcon(electricIcon);
         }else if (shopItems.front() instanceof ExplosiveAmmunition) {
             ammoType = "Explosive Ammunition";
+            shopOption.setIcon(explodingIcon);
         }
         shopOption.setText(ammoType);
     }
