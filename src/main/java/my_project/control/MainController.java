@@ -38,11 +38,11 @@ public class MainController extends GraphicalObject {
         currentMode = "start";
         modeControls = new HashMap<>(); // create Hashmap to cantain all controllers of game modes
         // add mode controllers to Hashmap
-        modeControls.put("start", new startModeControl());
-        modeControls.put("map", new MapModeControl());
-        modeControls.put("village", new VillageModeControl());
-        modeControls.put("travel", new TravelModeControl());
-        modeControls.put("dungeon", new DungeonModeControl());
+        modeControls.put("start", new startModeControl(this));
+        modeControls.put("map", new MapModeControl(this));
+        modeControls.put("village", new VillageModeControl(this));
+        modeControls.put("travel", new TravelModeControl(this));
+        modeControls.put("dungeon", new DungeonModeControl(this));
         modeControls.put("loading", new LoadingModeControl(this));
 
         mainView = new MainView(this);

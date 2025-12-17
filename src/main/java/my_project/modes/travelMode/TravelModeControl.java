@@ -2,6 +2,7 @@ package my_project.modes.travelMode;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
+import my_project.control.MainController;
 import my_project.modes.ModeControl;
 import my_project.modes.travelMode.Bandits.Archer;
 import my_project.modes.travelMode.Bandits.Bandit;
@@ -10,7 +11,8 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
     private Carriage carriage;
     private List<Bandit> bandits;
     private double time;
-    public TravelModeControl() {
+    public TravelModeControl(MainController mainController) {
+        super(mainController);
         carriage = new Carriage();
         bandits = new List<Bandit>();
     }

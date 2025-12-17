@@ -12,8 +12,9 @@ public abstract class ModeControl<MV extends ModeView>{
     boolean active;
     protected double timer;
 
-    public ModeControl() {
+    public ModeControl(MainController mainController) {
         timer = 0.0;
+        this.mainController = mainController;
     }
     public void setMainController(MainController mainController) {
         this.mainController = mainController;

@@ -13,7 +13,8 @@ public class VillageModeControl extends ModeControl<VillageModeView> {
     private int amountVillage;
     private int currentVillage = 0;
 
-    public VillageModeControl() {
+    public VillageModeControl(MainController mainController) {
+        super(mainController);
         amountVillage = 5;
         setUpVillages();
     }

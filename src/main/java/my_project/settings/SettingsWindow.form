@@ -102,15 +102,15 @@
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <majorTickSpacing value="2"/>
-          <maximum value="32"/>
-          <minimum value="1"/>
+          <majorTickSpacing value="1"/>
+          <maximum value="3"/>
+          <minimum value="0"/>
           <minorTickSpacing value="0"/>
           <paintLabels value="false"/>
           <paintTicks value="true"/>
           <paintTrack value="true"/>
           <snapToTicks value="true"/>
-          <value value="5"/>
+          <value value="3"/>
         </properties>
       </component>
     </children>

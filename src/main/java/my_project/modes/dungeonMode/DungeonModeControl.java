@@ -1,6 +1,7 @@
 package my_project.modes.dungeonMode;
 
 import KAGO_framework.model.abitur.datenstrukturen.*;
+import my_project.control.MainController;
 import my_project.modes.dungeonMode.Monsters.*;
 import my_project.modes.dungeonMode.Tiles.*;
 import my_project.modes.*;
@@ -10,7 +11,8 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     Player player;
     private final List<Class<? extends Monster>> monsterClasses = new List<>();
 
-    public DungeonModeControl() {
+    public DungeonModeControl(MainController mainController) {
+        super(mainController);
         // Add the classes of possible monsters to the linked list with all monster classes
         monsterClasses.append(Dragon.class);
         monsterClasses.append(Goblin.class);

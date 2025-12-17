@@ -8,12 +8,10 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
     private String loadToMode;
     private ModeControl loadedControl;
     private ModeControl loadToControl;
-    private MainController mainController;
     private boolean modeGotLoaded;
     private double transitionTime = 3; //In seconds
     public LoadingModeControl(MainController mainController) {
-        super();
-        this.mainController = mainController;
+        super(mainController);
     }
 
     @Override

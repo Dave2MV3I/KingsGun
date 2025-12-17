@@ -5,6 +5,7 @@ import my_project.model.GameObject;
 import my_project.modes.dungeonMode.Dungeon;
 import my_project.model.Graphics.Texture;
 import my_project.model.Graphics.TileSheet;
+import my_project.settings.SettingsModel;
 import my_project.view.MainView;
 
 import java.awt.*;
@@ -41,8 +42,6 @@ public abstract class Tile extends GameObject {
     public void draw(DrawTool drawTool) {
         if(this.texture != null && isOnScreen()) {
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
-            drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-brightness))));
-            //drawTool.drawFilledRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWIDTH()), MainView.scale(getHEIGHT()));
             drawBrightness(drawTool);
             brightness = brightness * 0.9;
         }
@@ -60,54 +59,73 @@ public abstract class Tile extends GameObject {
         this.brightness = Math.min(Math.max(brightness, 0), 1);
     }
     public void drawBrightness(DrawTool drawTool) {
-        //TODO make BrightnessGradient
-        double leftBrightness = this.brightness;
-        double rightBrightness = this.brightness;
-        double upBrightness = this.brightness;
-        double downBrightness = this.brightness;
-        if(getRelative("left") != null) {
-            leftBrightness = (getRelative("left").brightness + brightness)/2;
-        }
-        if(getRelative("right") != null) {
-            rightBrightness = (getRelative("right").brightness + brightness)/2;
-        }
-        if(getRelative("up") != null) {
-            upBrightness = (getRelative("up").brightness + brightness)/2;
-        }
-        if(getRelative("down") != null) {
-            downBrightness = (getRelative("down").brightness + brightness)/2;
-        }
-
-        double fract = 32;
-        for (int j = 0; j < fract; j++) {
-            double udFactor = j / fract;
-            double udSubBright = interpolate(upBrightness, brightness, downBrightness, (udFactor-0.5)*2);
-            udSubBright = Math.max(Math.min(udSubBright, 1.0), 0);
-            for (int i = 0; i < fract; i++) {
-                double lrFactor = i / fract;
-                double lrSubBrght = interpolate(leftBrightness, brightness, rightBrightness, (lrFactor-0.5) * 2);
-                lrSubBrght = Math.max(Math.min(lrSubBrght, 1.0), 0);
-                //drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-brght))));
-
-                String gradientAlgorithm = "max";
-                double subBright = switch (gradientAlgorithm) {
-                    case "average" -> (udSubBright + lrSubBrght) / 2;
-                    case "min" -> Math.min(udSubBright, lrSubBrght);
-                    case "max" -> Math.max(udSubBright, lrSubBrght);
-                    case "lumen" -> (udSubBright + lrSubBrght) / 2 + Math.abs(udSubBright - lrSubBrght);
-                    default -> brightness;
-                };
-                //double subBright = (udSubBright + lrSubBrght)/2;
-                //double subBright = (udSubBright + lrSubBrght)/2 + Math.abs(udSubBright - lrSubBrght);
-                //double
-                if (subBright < 1) {
-                    drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-subBright))));
-                } else {
-                    drawTool.setCurrentColor(new Color(255, 255, 255, (int)(255*(subBright-1))));
-                }
-
-                drawScaledRectangle(drawTool, x + getWIDTH() / fract * i, y + getHEIGHT() / fract * j, getWIDTH() / fract, getHEIGHT() / fract);
+        if(brightness > 0.01) {
+            //TODO make BrightnessGradient
+            double leftBrightness = this.brightness;
+            double rightBrightness = this.brightness;
+            double upBrightness = this.brightness;
+            double downBrightness = this.brightness;
+            if (getRelative("left") != null) {
+                leftBrightness = (getRelative("left").brightness + brightness) / 2;
             }
+            if (getRelative("right") != null) {
+                rightBrightness = (getRelative("right").brightness + brightness) / 2;
+            }
+            if (getRelative("up") != null) {
+                upBrightness = (getRelative("up").brightness + brightness) / 2;
+            }
+            if (getRelative("down") != null) {
+                downBrightness = (getRelative("down").brightness + brightness) / 2;
+            }
+            int complexity = 1; //0 - 3
+            double fract = switch ((int)SettingsModel.getPerformance()) {
+                case 0 -> 1;
+                case 1 -> 6;
+                case 2 -> 16;
+                case 3 -> 32;
+                default -> 1;
+            };
+            if (SettingsModel.getPerformance() > 0) {
+                for (int j = 0; j < fract; j++) {
+                    double udFactor = j / fract;
+                    double udSubBright = interpolate(upBrightness, brightness, downBrightness, (udFactor - 0.5) * 2);
+                    udSubBright = Math.max(Math.min(udSubBright, 1.0), 0);
+                    for (int i = 0; i < fract; i++) {
+                        double lrFactor = i / fract;
+                        double lrSubBrght = interpolate(leftBrightness, brightness, rightBrightness, (lrFactor - 0.5) * 2);
+                        lrSubBrght = Math.max(Math.min(lrSubBrght, 1.0), 0);
+                        //drawTool.setCurrentColor(new Color(0, 0, 0, (int)(255*(1-brght))));
+
+                        String gradientAlgorithm = "lumen";
+                        double subBright = switch (gradientAlgorithm) {
+                            case "average" -> (udSubBright + lrSubBrght) / 2;
+                            case "min" -> Math.min(udSubBright, lrSubBrght);
+                            case "max" -> Math.max(udSubBright, lrSubBrght);
+                            case "lumen" -> (udSubBright + lrSubBrght) / 2 + Math.abs(udSubBright - lrSubBrght);
+                            default -> brightness;
+                        };
+                        if (subBright < 1) {
+                            drawTool.setCurrentColor(new Color(0, 0, 0, (int) (255 * (1 - subBright))));
+                        } else {
+                            drawTool.setCurrentColor(new Color(255, 255, 255, (int) (255 * (subBright - 1))));
+                        }
+                        drawScaledRectangle(drawTool, x + getWIDTH() / fract * i, y + getHEIGHT() / fract * j, getWIDTH() / fract, getHEIGHT() / fract);
+                    }
+                }
+            } else {
+                if (brightness < 1) {
+                    drawTool.setCurrentColor(new Color(0, 0, 0, (int) (255 * (1 - brightness))));
+                } else if (brightness > 1) {
+                    brightness = Math.min(brightness, 2);
+                    drawTool.setCurrentColor(new Color(255, 255, 255, (int) (255 * (brightness - 1))));
+                } else return;
+
+                drawScaledRectangle(drawTool, x, y, getWIDTH(), getHEIGHT());
+            }
+        } else {
+            drawTool.setCurrentColor(new Color(0, 0, 0, 255));
+
+            drawScaledRectangle(drawTool, x, y, getWIDTH(), getHEIGHT());
         }
 
     }
