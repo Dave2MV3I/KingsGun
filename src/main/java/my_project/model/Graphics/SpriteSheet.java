@@ -25,7 +25,6 @@ public class SpriteSheet extends Texture {
         height = (double) getMyImage().getHeight() /rows;
 
 
-
         for (int iX = 0; iX < cols; iX++) {
             for (int iY = 0; iY < rows; iY++) {
                 subImages[iX][iY] = getMyImage().getSubimage((int)(iX* width), (int)(iY* height), (int)(width), (int)(height));
@@ -76,5 +75,16 @@ public class SpriteSheet extends Texture {
     public double getSubImgHeight() {
         return height;
     }
+    public int getRows(){
+        return subImages[0].length;
+    }
+    public int getCols(){
+        return subImages.length;
+    }
 
+    public void setRandom() {
+        currentX = (int)(Math.random()*getCols());
+        currentY = (int)(Math.random()*getRows());
+        setImageToCurrent();
+    }
 }

@@ -2,11 +2,22 @@ package my_project.view;
 
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
+import my_project.modes.dungeonMode.DungeonModeControl;
+import my_project.modes.loadingMode.LoadingModeControl;
+import my_project.modes.loadingMode.LoadingModeView;
+import my_project.modes.mapMode.MapModeControl;
+import my_project.modes.mapMode.MapModeView;
+import my_project.modes.ModeView;
+import my_project.modes.startMode.startModeControl;
+import my_project.modes.startMode.startModeView;
 import my_project.control.MainController;
-import my_project.control.modeControl.*;
-import my_project.model.CoreClasses.SettingsModel;
+import my_project.modes.ModeControl;
+import my_project.settings.SettingsModel;
+import my_project.modes.dungeonMode.DungeonModeView;
+import my_project.modes.travelMode.TravelModeControl;
+import my_project.modes.travelMode.TravelModeView;
+import my_project.modes.villageMode.*;
 import my_project.view.javafx.BackendDeveloperAcces;
-import my_project.view.modeView.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,17 +49,23 @@ public class MainView {
         frame = mainController.createJFrame(backendDeveloperAcces.getContentPane());
 
         modeViews = new HashMap<>();
+        modeViews.put("start", new startModeView((startModeControl)modeControls.get("start")));
         modeViews.put("map", new MapModeView((MapModeControl)modeControls.get("map")));
         modeViews.put("village", new VillageModeView((VillageModeControl)modeControls.get("village")));
         modeViews.put("travel", new TravelModeView((TravelModeControl)modeControls.get("travel")));
         modeViews.put("dungeon", new DungeonModeView((DungeonModeControl)modeControls.get("dungeon")));
-
+        modeViews.put("loading", new LoadingModeView((LoadingModeControl)modeControls.get("loading")));
     }
 
     public void draw(DrawTool drawTool) {
+        drawTool.setCurrentColor(new Color(24, 20, 37));
+        drawTool.drawFilledRectangle(0,0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         modeViews.get(mainController.getMode()).draw(drawTool);
         drawTool.setCurrentColor(0,0,0,(int)((1 - SettingsModel.getBrightness())*255));
         drawTool.drawFilledRectangle(0,0,Config.WINDOW_WIDTH,Config.WINDOW_HEIGHT);
+    }
+    public String concatinateEve(String toConcat) {
+        return toString() + toConcat;
     }
 
 
@@ -113,6 +130,7 @@ public class MainView {
         }else {
             SCREEN_OFFSET_X = 0;
             SCREEN_OFFSET_Y = 0;
+            
         }
     }
     public static boolean isCameraCentered() {

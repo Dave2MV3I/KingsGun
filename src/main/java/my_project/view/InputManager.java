@@ -2,9 +2,8 @@ package my_project.view;
 
 import KAGO_framework.model.InteractiveGraphicalObject;
 import my_project.control.MainController;
-import my_project.control.ProgramController;
-import my_project.control.modeControl.MapModeControl;
-import my_project.view.modeView.MapModeView;
+import my_project.modes.mapMode.MapModeControl;
+import my_project.modes.villageMode.VillageModeControl;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -38,9 +37,15 @@ public class InputManager extends InteractiveGraphicalObject {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1 && mainController.getMode().equals("map")){
-            MapModeControl mapmodecontrol = (MapModeControl)mainController.getModeControls().get("map");
-            mapmodecontrol.getMapModeView().manageMouseInput(e);
+        if(e.getButton() == MouseEvent.BUTTON1){
+            switch(mainController.getMode()){
+                case "map": MapModeControl mapmodecontrol = (MapModeControl)mainController.getModeControls().get("map");
+                    mapmodecontrol.getMapModeView().manageMouseInput(e);
+                break;
+                case "village": VillageModeControl villageModeControl = (VillageModeControl)mainController.getModeControls().get("village");
+                    villageModeControl.getVillageModeView().manageMouseInput(e);
+                break;
+            }
         }
     }
 

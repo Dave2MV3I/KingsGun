@@ -2,10 +2,15 @@ package my_project.control;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
-import my_project.control.modeControl.*;
-import my_project.model.CoreClasses.SettingsController;
+import my_project.modes.dungeonMode.*;
+import my_project.modes.loadingMode.*;
+import my_project.modes.mapMode.*;
+import my_project.modes.ModeControl;
+import my_project.modes.startMode.*;
+import my_project.settings.*;
+import my_project.modes.travelMode.*;
+import my_project.modes.villageMode.*;
 import my_project.view.MainView;
-import my_project.view.modeView.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,13 +35,15 @@ public class MainController extends GraphicalObject {
 
     // Constructor
     public MainController() {
-        currentMode = "map";
+        currentMode = "start";
         modeControls = new HashMap<>(); // create Hashmap to cantain all controllers of game modes
         // add mode controllers to Hashmap
-        modeControls.put("map", new MapModeControl());
-        modeControls.put("village", new VillageModeControl());
-        modeControls.put("travel", new TravelModeControl());
-        modeControls.put("dungeon", new DungeonModeControl());
+        modeControls.put("start", new startModeControl(this));
+        modeControls.put("map", new MapModeControl(this));
+        modeControls.put("village", new VillageModeControl(this));
+        modeControls.put("travel", new TravelModeControl(this));
+        modeControls.put("dungeon", new DungeonModeControl(this));
+        modeControls.put("loading", new LoadingModeControl(this));
 
         mainView = new MainView(this);
 
@@ -56,14 +63,31 @@ public class MainController extends GraphicalObject {
         mainView.getBackEndDeveloperAcces().setFPS(fps);
     }
     public void setMode(String mode) {
+        setMode(mode, true);
+    }
+    public void setMode(String mode, boolean activateNew) {
         if (modeControls.containsKey(mode)) {
             modeControls.get(currentMode).setActive(false);
             currentMode = mode.toLowerCase();
-            modeControls.get(currentMode).setActive(true);
+            if (activateNew) modeControls.get(currentMode).setActive(true);
         }else{
             System.err.println("mode not found: " + mode);
         }
     }
+
+    public void loadMode(String mode) {
+        if (modeControls.containsKey(mode)) {
+            String previous = currentMode;
+            modeControls.get(currentMode).setActive(false);
+            currentMode = "loading";
+            modeControls.get(currentMode).setActive(true);
+            ((LoadingModeControl)modeControls.get(currentMode)).loadMode(previous, mode);
+
+        }else{
+            System.err.println("mode not found: " + mode);
+        }
+    }
+
     public String getMode() {
         return currentMode;
     }
