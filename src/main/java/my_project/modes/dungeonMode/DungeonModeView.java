@@ -18,7 +18,6 @@ public class DungeonModeView extends ModeView<DungeonModeControl> {
         drawTool.drawFilledRectangle(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         drawDungeon(drawTool);
         super.draw(drawTool);
-        modeControl.getDungeon().getMonster().draw(drawTool);
     }
     private void drawDungeon(DrawTool drawTool) {
         for (Tile[] tiles : modeControl.getDungeonTiles()) {
@@ -27,7 +26,19 @@ public class DungeonModeView extends ModeView<DungeonModeControl> {
 
             }
         }
-        if (modeControl.getMonster() != null) modeControl.getMonster().draw(drawTool);
-        if (modeControl.getPlayer() != null) modeControl.getPlayer().draw(drawTool);
+
+        if (modeControl.getMonster() != null && modeControl.getPlayer() != null) {
+
+            if (modeControl.getMonster().getY() < modeControl.getPlayer().getY()) { // Monster above Player
+                modeControl.getMonster().draw(drawTool);
+                modeControl.getPlayer().draw(drawTool);
+                //System.out.println("Monster above Player");
+            } else {// Player above Monster
+                modeControl.getPlayer().draw(drawTool);
+                modeControl.getMonster().draw(drawTool);
+                //System.out.println("Player above Monster");
+            }
+
+        }
     }
 }

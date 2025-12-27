@@ -4,6 +4,7 @@ import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.model.Graphics.SpriteSheet;
 import my_project.modes.ModeView;
+import my_project.view.InputManager;
 import my_project.view.Mouse;
 
 public class startModeView extends ModeView<startModeControl> {

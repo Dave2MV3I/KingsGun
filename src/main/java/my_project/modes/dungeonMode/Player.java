@@ -3,6 +3,8 @@ package my_project.modes.dungeonMode;
 import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
 import my_project.model.Graphics.AnimatedSpriteSheet;
+import my_project.modes.dungeonMode.Tiles.InteractiveTile;
+import my_project.modes.dungeonMode.Tiles.Tile;
 import my_project.view.InputManager;
 import my_project.view.MainView;
 
@@ -48,12 +50,24 @@ public class Player extends DungeonEntity {
             lVx -= lV;
             ((AnimatedSpriteSheet) texture).setCurrentY(1);
         }
+
         setVelocityX(lVx);
         setVelocityY(lVy);
         texture.update(dt);
         super.update(dt);
         control.getTileByCoord(x, y).setBrightness(1);
         MainView.follow(x, y, true);
+        if (InputManager.isPressed("f")) {
+            int range = 1;
+            for (int i = -range; i <= range; i++) {
+                for (int j = -range; j <= range; j++) {
+                    Tile locTile = control.getTileByCoord(x + (i * Tile.getWIDTH()), y + (j * Tile.getHEIGHT()));
+                    if (locTile instanceof InteractiveTile) {
+                        ((InteractiveTile)locTile).interact();
+                    }
+                }
+            }
+        }
     }
     @Override
     public void draw(DrawTool drawTool) {
