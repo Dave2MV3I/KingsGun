@@ -2,6 +2,7 @@ package my_project.control;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
+import my_project.model.Player;
 import my_project.modes.dungeonMode.*;
 import my_project.modes.loadingMode.*;
 import my_project.modes.mapMode.*;
@@ -25,6 +26,7 @@ public class MainController extends GraphicalObject {
 
     // Attributes and Strings
     private static String currentMode;
+    private static Player currentPlayer;
 
     // References
     private MainView mainView;
@@ -36,6 +38,7 @@ public class MainController extends GraphicalObject {
     // Constructor
     public MainController() {
         currentMode = "start";
+        currentPlayer = new Player();
         modeControls = new HashMap<>(); // create Hashmap to cantain all controllers of game modes
         // add mode controllers to Hashmap
         modeControls.put("start", new startModeControl(this));
@@ -76,12 +79,15 @@ public class MainController extends GraphicalObject {
     }
 
     public void loadMode(String mode) {
+        loadMode(mode, "standart");
+    }
+    public void loadMode(String mode, String animation) {
         if (modeControls.containsKey(mode)) {
             String previous = currentMode;
             modeControls.get(currentMode).setActive(false);
             currentMode = "loading";
             modeControls.get(currentMode).setActive(true);
-            ((LoadingModeControl)modeControls.get(currentMode)).loadMode(previous, mode);
+            ((LoadingModeControl)modeControls.get(currentMode)).loadMode(previous, mode, animation);
 
         }else{
             System.err.println("mode not found: " + mode);
@@ -122,6 +128,9 @@ public class MainController extends GraphicalObject {
         localFrame.pack();
         localFrame.setVisible(visible);
         return localFrame;
+    }
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
 }

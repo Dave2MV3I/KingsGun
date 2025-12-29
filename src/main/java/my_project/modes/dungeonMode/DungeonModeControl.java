@@ -2,13 +2,14 @@ package my_project.modes.dungeonMode;
 
 import KAGO_framework.model.abitur.datenstrukturen.*;
 import my_project.control.MainController;
+import my_project.model.Player;
 import my_project.modes.dungeonMode.Monsters.*;
 import my_project.modes.dungeonMode.Tiles.*;
 import my_project.modes.*;
 
 public class DungeonModeControl extends ModeControl<DungeonModeView> {
     Dungeon dungeon;
-    Player player;
+    DungeonPlayer dungeonPlayer;
     private final List<Class<? extends Monster>> monsterClasses = new List<>();
 
     public DungeonModeControl(MainController mainController) {
@@ -30,7 +31,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
 
     @Override
     protected void activate() {
-        player = new Player(256,128, this);
+        dungeonPlayer = new DungeonPlayer(256,128, this);
         dungeon = new Dungeon(this, monsterClasses);
         dungeon.update(0);
     }
@@ -39,7 +40,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     public void update(double dt) {
         super.update(dt);
         dungeon.update(dt);
-        player.update(dt);
+        dungeonPlayer.update(dt);
         getMonster().update(dt);
     }
 
@@ -60,13 +61,24 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     public Tile getTileByCoord(double x, double y){
         return dungeon.getTileFromCoordinates(x, y);
     }
-    public Player getPlayer(){
-        return player;
+    public DungeonPlayer getDungeonPlayer(){
+        return dungeonPlayer;
     }
-    public void setPlayer(Player player){
-        this.player = player;
+    public void setPlayer(DungeonPlayer dungeonPlayer){
+        this.dungeonPlayer = dungeonPlayer;
     }
     public Monster getMonster(){
         return dungeon.getMonster();
+    }
+    public void exit(){
+        mainController.loadMode("village");
+        mainController.getCurrentPlayer().addMoney(dungeonPlayer.getMoney());
+    }
+    public void playerDied(){
+        mainController.loadMode("start");
+    }
+
+    public Player getPlayer() {
+        return mainController.getCurrentPlayer();
     }
 }

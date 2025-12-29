@@ -13,7 +13,7 @@ import java.awt.*;
 public abstract class Tile extends GameObject {
     private static final double WIDTH = 32;
     private static final double HEIGHT = 32;
-    private Dungeon dungeon;
+    protected Dungeon dungeon;
     private boolean isSolid;
     protected double brightness; // 0.0 - 1.0
     protected double spreadFactor;

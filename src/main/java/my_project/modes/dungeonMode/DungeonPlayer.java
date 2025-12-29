@@ -1,7 +1,6 @@
 package my_project.modes.dungeonMode;
 
 import KAGO_framework.view.DrawTool;
-import my_project.model.GameObject;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 import my_project.modes.dungeonMode.Tiles.InteractiveTile;
 import my_project.modes.dungeonMode.Tiles.Tile;
@@ -10,10 +9,12 @@ import my_project.view.MainView;
 
 import java.awt.event.KeyEvent;
 
-public class Player extends DungeonEntity {
-
-    public Player(double x, double y, DungeonModeControl dungeonModeControl) {
+public class DungeonPlayer extends DungeonEntity {
+    private double money;
+    public DungeonPlayer(double x, double y, DungeonModeControl dungeonModeControl) {
         super(dungeonModeControl);
+        health = 100;
+        money = 0;
         this.x = x;
         this.y = y;
         this.texture = new AnimatedSpriteSheet("Player.png", 4, 4);
@@ -68,11 +69,27 @@ public class Player extends DungeonEntity {
                 }
             }
         }
+        if (health < 0) {
+            control.playerDied();
+        }
     }
     @Override
     public void draw(DrawTool drawTool) {
         texture.autoDraw(drawTool, x - texture.getWidth()/2, y - 25, 32);
         autoDrawHitbox(drawTool);
+    }
+    public void drawHealth(DrawTool drawTool, double x, double y, double width, double height) {
+        width = width * health/100;
+        drawTool.drawFilledRectangle(x, y, width, height);
+    }
+    public void drawMoney(DrawTool drawTool, double x, double y) {
+        drawTool.drawText(x, y, control.getPlayer().getMoney()+ "$ + " + money + "$");
+    }
+    public void increaseMoney(double amount) {
+        money += amount;
+    }
+    public double getMoney() {
+        return money;
     }
 
 }

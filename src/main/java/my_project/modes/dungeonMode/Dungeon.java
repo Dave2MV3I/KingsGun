@@ -73,7 +73,7 @@ public class Dungeon extends GraphicalObject {
      * <br>
      * Magenta Pixel: Cosmetic Tile
      * <br>
-     * Blue Pixel: Player spawn
+     * Blue Pixel: DungeonPlayer spawn
      * <br>
      * Cyan Pixel: Chest Tile
      * <br>
@@ -145,5 +145,9 @@ public class Dungeon extends GraphicalObject {
                 }
             }
         }
+    }
+
+    public DungeonPlayer getPlayer() {
+        return control.getDungeonPlayer();
     }
 }
