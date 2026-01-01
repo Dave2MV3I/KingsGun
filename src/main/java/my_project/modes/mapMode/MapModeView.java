@@ -13,6 +13,9 @@ public class MapModeView extends ModeView<MapModeControl> {
     private int[][] villagePos;
     private Texture mapTexture;
     private Texture mapSymbolVillage;
+    private int currentVillage = 0;
+    private double radius = 15;
+    private boolean inMoving = false;
 
     public MapModeView(MapModeControl modeControl) {
         super(modeControl);
@@ -44,6 +47,7 @@ public class MapModeView extends ModeView<MapModeControl> {
     public void draw(DrawTool drawTool) {
         mapTexture.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
 
+        //Draw Roadlines
         for(int i = 0; i < villagePos.length - 1; i++) {
             drawTool.setCurrentColor(new Color(115, 62, 57));
             drawTool.setLineWidth(21);
@@ -53,6 +57,7 @@ public class MapModeView extends ModeView<MapModeControl> {
             drawTool.drawLine(villagePos[i][0], villagePos[i][1], villagePos[i+1][0], villagePos[i+1][1]);
         }
 
+        //Draw Castle
         drawTool.setCurrentColor(new Color(255, 0, 0));
         drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/6,15);
         drawTool.setCurrentColor(new Color(38, 43, 68));
@@ -60,9 +65,19 @@ public class MapModeView extends ModeView<MapModeControl> {
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10-40,35,40);
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2+15, Config.WINDOW_HEIGHT/10-40,35,40);
 
-        drawTool.setCurrentColor(new Color(54, 182, 11));
+        drawTool.setLineWidth(4);
         for(int i = 1; i < amountVillages+1; i++) {
+            drawTool.setCurrentColor(new Color(194, 133, 105));
+            if(i < currentVillage+1) {
+                drawTool.setCurrentColor(new Color(234, 212, 170));
+            }
             drawTool.drawFilledCircle(villagePos[i][0], villagePos[i][1], 15);
+
+            if(i == currentVillage+1) {
+                drawTool.setCurrentColor(new Color(234, 212, 170));
+                drawTool.drawCircle(villagePos[i][0], villagePos[i][1], radius);
+            }
+
             if (villagePos[i][0] > Config.WINDOW_WIDTH/2) {
                 mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] + 20, villagePos[i][1]-20, 70);
             }else {
@@ -70,8 +85,21 @@ public class MapModeView extends ModeView<MapModeControl> {
             }
         }
 
-        drawTool.setCurrentColor(new Color(13, 152, 241));
+        drawTool.setCurrentColor(new Color(234, 212, 170));
         drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/1.2,15);
+    }
+
+    public void update(double dt) {
+        if(radius < 15) {
+            inMoving = false;
+        }else if(radius > 25) {
+            inMoving = true;
+        }
+        if(inMoving) {
+            radius -= 20*dt;
+        }else {
+            radius += 15*dt;
+        }
     }
 
     public void manageMouseInput(MouseEvent e) {
@@ -82,6 +110,9 @@ public class MapModeView extends ModeView<MapModeControl> {
                     System.out.println("Castle");
                 } else {
                     System.out.println("Village " + i + " ist da");
+                }
+                if(i == currentVillage+1) {
+                    modeControl.getMainController().loadMode("travel");
                 }
             }
         }

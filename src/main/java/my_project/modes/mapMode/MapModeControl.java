@@ -27,6 +27,13 @@ public class MapModeControl extends ModeControl<MapModeView> {
         modeView.setAmountVillages(villageModeControl.getAmountVillage());
     }
 
+    @Override
+    public void update(double dt){
+        super.update(dt);
+        modeView.update(dt);
+    }
+
     public MapModeView getMapModeView() {return modeView;}
+    public MainController getMainController() {return mainController;}
 
 }
