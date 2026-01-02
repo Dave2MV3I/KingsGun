@@ -1,19 +1,25 @@
 package my_project.modes.dungeonMode;
 
 import KAGO_framework.view.DrawTool;
+import my_project.Config;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 import my_project.modes.dungeonMode.Tiles.InteractiveTile;
 import my_project.modes.dungeonMode.Tiles.Tile;
 import my_project.view.InputManager;
 import my_project.view.MainView;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class DungeonPlayer extends DungeonEntity {
     private double money;
+    private double exitTimer;
+    private double exitTime;
     public DungeonPlayer(double x, double y, DungeonModeControl dungeonModeControl) {
         super(dungeonModeControl);
         health = 100;
+        exitTimer = 0.0;
+        exitTime = 10.0;
         money = 0;
         this.x = x;
         this.y = y;
@@ -29,8 +35,18 @@ public class DungeonPlayer extends DungeonEntity {
         double lVx = 0;
         double lVy = 0;
         //TODO Overhaul movment code sqrt(2) diagonal movement removal
+        if (InputManager.isPressed("e")) {
+
+            exitTimer += dt;
+            if (exitTimer > exitTime) {
+                control.exit();
+            }
+        } else {
+            exitTimer = 0.0;
+        }
         if (InputManager.isPressed("w") || InputManager.isPressed("s") || InputManager.isPressed("a") || InputManager.isPressed("d")) {
             ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.1);
+            exitTimer = 0.0;
         }else{
             ((AnimatedSpriteSheet)texture).setFrameCooldownX(0);
             ((AnimatedSpriteSheet)texture).setCurrentX(0);
@@ -38,19 +54,24 @@ public class DungeonPlayer extends DungeonEntity {
         if (InputManager.isPressed("w")){
             lVy -= lV;
             ((AnimatedSpriteSheet) texture).setCurrentY(2);
+
         }
         if (InputManager.isPressed("s")) {
             lVy += lV;
             ((AnimatedSpriteSheet) texture).setCurrentY(0);
+
         }
         if (InputManager.isPressed("d")) {
             lVx += lV;
             ((AnimatedSpriteSheet) texture).setCurrentY(3);
+
         }
         if (InputManager.isPressed("a")) {
             lVx -= lV;
             ((AnimatedSpriteSheet) texture).setCurrentY(1);
+
         }
+
 
         setVelocityX(lVx);
         setVelocityY(lVy);
@@ -72,6 +93,7 @@ public class DungeonPlayer extends DungeonEntity {
         if (health < 0) {
             control.playerDied();
         }
+
     }
     @Override
     public void draw(DrawTool drawTool) {
@@ -85,11 +107,31 @@ public class DungeonPlayer extends DungeonEntity {
     public void drawMoney(DrawTool drawTool, double x, double y) {
         drawTool.drawText(x, y, control.getPlayer().getMoney()+ "$ + " + money + "$");
     }
+    public void drawExit(DrawTool drawTool, double x, double y) {
+        if (exitTimer != 0.0) {
+            if (exitTimer <= 0.0){
+                exitTimer = 0.0;
+            }
+            drawTool.setCurrentColor(new Color(211, 63, 8));
+            double border = 25;
+            drawTool.drawFilledRectangle(0, y - border, Config.WINDOW_WIDTH *(exitTimer/exitTime), Config.WINDOW_HEIGHT/10 + 2 * border);
+
+            drawTool.setCurrentColor(new Color(255, 213, 100));
+            drawTool.formatText("Arial", Font.BOLD, Config.WINDOW_HEIGHT/10);
+            drawTool.drawText(Config.WINDOW_WIDTH/4, y + Config.WINDOW_HEIGHT/10, "EXITING IN: "+ ((Math.ceil((exitTime - exitTimer)*100))/100)); //TODO displays -0.01 to many seconds
+        }
+    }
     public void increaseMoney(double amount) {
         money += amount;
     }
     public double getMoney() {
         return money;
+    }
+    public double getExitTimer(){
+        return exitTimer;
+    }
+    public double getExitTime(){
+        return exitTime;
     }
 
 }

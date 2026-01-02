@@ -71,7 +71,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         return dungeon.getMonster();
     }
     public void exit(){
-        mainController.loadMode("village");
+        mainController.loadMode("village", "exit Dungeon");
         mainController.getCurrentPlayer().addMoney(dungeonPlayer.getMoney());
     }
     public void playerDied(){

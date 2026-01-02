@@ -15,18 +15,25 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
     private HashMap<String, AnimatedSpriteSheet> animations;
     public LoadingModeView(LoadingModeControl modeControl) {
         super(modeControl);
+        animations = new HashMap<>();
+        animations.put("standart", new AnimatedSpriteSheet("transitions/standart animation.png", 1, 5));
+        animations.put("exit Dungeon", new AnimatedSpriteSheet("transitions/exit dungeon.png", 1, 35));
     }
     public void setLoadedView(ModeView loadedView) {
         this.loadedView = loadedView;
     }
     @Override
     public void draw(DrawTool drawTool) {
-        double progressionFactor = (modeControl.getTimer()/ modeControl.getTransitionTime());
+        double progressionFactor = (modeControl.getTimer() / modeControl.getTransitionTime());
         updateAnimation(progressionFactor);
         super.draw(drawTool);
         if (loadedView != null) {
             loadedView.draw(drawTool);
         }
+
+        transitionAnimation.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
+
+        /*
         double loadingValue = progressionFactor < 0.5 ? (progressionFactor*2) : (1-((progressionFactor-0.5)*2));
 
         drawTool.setCurrentColor(new Color(0,0,0, (int)Math.min(loadingValue * 255,255)));
@@ -38,10 +45,13 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         }
         drawTool.setCurrentColor(new Color(255, 255, 255));
         drawTool.drawFilledRectangle(50,Config.WINDOW_HEIGHT - 300,(Config.WINDOW_WIDTH-100) * progressionFactor, 50);
+        */
+
     }
 
     public void setAnimation(String animation) {
         if (animations.containsKey(animation)) {
+            System.out.println("Animation started: " + animation);
             transitionAnimation = animations.get(animation);
             transitionAnimation.setCurrent(0,0);
         } else {
@@ -51,7 +61,7 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
     public void updateAnimation(double progress) {
         if (transitionAnimation != null) {
             int frameAmount = transitionAnimation.getCols();
-            transitionAnimation.setCurrentX((int)(frameAmount * progress) - 1);
+            transitionAnimation.setCurrentX((int)(frameAmount * progress));
         }
     }
 }

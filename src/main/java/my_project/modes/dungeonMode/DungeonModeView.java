@@ -20,7 +20,11 @@ public class DungeonModeView extends ModeView<DungeonModeControl> {
         drawTool.setCurrentColor(new Color(18, 172, 0));
         modeControl.getDungeonPlayer().drawHealth(drawTool, 20, 20, Config.WINDOW_WIDTH/3, 50);
         modeControl.getDungeonPlayer().drawMoney(drawTool, 20, 85);
+        drawTool.setCurrentColor(new Color(255, 182, 0));
+
+        modeControl.getDungeonPlayer().drawExit(drawTool, 0, Config.WINDOW_HEIGHT/2);
         super.draw(drawTool);
+        drawTool.formatText("Arial", Font.PLAIN, Config.WINDOW_HEIGHT/10);
     }
     private void drawDungeon(DrawTool drawTool) {
         for (Tile[] tiles : modeControl.getDungeonTiles()) {

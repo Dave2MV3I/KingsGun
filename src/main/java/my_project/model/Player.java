@@ -4,7 +4,7 @@ import my_project.modes.dungeonMode.DungeonPlayer;
 
 public class Player {
     private double money;
-    private DungeonPlayer dungeonPlayer;
+    //private DungeonPlayer dungeonPlayer;
     public Player() {
         money = 0;
     }
