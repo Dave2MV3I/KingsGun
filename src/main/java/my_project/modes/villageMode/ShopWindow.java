@@ -1,6 +1,7 @@
 package my_project.modes.villageMode;
 
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
+import my_project.control.MainController;
 import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
 import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
@@ -12,20 +13,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ShopWindow {
+    private MainController mainController;
+
     private Queue<Ammunition> shopItems;
 
     private JPanel shopPanal;
     private JButton discardButton;
     private JButton takeButton;
     private JLabel shopOption;
+    private JLabel optionPicture;
+    private JLabel priceLabel;
 
     private ImageIcon normalIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
     private ImageIcon electricIcon = new ImageIcon("src/main/resources/graphic/ElektricAmmo.png");
     private ImageIcon explodingIcon = new ImageIcon("src/main/resources/graphic/ExplodingAmmo.png");
 
-    public ShopWindow() {
+    private ImageIcon coinIcon = new ImageIcon("src/main/resources/graphic/Coin.png");
+
+    public ShopWindow(MainController mainController) {
+        this.mainController = mainController;
+
         initiateShopQueue();
         updateShopText();
+
+        priceLabel.setIcon(coinIcon);
 
         normalIcon.setImage(normalIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
         electricIcon.setImage(electricIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
@@ -42,25 +53,44 @@ public class ShopWindow {
         takeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ammunition takenAmmunition = shopItems.front();
-                shopItems.dequeue();
-                addAmmunition();
-                updateShopText();
+                if(checkingToBuy(shopItems.front())) {
+                    Ammunition takenAmmunition = shopItems.front();
+                    shopItems.dequeue();
+                    addAmmunition();
+                    updateShopText();
+                }
             }
         });
+    }
+
+    private boolean checkingToBuy(Ammunition ammo) {
+        if(ammo instanceof NormalAmmunition) {
+            if(mainController.getCurrentPlayer().getMoney() >= 10) {
+                mainController.getCurrentPlayer().addMoney(-10);
+                return true;
+            }
+        }else if(ammo instanceof ElectricAmmunition) {
+            return true;
+        }else if(ammo instanceof ExplosiveAmmunition) {
+            return true;
+        }
+        return false;
     }
 
     private void updateShopText() {
         String ammoType = "";
         if (shopItems.front() instanceof NormalAmmunition) {
             ammoType = "Normal Ammunition";
-            shopOption.setIcon(normalIcon);
+            optionPicture.setIcon(normalIcon);
+            priceLabel.setText("No");
         }else if (shopItems.front() instanceof ElectricAmmunition) {
             ammoType = "Electric Ammunition";
-            shopOption.setIcon(electricIcon);
+            optionPicture.setIcon(electricIcon);
+            priceLabel.setText("Ez");
         }else if (shopItems.front() instanceof ExplosiveAmmunition) {
             ammoType = "Explosive Ammunition";
-            shopOption.setIcon(explodingIcon);
+            optionPicture.setIcon(explodingIcon);
+            priceLabel.setText("Ex");
         }
         shopOption.setText(ammoType);
     }

@@ -22,8 +22,9 @@ public class VillageModeView extends ModeView<VillageModeControl> {
 
     public void activationVillage(Village village) {
         currentVillage = village;
-        ShopWindow shopWindow = new ShopWindow();
-        shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 200, false);
+        ShopWindow shopWindow = new ShopWindow(modeControl.getMainController());
+        shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 250, false);
+        shopFrame.setLocation(570, 200);
     }
 
     public void draw(DrawTool drawTool) {
@@ -37,10 +38,14 @@ public class VillageModeView extends ModeView<VillageModeControl> {
             shopFrame.setVisible(true);
         }
         if (e.getX() > 0 && e.getX() < 300 && e.getY() > 500 && e.getY() < 900) {
-            modeControl.getMainController().loadMode("map");
+            if(!shopFrame.isVisible()) {
+                modeControl.getMainController().loadMode("map");
+            }
         }
         if (e.getX() > Config.WINDOW_WIDTH-300 && e.getX() < Config.WINDOW_WIDTH && e.getY() > 500 && e.getY() < 900) {
-            modeControl.getMainController().loadMode("dungeon");
+            if(!shopFrame.isVisible()) {
+                modeControl.getMainController().loadMode("dungeon");
+            }
         }
     }
 }

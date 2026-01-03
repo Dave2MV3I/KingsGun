@@ -113,6 +113,7 @@ public class MapModeView extends ModeView<MapModeControl> {
                 }
                 if(i == currentVillage+1) {
                     modeControl.getMainController().loadMode("travel");
+                    currentVillage++;
                 }
             }
         }
