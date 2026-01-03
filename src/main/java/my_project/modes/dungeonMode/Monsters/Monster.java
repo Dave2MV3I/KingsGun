@@ -144,12 +144,15 @@ public abstract class Monster extends DungeonEntity {
             // highest PathTile, the one with the lowest cost, gets checked out
             pending.toFirst();
             current = pending.getContent();
-            // TODO The above may not be finished and needs to be repeated, until current is destination.
-            //  But this method is called a few times a second. The monster is never going the whole path.
-            //  Do we just need the fist next step and then the algorithm is over?
+
+            // TODO The above needs to be repeated, until current is dest
         } else {
-            // TODO when current is destination, then the whole path is used to know the next step of the monster (setDirection)
+            // TODO When destination reached, all tiles from the path are put into a stack, the monster knows.
+            //  The monster then calls a method which changes its direction after each tile so that it can follow the path
+            //  The path is updated, meaning that this method findPath() is called every 2 seconds (cooldown)
         };
+
+
 
 
 
