@@ -7,19 +7,28 @@ import my_project.modes.dungeonMode.Tiles.Tile;
  * distance -> the distance to the monsters destination
  */
 public class PathTile {
-    private Tile previous;
+    private PathTile previous;
     private Tile tile;
     private double heuristic;
-    private double distanceToTile;
+    private double distance;
+    private double cost;
 
-    public PathTile(Tile t) {
+    public PathTile(Tile t, PathTile previous, Tile dest) {
         this.tile = t;
-        //heuristic = ; distance to dest.
+        this.previous = previous;
+        this.distance = previous.getDistance() + t.getDistanceTo(previous.getTile());
+        heuristic = t.getDistanceTo(dest);
+        calculateCost();
     }
 
-    public void setPrevious(Tile t) {this.previous = t;}
-    public Tile getPrevious() {return previous;}
+    public void setPrevious(PathTile t) {this.previous = t;}
+    public PathTile getPrevious() {return previous;}
 
-    public void setDistanceToTile(double d) {this.distanceToTile = d;}
-    public double getDistanceToTile() {return distanceToTile;}
+    public Tile getTile() {return tile;}
+
+    public void calculateCost() {cost = distance + heuristic;}
+    public double getCost() {return cost;}
+
+    public void setDistance(double d) {distance = d;}
+    public double getDistance() {return distance;}
 }
