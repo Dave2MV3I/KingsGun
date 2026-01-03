@@ -1,9 +1,13 @@
 package my_project.modes.dungeonMode.Monsters;
 
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
+import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.view.DrawTool;
+import my_project.model.Player;
 import my_project.modes.dungeonMode.DungeonEntity;
 import my_project.modes.dungeonMode.DungeonModeControl;
 import my_project.modes.dungeonMode.DungeonPlayer;
+import my_project.modes.dungeonMode.PathTile;
 import my_project.modes.dungeonMode.Tasks.Attack;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 
@@ -66,5 +70,17 @@ public abstract class Monster extends DungeonEntity {
 
         // TODO Queue machen für Aktivitäten wie gehen und angreifen (Methode attack sollte im enum sein, nicht hier)
         // TODO Drache schwer zu kriegen machen
+    }
+
+    private void findPath(){
+        PathTile start = new PathTile(control.getDungeon().getTileFromCoordinates(x,y));
+        DungeonPlayer player = control.getDungeonPlayer();
+        PathTile dest = new PathTile(control.getDungeon().getTileFromCoordinates(player.getX(),player.getY()));
+        List<PathTile> pending = new List<>();
+        Stack<PathTile> visited = new Stack<>();
+
+        pending.append(start);
+        // TODO Joshi: Die Tiles sollen ihre Position im tilesArray oder ihre 8 Nachbarn kennen,
+        //  damit der Path gefunden werden kann, ohne dass jeder Tile mit einer Schleife im Array anhand seiner Koordinaten gesucht werden muss
     }
 }
