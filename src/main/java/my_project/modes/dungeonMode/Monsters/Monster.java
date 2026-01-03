@@ -146,20 +146,14 @@ public abstract class Monster extends DungeonEntity {
             current = pending.getContent();
 
             // TODO The above needs to be repeated, until current is dest
+            // TODO Monster kann in sackgasse geraten, deshalb muss es auch zurückgehen können und:
+            //  Weg zu einem Tile und sein cost können sich ändern, wenn man einen kürzeren Weg zum Tile findet.
         } else {
             // TODO When destination reached, all tiles from the path are put into a stack, the monster knows.
             //  The monster then calls a method which changes its direction after each tile so that it can follow the path
             //  The path is updated, meaning that this method findPath() is called every 2 seconds (cooldown)
         };
 
-
-
-
-
-
-
-
-        // TODO Weg zu einem Tile und seine Werte können sich ändern, wenn man einen kürzeren Weg zum Tile findet. (Later)
     }
 
     private void instertOrderingCost(List<PathTile> list, PathTile pT){
