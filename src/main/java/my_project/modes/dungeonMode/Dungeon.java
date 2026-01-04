@@ -27,7 +27,7 @@ public class Dungeon extends GraphicalObject {
 
         // TODO Choose random monsters, Powerful monsters spawn with less probability.
         //  put them in queue and let them spawn in nearest spawn point to player
-        //monster = generateMonster(280,128);
+        monster = generateMonster(280,128);
     }
 
     private Monster generateMonster(double x, double y){
@@ -97,7 +97,7 @@ public class Dungeon extends GraphicalObject {
                         tiles[col][row] = new TileChest(col, row, this);
                         break;
                     case "11111111111111110000000000000000": //red
-                        monster = generateMonster(col * Tile.getWIDTH(), row* Tile.getHEIGHT());
+                        //monster = generateMonster(col * Tile.getWIDTH(), row* Tile.getHEIGHT());
 
                         tiles[col][row] = new TileFloor(col, row, this);
                         break;

@@ -141,7 +141,7 @@ public abstract class Monster extends DungeonEntity {
 
                 PathNode neighborNode = new PathNode(neighbor, goal);
                 if (!insideOpenList){
-                    openList.append(neighborNode);
+                    insertByCost(openList, neighborNode);
                 } else if (tentativeDistance >= neighborNode.getDistance()) continue; // This path is not shorter
 
                 // Calculate neighboring pathTiles values or update them, if its parent is set to current bcs then path to this pathTile is shorter
@@ -156,15 +156,16 @@ public abstract class Monster extends DungeonEntity {
     /**
      * Inserts a pathTile into the openList on the correct position by its cost
      * @param list the openList
-     * @param pathTile the pathTile to be inserted into the openList
+     * @param pathNode the pathNode to be inserted into the openList
      */
-    private void insertByCost(List<PathNode> list, PathNode pathTile){
-        while (list.hasAccess() && list.getContent().getCost() < pathTile.getCost()){
+    private void insertByCost(List<PathNode> list, PathNode pathNode){
+        list.toFirst();
+        while (list.hasAccess() && list.getContent().getCost() < pathNode.getCost()){
             list.next();
         }
         if (!list.hasAccess()){
-            list.append(pathTile);
-        } else list.insert(pathTile);
+            list.append(pathNode);
+        } else list.insert(pathNode);
     }
 
     private Queue<Tile> reconstructPath(PathNode goalNode){
