@@ -30,7 +30,7 @@ public abstract class Monster extends DungeonEntity {
         super(dungeonModeControl);
         myAttacks = attacks;
 
-        radius = 16;
+        radius = 10;
         texture = new AnimatedSpriteSheet("testSlime.png", 1, 2);
         ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.5);
 
@@ -42,7 +42,7 @@ public abstract class Monster extends DungeonEntity {
     public void draw(DrawTool drawTool){
         drawTool.drawFilledRectangle(this.x, this.y, 10, 10);
         drawTool.drawFilledRectangle(this.x+5, this.y+5, 10, 10);
-        texture.autoDraw(drawTool, x-radius, y-radius, 32); // TODO give the monsters their textures
+        texture.autoDraw(drawTool, x-radius, y-radius, 20); // TODO give the monsters their textures
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
     }
@@ -66,7 +66,7 @@ public abstract class Monster extends DungeonEntity {
         // Update direction according to the path
         if (!currentPath.isEmpty() && !this.collidesWith(currentPath.front())) {
             currentPath.dequeue();
-            setVelocityAS(getDirection(currentPath.front()), 30); // TODO every monster has its own speed
+            setVelocityAS(getDirection(currentPath.front()), 50); // TODO every monster has its own speed
         }
     }
 
