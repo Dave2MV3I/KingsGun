@@ -17,6 +17,7 @@ public abstract class Tile extends GameObject {
     private boolean isSolid;
     protected double brightness; // 0.0 - 1.0
     protected double spreadFactor;
+    private String mark;
 
 
     public Tile(int x, int y, Texture texture, Dungeon dungeon) {
@@ -27,6 +28,7 @@ public abstract class Tile extends GameObject {
         this.brightness = 0;
         setSize();
         spreadFactor = 0.5;
+        mark = "none";
     }
     private void setSize() {
         this.width = WIDTH;
@@ -44,8 +46,15 @@ public abstract class Tile extends GameObject {
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
             drawBrightness(drawTool);
             brightness = brightness * 0.9;
+            switch (mark){
+                case "none": drawTool.setCurrentColor(new Color(0,0,0, 0)); break;
+                case "yellow": drawTool.setCurrentColor(new Color(255, 255,0, 128)); break;
+                case "green": drawTool.setCurrentColor(new Color(0, 255,0, 128)); break;
+                case "blue": drawTool.setCurrentColor(new Color(0, 0, 255, 128)); break;
+                case "red": drawTool.setCurrentColor(new Color(255, 0, 0, 128)); break;
+            }
+            drawScaledRectangle(drawTool, x, y, getWIDTH(), getHEIGHT());
         }
-
     }
     @Override
     public void update(double dt) {
@@ -54,6 +63,9 @@ public abstract class Tile extends GameObject {
 
         setOrientation(findOrientation());
         texture.update(dt);
+    }
+    public void mark(String mark) {
+        this.mark = mark;
     }
     public void setBrightness(double brightness) {
         this.brightness = Math.min(Math.max(brightness, 0), 1);

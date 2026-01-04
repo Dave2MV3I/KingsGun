@@ -47,7 +47,7 @@ public class DrawTool {
                 } else {
                     transform.translate(-bI.getWidth()*(scale-1)*0.25, -bI.getHeight()*(scale-1)*0.25);
                 }
-                */
+                //*/
 
             }
             transform.rotate( Math.toRadians(degrees), bI.getWidth()/ (double) 2, bI.getHeight()/ (double) 2 );

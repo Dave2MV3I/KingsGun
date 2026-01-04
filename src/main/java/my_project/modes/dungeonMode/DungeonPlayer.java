@@ -15,9 +15,11 @@ public class DungeonPlayer extends DungeonEntity {
     private double money;
     private double exitTimer;
     private double exitTime;
+    private double attackCooldown;
     public DungeonPlayer(double x, double y, DungeonModeControl dungeonModeControl) {
         super(dungeonModeControl);
         health = 100;
+        attackCooldown = 0.0;
         exitTimer = 0.0;
         exitTime = 10.0;
         money = 0;
@@ -71,6 +73,13 @@ public class DungeonPlayer extends DungeonEntity {
             ((AnimatedSpriteSheet) texture).setCurrentY(1);
 
         }
+        if (InputManager.isPressed("Space") && attackCooldown <= 0) {
+            if (control.getMonster().getDistanceTo(this) < 128) {
+                System.out.println("Monster is hit");
+                control.getMonster().damage(100000);
+                attackCooldown = 1;
+            }
+        }
 
 
         setVelocityX(lVx);
@@ -93,6 +102,7 @@ public class DungeonPlayer extends DungeonEntity {
         if (health < 0) {
             control.playerDied();
         }
+        attackCooldown -= dt;
 
     }
     @Override

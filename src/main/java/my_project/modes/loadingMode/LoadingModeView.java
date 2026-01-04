@@ -18,6 +18,7 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         animations = new HashMap<>();
         animations.put("standart", new AnimatedSpriteSheet("transitions/standart animation.png", 1, 5));
         animations.put("exit Dungeon", new AnimatedSpriteSheet("transitions/exit dungeon.png", 1, 35));
+        animations.put("death", new AnimatedSpriteSheet("transitions/death.png", 1, 29));
     }
     public void setLoadedView(ModeView loadedView) {
         this.loadedView = loadedView;

@@ -75,7 +75,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         mainController.getCurrentPlayer().addMoney(dungeonPlayer.getMoney());
     }
     public void playerDied(){
-        mainController.loadMode("start");
+        mainController.loadMode("start", "death");
     }
 
     public Player getPlayer() {
