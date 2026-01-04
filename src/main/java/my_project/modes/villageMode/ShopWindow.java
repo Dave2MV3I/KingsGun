@@ -70,9 +70,15 @@ public class ShopWindow {
                 return true;
             }
         }else if(ammo instanceof ElectricAmmunition) {
-            return true;
+            if(mainController.getCurrentPlayer().getMoney() >= 12) {
+                mainController.getCurrentPlayer().addMoney(-12);
+                return true;
+            }
         }else if(ammo instanceof ExplosiveAmmunition) {
-            return true;
+            if(mainController.getCurrentPlayer().getMoney() >= 15) {
+                mainController.getCurrentPlayer().addMoney(-15);
+                return true;
+            }
         }
         return false;
     }
@@ -82,15 +88,15 @@ public class ShopWindow {
         if (shopItems.front() instanceof NormalAmmunition) {
             ammoType = "Normal Ammunition";
             optionPicture.setIcon(normalIcon);
-            priceLabel.setText("No");
+            priceLabel.setText("10");
         }else if (shopItems.front() instanceof ElectricAmmunition) {
             ammoType = "Electric Ammunition";
             optionPicture.setIcon(electricIcon);
-            priceLabel.setText("Ez");
+            priceLabel.setText("12");
         }else if (shopItems.front() instanceof ExplosiveAmmunition) {
             ammoType = "Explosive Ammunition";
             optionPicture.setIcon(explodingIcon);
-            priceLabel.setText("Ex");
+            priceLabel.setText("15");
         }
         shopOption.setText(ammoType);
     }

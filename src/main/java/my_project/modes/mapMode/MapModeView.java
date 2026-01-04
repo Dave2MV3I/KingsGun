@@ -52,13 +52,13 @@ public class MapModeView extends ModeView<MapModeControl> {
             drawTool.setCurrentColor(new Color(115, 62, 57));
             drawTool.setLineWidth(21);
             drawTool.drawLine(villagePos[i][0], villagePos[i][1], villagePos[i+1][0], villagePos[i+1][1]);
-            drawTool.setCurrentColor(new Color(184, 111, 80));
+            drawTool.setCurrentColor(new Color(194, 133, 105));
             drawTool.setLineWidth(7);
             drawTool.drawLine(villagePos[i][0], villagePos[i][1], villagePos[i+1][0], villagePos[i+1][1]);
         }
 
         //Draw Castle
-        drawTool.setCurrentColor(new Color(255, 0, 0));
+        drawTool.setCurrentColor(new Color(194, 133, 105));
         drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/6,15);
         drawTool.setCurrentColor(new Color(38, 43, 68));
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10,100,40);
@@ -66,7 +66,7 @@ public class MapModeView extends ModeView<MapModeControl> {
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2+15, Config.WINDOW_HEIGHT/10-40,35,40);
 
         drawTool.setLineWidth(4);
-        for(int i = 1; i < amountVillages+1; i++) {
+        for(int i = 1; i <= amountVillages+1; i++) {
             drawTool.setCurrentColor(new Color(194, 133, 105));
             if(i < currentVillage+1) {
                 drawTool.setCurrentColor(new Color(234, 212, 170));
@@ -77,11 +77,12 @@ public class MapModeView extends ModeView<MapModeControl> {
                 drawTool.setCurrentColor(new Color(234, 212, 170));
                 drawTool.drawCircle(villagePos[i][0], villagePos[i][1], radius);
             }
-
-            if (villagePos[i][0] > Config.WINDOW_WIDTH/2) {
-                mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] + 20, villagePos[i][1]-20, 70);
-            }else {
-                mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] - 90, villagePos[i][1]-20, 70);
+            if(i != amountVillages+1) {
+                if (villagePos[i][0] > Config.WINDOW_WIDTH / 2) {
+                    mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] + 20, villagePos[i][1] - 20, 70);
+                } else {
+                    mapSymbolVillage.drawToWidth(drawTool, villagePos[i][0] - 90, villagePos[i][1] - 20, 70);
+                }
             }
         }
 
@@ -114,6 +115,9 @@ public class MapModeView extends ModeView<MapModeControl> {
                 if(i == currentVillage+1) {
                     modeControl.getMainController().loadMode("travel");
                     currentVillage++;
+                    if(i == amountVillages+1) {
+                        modeControl.getMainController().loadMode("castle");
+                    }
                 }
             }
         }
