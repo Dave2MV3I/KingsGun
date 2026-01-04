@@ -44,16 +44,28 @@ public abstract class Tile extends GameObject {
     public void draw(DrawTool drawTool) {
         if(this.texture != null && isOnScreen()) {
             this.texture.autoDraw(drawTool, x, y, getWIDTH());
-            drawBrightness(drawTool);
+            if (!SettingsModel.isDebugging()){ drawBrightness(drawTool);}
             brightness = brightness * 0.9;
-            switch (mark){
-                case "none": drawTool.setCurrentColor(new Color(0,0,0, 0)); break;
-                case "yellow": drawTool.setCurrentColor(new Color(255, 255,0, 128)); break;
-                case "green": drawTool.setCurrentColor(new Color(0, 255,0, 128)); break;
-                case "blue": drawTool.setCurrentColor(new Color(0, 0, 255, 128)); break;
-                case "red": drawTool.setCurrentColor(new Color(255, 0, 0, 128)); break;
+            if (SettingsModel.isDebugging()) {
+                switch (mark) {
+                    case "none":
+                        drawTool.setCurrentColor(new Color(0, 0, 0, 0));
+                        break;
+                    case "yellow":
+                        drawTool.setCurrentColor(new Color(255, 255, 0, 128));
+                        break;
+                    case "green":
+                        drawTool.setCurrentColor(new Color(0, 255, 0, 128));
+                        break;
+                    case "blue":
+                        drawTool.setCurrentColor(new Color(0, 0, 255, 128));
+                        break;
+                    case "red":
+                        drawTool.setCurrentColor(new Color(255, 0, 0, 128));
+                        break;
+                }
+                drawScaledRectangle(drawTool, x, y, getWIDTH(), getHEIGHT());
             }
-            drawScaledRectangle(drawTool, x, y, getWIDTH(), getHEIGHT());
         }
     }
     @Override

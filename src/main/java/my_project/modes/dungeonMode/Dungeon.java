@@ -3,10 +3,7 @@ package my_project.modes.dungeonMode;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.modes.dungeonMode.Monsters.Monster;
-import my_project.modes.dungeonMode.Tiles.Tile;
-import my_project.modes.dungeonMode.Tiles.TileChest;
-import my_project.modes.dungeonMode.Tiles.TileFloor;
-import my_project.modes.dungeonMode.Tiles.TileWall;
+import my_project.modes.dungeonMode.Tiles.*;
 
 import java.awt.image.BufferedImage;
 
@@ -27,7 +24,7 @@ public class Dungeon extends GraphicalObject {
 
         // TODO Choose random monsters, Powerful monsters spawn with less probability.
         //  put them in queue and let them spawn in nearest spawn point to player
-        monster = generateMonster(280,128);
+        //monster = generateMonster(280,128);
     }
 
     private Monster generateMonster(double x, double y){
@@ -97,7 +94,7 @@ public class Dungeon extends GraphicalObject {
                         tiles[col][row] = new TileChest(col, row, this);
                         break;
                     case "11111111111111110000000000000000": //red
-                        //monster = generateMonster(col * Tile.getWIDTH(), row* Tile.getHEIGHT());
+                        monster = generateMonster(col * Tile.getWIDTH(), row* Tile.getHEIGHT());
 
                         tiles[col][row] = new TileFloor(col, row, this);
                         break;
@@ -105,10 +102,10 @@ public class Dungeon extends GraphicalObject {
 
                         break;
                     case "11111111000000001111111100000000": //green
-
+                        tiles[col][row] = new TileCrate(col, row, this);
                         break;
                     case "11111111000000001111111111111111": //cyan
-
+                        tiles[col][row] = new TileChest(col, row, this);
                         break;
                     case "11111111000000000000000011111111": //blue
 

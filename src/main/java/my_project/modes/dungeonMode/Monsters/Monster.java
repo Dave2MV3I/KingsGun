@@ -2,6 +2,7 @@ package my_project.modes.dungeonMode.Monsters;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import KAGO_framework.view.DrawTool;
 import my_project.modes.dungeonMode.DungeonEntity;
 import my_project.modes.dungeonMode.DungeonModeControl;
@@ -24,7 +25,7 @@ public abstract class Monster extends DungeonEntity {
     protected DungeonPlayer dungeonPlayer;
     private double attackCoolDown = 2;
     private double pathCoolDown = 2;
-    private Queue<Tile> currentPath = new Queue<>();
+    private Stack<Tile> currentPath = new Stack<>();
 
     public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
         super(dungeonModeControl);
@@ -40,8 +41,6 @@ public abstract class Monster extends DungeonEntity {
 
     @Override
     public void draw(DrawTool drawTool){
-        drawTool.drawFilledRectangle(this.x, this.y, 10, 10);
-        drawTool.drawFilledRectangle(this.x+5, this.y+5, 10, 10);
         texture.autoDraw(drawTool, x-radius, y-radius, 20); // TODO give the monsters their textures
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
@@ -60,14 +59,28 @@ public abstract class Monster extends DungeonEntity {
         pathCoolDown -= dt;
         if (pathCoolDown <= 0) {
             currentPath = findPath();
-            pathCoolDown = 2;
+            if (getDistanceTo(dungeonPlayer) <= 16) {
+                pathCoolDown = 0.1;
+            } else if (getDistanceTo(dungeonPlayer) <= 128) {
+                pathCoolDown = 1;
+            } else if (getDistanceTo(dungeonPlayer) <= 256) {
+                pathCoolDown = 2;
+            } else {
+                pathCoolDown = 4;
+            }
+
         }
 
         // Update direction according to the path
-        if (!currentPath.isEmpty() && !this.collidesWith(currentPath.front())) {
-            currentPath.dequeue();
-            setVelocityAS(getDirection(currentPath.front()), 50); // TODO every monster has its own speed
+        if (currentPath != null && currentPath.top() != null) {
+            if (!currentPath.isEmpty() && this.collidesWith(currentPath.top())) {
+                currentPath.top().mark("none");
+                currentPath.pop();
+                currentPath.top().mark("green");
+            }
+            setVelocityAS(getDirection(currentPath.top()), 50); // TODO every monster has its own speed
         }
+
     }
 
     public void setPosition(double x, double y){
@@ -91,7 +104,7 @@ public abstract class Monster extends DungeonEntity {
      * Monsters call this method in order to get the shortest possible path to tht player.
      * @return an array of tiles, the updated path, the monster follows for 2 seconds
      */
-    private Queue<Tile> findPath(){
+    private Stack<Tile> findPath(){
         List<PathNode> openList = new List<>();
         List<PathNode> closedList = new List<>();
 
@@ -160,7 +173,7 @@ public abstract class Monster extends DungeonEntity {
      */
     private void insertByCost(List<PathNode> list, PathNode pathNode){
         list.toFirst();
-        while (list.hasAccess() && list.getContent().getCost() < pathNode.getCost()){
+        while (list.hasAccess() && list.getContent().getCost() > pathNode.getCost()){
             list.next();
         }
         if (!list.hasAccess()){
@@ -168,14 +181,16 @@ public abstract class Monster extends DungeonEntity {
         } else list.insert(pathNode);
     }
 
-    private Queue<Tile> reconstructPath(PathNode goalNode){
-        Queue<Tile> path = new Queue<>();
+    private Stack<Tile> reconstructPath(PathNode goalNode){
+        Stack<Tile> path = new Stack<>();
         PathNode current = goalNode;
 
         while (current.getParent() != null){
-            path.enqueue(current.getTile());
+            path.push(current.getTile());
+            current.getTile().mark("red");
             current = current.getParent();
         }
+        goalNode.getTile().mark("blue");
          return path;
     }
 

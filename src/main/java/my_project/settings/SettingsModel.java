@@ -18,6 +18,9 @@ public class SettingsModel {
     private static float _brightness = 1; // 0-1
     private static float _performance = 2; // 0-4
 
+    //debugging
+    private static boolean _debugging = false;
+
     // getter and setter methods
     public static float getSoundVolume() {return _soundVolume;}
 
@@ -34,4 +37,12 @@ public class SettingsModel {
     public static float getPerformance() {return _performance;}
 
     public static void setPerformance(float newPerformance) {_performance = newPerformance;}
+
+    public static boolean isDebugging() {
+        return _debugging;
+    }
+
+    public static void setDebugging(boolean debugging) {
+        _debugging = debugging;
+    }
 }

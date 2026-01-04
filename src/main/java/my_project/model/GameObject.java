@@ -31,7 +31,7 @@ public class GameObject extends GraphicalObject {
         setVelocityY(Math.sin(angle)*strength);
     }
     protected double getDirection(GraphicalObject object){
-        return Math.atan2(object.getY() - this.getX(),  object.getX() - this.getY());
+        return Math.atan2((object.getY() + object.getHeight()/2) - (this.getY() + this.getHeight()/2),  (object.getX() + object.getWidth()/2) - (this.getX() + this.getWidth()/2));
     }
 
     /**
