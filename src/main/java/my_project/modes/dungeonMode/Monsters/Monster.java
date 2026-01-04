@@ -1,6 +1,7 @@
 package my_project.modes.dungeonMode.Monsters;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
+import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.view.DrawTool;
 import my_project.modes.dungeonMode.DungeonEntity;
 import my_project.modes.dungeonMode.DungeonModeControl;
@@ -21,7 +22,9 @@ import java.awt.*;
 public abstract class Monster extends DungeonEntity {
     protected Attack[] myAttacks;
     protected DungeonPlayer dungeonPlayer;
-    private double coolDown = 2;
+    private double attackCoolDown = 2;
+    private double pathCoolDown = 2;
+    private Queue<Tile> currentPath = new Queue<>();
 
     public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
         super(dungeonModeControl);
@@ -39,7 +42,7 @@ public abstract class Monster extends DungeonEntity {
     public void draw(DrawTool drawTool){
         drawTool.drawFilledRectangle(this.x, this.y, 10, 10);
         drawTool.drawFilledRectangle(this.x+5, this.y+5, 10, 10);
-        texture.autoDraw(drawTool, x-radius, y-radius, 32);
+        texture.autoDraw(drawTool, x-radius, y-radius, 32); // TODO give the monsters their textures
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
     }
@@ -48,8 +51,23 @@ public abstract class Monster extends DungeonEntity {
     public void update(double dt) {
         super.update(dt);
         texture.update(dt);
-        coolDown -= dt;
-        if(getDistanceTo(dungeonPlayer) <= 32 && coolDown <= 0) this.attack();
+
+        // Attack player every 2 seconds if near enough
+        attackCoolDown -= dt;
+        if(getDistanceTo(dungeonPlayer) <= 32 && attackCoolDown <= 0) this.attack();
+
+        // Update path every 2 seconds
+        pathCoolDown -= dt;
+        if (pathCoolDown <= 0) {
+            currentPath = findPath();
+            pathCoolDown = 2;
+        }
+
+        // Update direction according to the path
+        if (!currentPath.isEmpty() && !this.collidesWith(currentPath.front())) {
+            currentPath.dequeue();
+            setVelocityAS(getDirection(currentPath.front()), 30); // TODO every monster has its own speed
+        }
     }
 
     public void setPosition(double x, double y){
@@ -58,6 +76,7 @@ public abstract class Monster extends DungeonEntity {
     }
 
     private void attack(){
+        // TODO animate attacks
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
         Attack attack = myAttacks[rndAttack];
@@ -65,109 +84,21 @@ public abstract class Monster extends DungeonEntity {
         //System.out.println(damage + " damage");
         dungeonPlayer.damage(damage);
         System.out.println(dungeonPlayer.getHealth());
-        coolDown = 2;
-
-        // TODO Queue machen für Aktivitäten wie gehen und angreifen (Methode attack sollte im enum sein, nicht hier)
-        // TODO Drache schwer zu kriegen machen
-    }
-
-    /*
-    *//**
-     * Monsters call this method in order to get the shortest path to the player.
-     *//*
-    private void findPath(){
-        DungeonPlayer player = control.getDungeonPlayer();
-        Tile destTile = control.getDungeon().getTileFromCoordinates(player.getX(),player.getY());
-        Tile startTile = control.getDungeon().getTileFromCoordinates(x,y);
-        PathNode dest = new PathNode(destTile, null, destTile);
-        PathNode start = new PathNode(startTile, null, dest.getTile());
-        PathNode current = start;
-
-        List<PathNode> pending = new List<>();
-        Stack<PathNode> visited = new Stack<>();
-
-        pending.append(start);
-        current = start;
-
-        if (current != dest){
-            // Nur pathTile erstellen, wenn zu diesem tile noch nicht erstellt
-            Tile up = current.getTile().getRelative("up");
-            Tile upRight = current.getTile().getRelative("upRight");
-            Tile right = current.getTile().getRelative("right");
-            Tile downRight = current.getTile().getRelative("downRight");
-            Tile down = current.getTile().getRelative("down");
-            Tile downLeft = current.getTile().getRelative("downLeft");
-            Tile left = current.getTile().getRelative("left");
-            Tile upLeft = current.getTile().getRelative("upLeft");
-
-            // Create PathNode for each tile which isn't a wall and insert it into pending ordered by cost
-            if (!(up instanceof TileWall)){
-                PathNode upPT= new PathNode(up, current, dest.getTile());
-                pending.toFirst();
-                instertOrderingCost(pending, upPT);
-            }
-            if (!(upRight instanceof TileWall)){
-                PathNode upRightPT= new PathNode(upRight, current, dest.getTile());
-                instertOrderingCost(pending, upRightPT);
-            }
-            if (!(right instanceof TileWall)){
-                PathNode rightPT= new PathNode(right, current, dest.getTile());
-                instertOrderingCost(pending, rightPT);
-            }
-            if (!(downRight instanceof TileWall)){
-                PathNode downRightPT= new PathNode(downRight, current, dest.getTile());
-                instertOrderingCost(pending, downRightPT);
-            }
-            if (!(down instanceof TileWall)){
-                PathNode downPT= new PathNode(down, current, dest.getTile());
-                instertOrderingCost(pending, downPT);
-            }
-            if (!(downLeft instanceof TileWall)){
-                PathNode downLeftPT= new PathNode(downLeft, current, dest.getTile());
-                instertOrderingCost(pending, downLeftPT);
-            }
-            if (!(left instanceof TileWall)){
-                PathNode leftPT= new PathNode(left, current, dest.getTile());
-                instertOrderingCost(pending, leftPT);
-            }
-            if (!(upLeft instanceof TileWall)){
-                PathNode upLeftPT= new PathNode(upLeft, current, dest.getTile());
-                instertOrderingCost(pending, upLeftPT);
-            }
-
-            // move current to visited, because all its neighbours which aren't wall are inside of pending
-            visited.push(current);
-            pending.remove();
-
-            // highest PathNode, the one with the lowest cost, gets checked out
-            pending.toFirst();
-            current = pending.getContent();
-
-            // TODO The above needs to be repeated, until current is dest
-            // TODO Monster kann in sackgasse geraten, deshalb muss es auch zurückgehen können und:
-            //  Weg zu einem Tile und sein cost können sich ändern, wenn man einen kürzeren Weg zum Tile findet.
-        } else {
-            // TODO When destination reached, all tiles from the path are put into a stack, the monster knows.
-            //  The monster then calls a method which changes its direction after each tile so that it can follow the path
-            //  The path is updated, meaning that this method findPath() is called every 2 seconds (cooldown)
-        };
-
+        attackCoolDown = 2;
     }
 
     /**
      * Monsters call this method in order to get the shortest possible path to tht player.
-     * @param start The tile the monster starts at.
-     * @param goal The monsters destination tile, the players position.
-     * @return an array of tiles the monster will follow
+     * @return an array of tiles, the updated path, the monster follows for 2 seconds
      */
-    private Tile[] findPath(Tile start, Tile goal){
+    private Queue<Tile> findPath(){
         List<PathNode> openList = new List<>();
         List<PathNode> closedList = new List<>();
 
-        Tile startTile = control.getDungeon().getTileFromCoordinates(x,y);
-        Tile goalTile = control.getDungeon().getTileFromCoordinates(control.getDungeonPlayer().getX(), control.getDungeonPlayer().getY());
+        Tile start = control.getDungeon().getTileFromCoordinates(x,y);
+        Tile goal = control.getDungeon().getTileFromCoordinates(control.getDungeonPlayer().getX(), control.getDungeonPlayer().getY());
 
-        PathNode startNode = new PathNode(startTile, goalTile);
+        PathNode startNode = new PathNode(start, goal);
         openList.append(startNode);
         startNode.setDistance(0);
         startNode.calculateCost();
@@ -179,7 +110,10 @@ public abstract class Monster extends DungeonEntity {
             PathNode current = openList.getContent();
 
             // If node is goalNode, return found path
-            if (current.getTile() == goalTile) return reconstructPath(current);
+            if (current.getTile() == goal) {
+                System.out.println("Path updated");
+                return reconstructPath(current);
+            }
 
             closedList.append(current);
             openList.remove();
@@ -192,6 +126,7 @@ public abstract class Monster extends DungeonEntity {
                 closedList.toFirst();
                 while (closedList.hasAccess()){
                     if (closedList.getContent().getTile() == neighbor) continue outer; // Jumps to next tile bcs this one already in closedList
+                    closedList.next();
                 }
 
                 double tentativeDistance = current.getDistance() + current.getTile().getDistanceTo(neighbor);
@@ -201,9 +136,10 @@ public abstract class Monster extends DungeonEntity {
                 boolean insideOpenList = false;
                 while (openList.hasAccess()){
                     if (openList.getContent().getTile() == neighbor) insideOpenList = true;
+                    openList.next();
                 }
 
-                PathNode neighborNode = new PathNode(neighbor, goalTile);
+                PathNode neighborNode = new PathNode(neighbor, goal);
                 if (!insideOpenList){
                     openList.append(neighborNode);
                 } else if (tentativeDistance >= neighborNode.getDistance()) continue; // This path is not shorter
@@ -231,21 +167,15 @@ public abstract class Monster extends DungeonEntity {
         } else list.insert(pathTile);
     }
 
-    private Tile[] reconstructPath(PathNode goalNode){
-        int nodes = 1;
-        while (goalNode.getParent() != null){
-            goalNode = goalNode.getParent();
-            nodes++;
-        }
-
-        Tile[] path = new Tile[nodes];
+    private Queue<Tile> reconstructPath(PathNode goalNode){
+        Queue<Tile> path = new Queue<>();
         PathNode current = goalNode;
 
-        for (int i = 0; i < nodes; i++) {
-            path[i] = current.getTile();
+        while (current.getParent() != null){
+            path.enqueue(current.getTile());
             current = current.getParent();
         }
-        return path;
+         return path;
     }
 
 

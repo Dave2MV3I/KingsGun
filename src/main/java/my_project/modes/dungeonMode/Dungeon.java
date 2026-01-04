@@ -25,8 +25,9 @@ public class Dungeon extends GraphicalObject {
         this.monsterClasses = monsterClasses;
         setMap("src/main/resources/graphic/Dungeon 1 rework.png");
 
-        // Choose random monster. Powerful monsters spawn with less probability.
-
+        // TODO Choose random monsters, Powerful monsters spawn with less probability.
+        //  put them in queue and let them spawn in nearest spawn point to player
+        //monster = generateMonster(280,128);
     }
 
     private Monster generateMonster(double x, double y){
