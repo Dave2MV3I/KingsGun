@@ -3,6 +3,7 @@ package my_project.control;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.model.Player;
+import my_project.modes.castleMode.CastleModeControl;
 import my_project.modes.dungeonMode.*;
 import my_project.modes.loadingMode.*;
 import my_project.modes.mapMode.*;
@@ -47,6 +48,7 @@ public class MainController extends GraphicalObject {
         modeControls.put("travel", new TravelModeControl(this));
         modeControls.put("dungeon", new DungeonModeControl(this));
         modeControls.put("loading", new LoadingModeControl(this));
+        modeControls.put("castle", new CastleModeControl(this));
 
         mainView = new MainView(this);
 

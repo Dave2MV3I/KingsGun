@@ -2,6 +2,8 @@ package my_project.view;
 
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
+import my_project.modes.castleMode.CastleModeControl;
+import my_project.modes.castleMode.CastleModeView;
 import my_project.modes.dungeonMode.DungeonModeControl;
 import my_project.modes.loadingMode.LoadingModeControl;
 import my_project.modes.loadingMode.LoadingModeView;
@@ -55,6 +57,7 @@ public class MainView {
         modeViews.put("travel", new TravelModeView((TravelModeControl)modeControls.get("travel")));
         modeViews.put("dungeon", new DungeonModeView((DungeonModeControl)modeControls.get("dungeon")));
         modeViews.put("loading", new LoadingModeView((LoadingModeControl)modeControls.get("loading")));
+        modeViews.put("castle", new CastleModeView((CastleModeControl)modeControls.get("castle")));
     }
 
     public void draw(DrawTool drawTool) {
