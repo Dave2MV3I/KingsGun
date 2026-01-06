@@ -8,13 +8,15 @@ public class TileCrate extends InteractiveTile {
     private boolean isClosed = true;
     public TileCrate(int x, int y, Dungeon dungeon) {
         super(x, y, new SpriteSheet("crate.png", 1, 2), dungeon);
+        setSolid(true);
+        spreadFactor = 0.03;
         ((SpriteSheet)texture).setCurrent(0,0);
     }
 
     @Override
     public void interact() {
         if (isClosed){
-            isClosed = false;System.out.println("Chest interact");
+            isClosed = false;
             dungeon.getPlayer().increaseMoney(10);
             ((SpriteSheet)texture).setCurrent(1,0);
         }

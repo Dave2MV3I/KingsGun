@@ -39,7 +39,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
         }
         if (e.getX() > 0 && e.getX() < 300 && e.getY() > 500 && e.getY() < 900) {
             if(!shopFrame.isVisible()) {
-                modeControl.getMainController().loadMode("map");
+                modeControl.getMainController().loadMode("map", "open map");
             }
         }
         if (e.getX() > Config.WINDOW_WIDTH-300 && e.getX() < Config.WINDOW_WIDTH && e.getY() > 500 && e.getY() < 900) {

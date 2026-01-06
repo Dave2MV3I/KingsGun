@@ -2,6 +2,7 @@ package my_project.modes.villageMode;
 
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import my_project.control.MainController;
+import my_project.model.Player;
 import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
 import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
@@ -88,15 +89,15 @@ public class ShopWindow {
         if (shopItems.front() instanceof NormalAmmunition) {
             ammoType = "Normal Ammunition";
             optionPicture.setIcon(normalIcon);
-            priceLabel.setText("10");
+            priceLabel.setText("10 / "+ mainController.getCurrentPlayer().getMoney());
         }else if (shopItems.front() instanceof ElectricAmmunition) {
             ammoType = "Electric Ammunition";
             optionPicture.setIcon(electricIcon);
-            priceLabel.setText("12");
+            priceLabel.setText("12/ "+ mainController.getCurrentPlayer().getMoney());
         }else if (shopItems.front() instanceof ExplosiveAmmunition) {
             ammoType = "Explosive Ammunition";
             optionPicture.setIcon(explodingIcon);
-            priceLabel.setText("15");
+            priceLabel.setText("15/ "+ mainController.getCurrentPlayer().getMoney());
         }
         shopOption.setText(ammoType);
     }

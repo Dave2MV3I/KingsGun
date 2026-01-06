@@ -24,7 +24,7 @@ public class startModeControl extends ModeControl<startModeView> {
     @Override
     public void update(double dt){
         if (Mouse.getPosition().x < Config.WINDOW_WIDTH * 0.4 && Mouse.isDown(1)) {
-            mainController.loadMode("map");
+            mainController.loadMode("map", "open map");
         }
     }
 
