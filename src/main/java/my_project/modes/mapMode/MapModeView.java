@@ -13,6 +13,7 @@ public class MapModeView extends ModeView<MapModeControl> {
     private int[][] villagePos;
     private Texture mapTexture;
     private Texture mapSymbolVillage;
+    private Texture mapSymbolCastle;
     private int currentVillage = 0;
     private double radius = 15;
     private boolean inMoving = false;
@@ -22,6 +23,7 @@ public class MapModeView extends ModeView<MapModeControl> {
         //amountVillages = modeControl.getVillageControl().getAmountVillage();
         mapTexture = new Texture("Map.png");
         mapSymbolVillage = new Texture("MapSymbolVillage.png");
+        mapSymbolCastle = new Texture("MapSymbolCastle.png");
     }
 
     /**
@@ -58,12 +60,13 @@ public class MapModeView extends ModeView<MapModeControl> {
         }
 
         //Draw Castle
-        drawTool.setCurrentColor(new Color(194, 133, 105));
+        mapSymbolCastle.drawToWidth(drawTool, Config.WINDOW_WIDTH/2 -65, 50, 130);
+        /*drawTool.setCurrentColor(new Color(194, 133, 105));
         drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/6,15);
         drawTool.setCurrentColor(new Color(38, 43, 68));
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10,100,40);
         drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10-40,35,40);
-        drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2+15, Config.WINDOW_HEIGHT/10-40,35,40);
+        drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2+15, Config.WINDOW_HEIGHT/10-40,35,40);*/
 
         drawTool.setLineWidth(4);
         for(int i = 1; i <= amountVillages+1; i++) {
