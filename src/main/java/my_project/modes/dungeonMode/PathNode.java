@@ -51,29 +51,29 @@ public class PathNode {
         Stack<Tile> stack = new Stack<Tile>();
 
         Tile up = tile.getRelative("up");
-        if (!(up instanceof TileWall)) queue.enqueue(up);
-
+        if (!(up.isSolid())) queue.enqueue(up);
+        /*
         Tile upRight = tile.getRelative("upRight");
-        if (!(upRight instanceof TileWall)) queue.enqueue(upRight);
-
+        if (!(upRight.isSolid())) queue.enqueue(upRight);
+        */
         Tile right = tile.getRelative("right");
-        if (!(right instanceof TileWall)) queue.enqueue(right);
-
+        if (!(right.isSolid())) queue.enqueue(right);
+        /*
         Tile downRight = tile.getRelative("downRight");
-        if (!(downRight instanceof TileWall)) queue.enqueue(downRight);
-
+        if (!(downRight.isSolid())) queue.enqueue(downRight);
+        */
         Tile down = tile.getRelative("down");
-        if (!(down instanceof TileWall)) queue.enqueue(down);
-
+        if (!(down.isSolid())) queue.enqueue(down);
+        /*
         Tile downLeft = tile.getRelative("downLeft");
-        if (!(downLeft instanceof TileWall)) queue.enqueue(downLeft);
-
+        if (!(downLeft.isSolid())) queue.enqueue(downLeft);
+        */
         Tile left = tile.getRelative("left");
-        if (!(left instanceof TileWall)) queue.enqueue(left);
-
+        if (!(left.isSolid())) queue.enqueue(left);
+        /*
         Tile upLeft = tile.getRelative("upLeft");
-        if (!(upLeft instanceof TileWall)) queue.enqueue(upLeft);
-
+        if (!(upLeft.isSolid())) queue.enqueue(upLeft);
+        */
         int tiles = 0;
         while (!queue.isEmpty()) {
             stack.push(queue.front());

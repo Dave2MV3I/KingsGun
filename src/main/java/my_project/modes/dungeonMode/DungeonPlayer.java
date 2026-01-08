@@ -21,7 +21,7 @@ public class DungeonPlayer extends DungeonEntity {
         health = 100;
         attackCooldown = 0.0;
         exitTimer = 0.0;
-        exitTime = 10.0;
+        exitTime = 7.0;
         money = 0;
         this.x = x;
         this.y = y;
