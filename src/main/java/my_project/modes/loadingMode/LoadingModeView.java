@@ -20,6 +20,9 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         animations.put("exit Dungeon", new AnimatedSpriteSheet("transitions/exit dungeon.png", 1, 35));
         animations.put("death", new AnimatedSpriteSheet("transitions/death.png", 1, 29));
         animations.put("open map", new AnimatedSpriteSheet("transitions/open map.png", 1, 35));
+        animations.put("close map", new AnimatedSpriteSheet("transitions/close map.png", 1, 35));
+        animations.put("enter dungeon", new AnimatedSpriteSheet("transitions/enter dungeon.png", 1, 31));
+
     }
     public void setLoadedView(ModeView loadedView) {
         this.loadedView = loadedView;
@@ -31,6 +34,8 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         super.draw(drawTool);
         if (loadedView != null) {
             loadedView.draw(drawTool);
+        } else {
+            System.err.println("Mode could not be drawn: " + loadedView);
         }
 
         transitionAnimation.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);

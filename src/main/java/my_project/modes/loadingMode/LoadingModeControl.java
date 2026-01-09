@@ -43,9 +43,12 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
     }
 
     public void loadMode(String modeFrom, String modeTo, String animation) {
+        System.out.println("loading from " + modeFrom + " to " + modeTo);
+        loadedControl = mainController.getModeControls().get(modeFrom);
+        modeView.setLoadedView(loadedControl.getModeView());
         loadedMode = modeFrom;
-        loadToMode = modeTo;
 
+        loadToMode = modeTo;
         modeView.setAnimation(animation);
     }
     private void activateLoadedMode(String modeTo) {

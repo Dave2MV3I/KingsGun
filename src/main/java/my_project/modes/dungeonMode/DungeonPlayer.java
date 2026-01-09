@@ -33,9 +33,9 @@ public class DungeonPlayer extends DungeonEntity {
     }
     @Override
     public void update(double dt) {
-        double lV = InputManager.isPressed(KeyEvent.VK_SHIFT) ? 50 : 30;
-        double lVx = 0;
-        double lVy = 0;
+        double localV = InputManager.isPressed(KeyEvent.VK_SHIFT) ? 50 : 30;
+        double localVx = 0;
+        double localVy = 0;
         //TODO Overhaul movment code sqrt(2) diagonal movement removal
         if (InputManager.isPressed("e")) {
 
@@ -54,22 +54,22 @@ public class DungeonPlayer extends DungeonEntity {
             ((AnimatedSpriteSheet)texture).setCurrentX(0);
         }
         if (InputManager.isPressed("w")){
-            lVy -= lV;
+            localVy -= localV;
             ((AnimatedSpriteSheet) texture).setCurrentY(2);
 
         }
         if (InputManager.isPressed("s")) {
-            lVy += lV;
+            localVy += localV;
             ((AnimatedSpriteSheet) texture).setCurrentY(0);
 
         }
         if (InputManager.isPressed("d")) {
-            lVx += lV;
+            localVx += localV;
             ((AnimatedSpriteSheet) texture).setCurrentY(3);
 
         }
         if (InputManager.isPressed("a")) {
-            lVx -= lV;
+            localVx -= localV;
             ((AnimatedSpriteSheet) texture).setCurrentY(1);
 
         }
@@ -82,8 +82,8 @@ public class DungeonPlayer extends DungeonEntity {
         }
 
 
-        setVelocityX(lVx);
-        setVelocityY(lVy);
+        setVelocityX(localVx);
+        setVelocityY(localVy);
         texture.update(dt);
         super.update(dt);
         control.getTileByCoord(x, y).setBrightness(1);
