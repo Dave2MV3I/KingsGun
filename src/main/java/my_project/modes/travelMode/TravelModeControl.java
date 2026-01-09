@@ -25,7 +25,7 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         carriage = new Carriage();
         bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
         bandits.toFirst();
-        bandits.append(new Archer());
+        bandits.append(new Archer(carriage));
         System.out.println("created Bandit");
     }
     @Override

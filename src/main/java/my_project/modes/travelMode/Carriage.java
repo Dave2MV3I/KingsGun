@@ -19,7 +19,7 @@ public class Carriage extends GameObject {
         hP = 100 * Math.random();
     }
     public void draw(DrawTool drawtool){
-        texture.autoDraw(drawtool, x, y, 64);
+        texture.autoDraw(drawtool, x-32, y-48, 64);
         showHP(drawtool);
     }
 
@@ -38,7 +38,7 @@ public class Carriage extends GameObject {
         if(InputManager.isPressed("d")){
             moveX(20*dt);
         }
-        MainView.follow(0, y - 20, false); //folgt immer der Kutsche
+        MainView.follow(0, y - 64, false); //folgt immer der Kutsche
     }
 
     public void loseHP(double damage){
