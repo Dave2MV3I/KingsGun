@@ -11,7 +11,6 @@ import my_project.control.MainController;
 public class VillageModeControl extends ModeControl<VillageModeView> {
     private List<Village> villages;
     private int amountVillage;
-    private int currentVillage = 0;
 
     public VillageModeControl(MainController mainController) {
         super(mainController);

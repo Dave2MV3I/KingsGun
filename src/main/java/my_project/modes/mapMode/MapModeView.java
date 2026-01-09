@@ -116,10 +116,10 @@ public class MapModeView extends ModeView<MapModeControl> {
                     System.out.println("Village " + i + " ist da");
                 }
                 if(i == currentVillage+1) {
-                    modeControl.getMainController().loadMode("travel");
+                    modeControl.getMainController().loadMode("travel", "close map");
                     currentVillage++;
                     if(i == amountVillages+1) {
-                        modeControl.getMainController().loadMode("castle");
+                        modeControl.getMainController().loadMode("castle", "close map");
                     }
                 }
             }

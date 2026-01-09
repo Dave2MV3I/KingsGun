@@ -24,6 +24,8 @@ public class ShopWindow {
     private JLabel shopOption;
     private JLabel optionPicture;
     private JLabel priceLabel;
+    private JLabel tippLabel;
+    private JLabel playerMoney;
 
     private ImageIcon normalIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
     private ImageIcon electricIcon = new ImageIcon("src/main/resources/graphic/ElektricAmmo.png");
@@ -69,19 +71,23 @@ public class ShopWindow {
             if(mainController.getCurrentPlayer().getMoney() >= 10) {
                 mainController.getCurrentPlayer().addMoney(-10);
                 return true;
-            }
+            }else showTipp();
         }else if(ammo instanceof ElectricAmmunition) {
             if(mainController.getCurrentPlayer().getMoney() >= 12) {
                 mainController.getCurrentPlayer().addMoney(-12);
                 return true;
-            }
+            }else showTipp();
         }else if(ammo instanceof ExplosiveAmmunition) {
             if(mainController.getCurrentPlayer().getMoney() >= 15) {
                 mainController.getCurrentPlayer().addMoney(-15);
                 return true;
-            }
+            }else showTipp();
         }
         return false;
+    }
+
+    private void showTipp() {
+        tippLabel.setText("Tipp: Go to the Dungeon to get Money");
     }
 
     private void updateShopText() {
@@ -89,17 +95,19 @@ public class ShopWindow {
         if (shopItems.front() instanceof NormalAmmunition) {
             ammoType = "Normal Ammunition";
             optionPicture.setIcon(normalIcon);
-            priceLabel.setText("10 / "+ mainController.getCurrentPlayer().getMoney());
+            priceLabel.setText("10");
         }else if (shopItems.front() instanceof ElectricAmmunition) {
             ammoType = "Electric Ammunition";
             optionPicture.setIcon(electricIcon);
-            priceLabel.setText("12/ "+ mainController.getCurrentPlayer().getMoney());
+            priceLabel.setText("12");
         }else if (shopItems.front() instanceof ExplosiveAmmunition) {
             ammoType = "Explosive Ammunition";
             optionPicture.setIcon(explodingIcon);
-            priceLabel.setText("15/ "+ mainController.getCurrentPlayer().getMoney());
+            priceLabel.setText("15");
         }
         shopOption.setText(ammoType);
+        playerMoney.setIcon(coinIcon);
+        playerMoney.setText(String.valueOf(mainController.getCurrentPlayer().getMoney()));
     }
 
     private void addAmmunition() {

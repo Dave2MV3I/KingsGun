@@ -23,7 +23,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
     public void activationVillage(Village village) {
         currentVillage = village;
         ShopWindow shopWindow = new ShopWindow(modeControl.getMainController());
-        shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 250, false);
+        shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 300, false);
         shopFrame.setLocation(570, 200);
     }
 
@@ -44,7 +44,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
         }
         if (e.getX() > Config.WINDOW_WIDTH-300 && e.getX() < Config.WINDOW_WIDTH && e.getY() > 500 && e.getY() < 900) {
             if(!shopFrame.isVisible()) {
-                modeControl.getMainController().loadMode("dungeon");
+                modeControl.getMainController().loadMode("dungeon", "enter dungeon");
             }
         }
     }
