@@ -76,7 +76,9 @@ public abstract class Monster extends DungeonEntity {
             if (!currentPath.isEmpty() && this.collidesWith(currentPath.top())) {
                 currentPath.top().mark("none");
                 currentPath.pop();
-                currentPath.top().mark("green");
+                if (currentPath.top() != null) {
+                    currentPath.top().mark("green");
+                }
             }
             setVelocityAS(getDirection(currentPath.top()), 50); // TODO every monster has its own speed
         }

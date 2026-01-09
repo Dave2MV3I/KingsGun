@@ -7,6 +7,8 @@ import my_project.modes.ModeView;
 import my_project.view.InputManager;
 import my_project.view.Mouse;
 
+import java.awt.*;
+
 public class startModeView extends ModeView<startModeControl> {
     SpriteSheet spriteSheet;
     public startModeView(startModeControl modeControl) {
@@ -22,6 +24,6 @@ public class startModeView extends ModeView<startModeControl> {
             spriteSheet.setCurrent(0,0);
         }
         spriteSheet.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
-        super.draw(drawTool);
+
     }
 }

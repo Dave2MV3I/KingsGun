@@ -44,7 +44,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
         }
         if (e.getX() > Config.WINDOW_WIDTH-300 && e.getX() < Config.WINDOW_WIDTH && e.getY() > 500 && e.getY() < 900) {
             if(!shopFrame.isVisible()) {
-                modeControl.getMainController().loadMode("dungeon");
+                modeControl.getMainController().loadMode("dungeon", "enter dungeon");
             }
         }
     }
