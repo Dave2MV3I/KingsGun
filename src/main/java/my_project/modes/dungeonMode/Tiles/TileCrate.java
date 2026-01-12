@@ -17,7 +17,7 @@ public class TileCrate extends InteractiveTile {
     public void interact() {
         if (isClosed){
             isClosed = false;
-            dungeon.getPlayer().increaseMoney(10);
+            dungeon.getPlayer().increaseMoney(8 + Math.random() * 20);
             ((SpriteSheet)texture).setCurrent(1,0);
         }
 
