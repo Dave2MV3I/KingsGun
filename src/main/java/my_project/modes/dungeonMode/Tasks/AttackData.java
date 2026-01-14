@@ -1,6 +1,8 @@
 package my_project.modes.dungeonMode.Tasks;
 
-public enum Attack{
+public enum AttackData {
+    // TODO Eine Klasse AttackRepresentation, die auf dieses Enum zugreifen und ihr TExture hieraus holen.
+    //  AttackRepresentation erbt von Dungeon Entity.
     WEIGHT_ATTACK(50, 75),
     AXE_ATTACK(25, 50),
     SPEAR_ATTACK(10, 50),
@@ -10,14 +12,15 @@ public enum Attack{
     private final double minDamage;
     private final double maxDamage;
     private final double attackSpeed;
+    //private final String texture;
 
-    Attack(double minDamage, double maxDamage){
+    AttackData(double minDamage, double maxDamage){
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.attackSpeed = 0.5;
     }
 
-    Attack(double minDamage, double maxDamage, double attackSpeed){
+    AttackData(double minDamage, double maxDamage, double attackSpeed){
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.attackSpeed = attackSpeed;

@@ -2,9 +2,9 @@ package my_project.modes.dungeonMode;
 
 import my_project.model.GameObject;
 
-public abstract class DungeonEntity extends GameObject {
+public class DungeonEntity extends GameObject {
     protected DungeonModeControl control;
-    protected double health = 100;
+
     public DungeonEntity(DungeonModeControl dungeonModeControl) {
         this.control = dungeonModeControl;
     }
@@ -19,9 +19,4 @@ public abstract class DungeonEntity extends GameObject {
         }
         return (control.getTileByCoord(x, y).isSolid() && control.getTileByCoord(x, y).collidesWith(this));
     }
-
-    public void damage(double damagePoints){
-        this.health -= damagePoints;
-    }
-    public double getHealth(){return health;}
 }

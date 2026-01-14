@@ -1,14 +1,13 @@
 package my_project.modes.dungeonMode.Monsters;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
-import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import KAGO_framework.view.DrawTool;
-import my_project.modes.dungeonMode.DungeonEntity;
+import my_project.modes.dungeonMode.LivingDungeonEntity;
 import my_project.modes.dungeonMode.DungeonModeControl;
 import my_project.modes.dungeonMode.DungeonPlayer;
 import my_project.modes.dungeonMode.PathNode;
-import my_project.modes.dungeonMode.Tasks.Attack;
+import my_project.modes.dungeonMode.Tasks.AttackData;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 import my_project.modes.dungeonMode.Tiles.Tile;
 
@@ -20,14 +19,14 @@ import java.awt.*;
  * David Glusmann
  */
 
-public abstract class Monster extends DungeonEntity {
-    protected Attack[] myAttacks;
+public abstract class Monster extends LivingDungeonEntity {
+    protected AttackData[] myAttacks;
     protected DungeonPlayer dungeonPlayer;
     private double attackCoolDown = 2;
     private double pathCoolDown = 2;
     private Stack<Tile> currentPath = new Stack<>();
 
-    public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
+    public Monster(DungeonModeControl dungeonModeControl, AttackData[] attacks){
         super(dungeonModeControl);
         myAttacks = attacks;
         radius = 10;
@@ -49,7 +48,7 @@ public abstract class Monster extends DungeonEntity {
         super.update(dt);
         texture.update(dt);
 
-        // Attack player every 2 seconds if near enough
+        // AttackData player every 2 seconds if near enough
         attackCoolDown -= dt;
         if(getDistanceTo(dungeonPlayer) <= 32 && attackCoolDown <= 0) this.attack();
 
@@ -97,7 +96,7 @@ public abstract class Monster extends DungeonEntity {
         // TODO animate attacks
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
-        Attack attack = myAttacks[rndAttack];
+        AttackData attack = myAttacks[rndAttack];
         double damage = attack.calculateDamage();
         //System.out.println(damage + " damage");
         dungeonPlayer.damage(damage);

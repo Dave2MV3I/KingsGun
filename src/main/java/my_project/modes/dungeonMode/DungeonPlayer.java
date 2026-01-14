@@ -11,7 +11,7 @@ import my_project.view.MainView;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class DungeonPlayer extends DungeonEntity {
+public class DungeonPlayer extends LivingDungeonEntity {
     private double money;
     private double exitTimer;
     private double exitTime;
