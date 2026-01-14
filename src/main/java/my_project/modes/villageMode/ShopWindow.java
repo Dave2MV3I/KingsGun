@@ -26,6 +26,7 @@ public class ShopWindow {
     private JLabel priceLabel;
     private JLabel tippLabel;
     private JLabel playerMoney;
+    private JLabel discardPrice;
 
     private ImageIcon normalIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
     private ImageIcon electricIcon = new ImageIcon("src/main/resources/graphic/ElektricAmmo.png");
@@ -40,6 +41,8 @@ public class ShopWindow {
         updateShopText();
 
         priceLabel.setIcon(coinIcon);
+        discardPrice.setIcon(coinIcon);
+        discardPrice.setText("2");
 
         normalIcon.setImage(normalIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
         electricIcon.setImage(electricIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
@@ -48,9 +51,12 @@ public class ShopWindow {
         discardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                shopItems.dequeue();
-                addAmmunition();
-                updateShopText();
+                if(mainController.getCurrentPlayer().getMoney() >= 2) {
+                    mainController.getCurrentPlayer().addMoney(-2);
+                    shopItems.dequeue();
+                    addAmmunition();
+                    updateShopText();
+                }else showTipp();
             }
         });
         takeButton.addActionListener(new ActionListener() {

@@ -20,7 +20,7 @@ public class Dungeon extends GraphicalObject {
     public Dungeon(DungeonModeControl control, List<Class<? extends Monster>> monsterClasses) {
         this.control = control;
         this.monsterClasses = monsterClasses;
-        setMap("src/main/resources/graphic/Dungeon 1 rework.png");
+        setMap("src/main/resources/graphic/Dungeon "+((int)(Math.random()*3)+1)+".png");
 
         // TODO Choose random monsters, Powerful monsters spawn with less probability.
         //  put them in queue and let them spawn in nearest spawn point to player
@@ -99,13 +99,15 @@ public class Dungeon extends GraphicalObject {
                         tiles[col][row] = new TileFloor(col, row, this);
                         break;
                     case "11111111111111111111111100000000": //yellow
-
+                        getPlayer().setX(col * Tile.getWIDTH());
+                        getPlayer().setY(row * Tile.getHEIGHT());
+                        tiles[col][row] = new TileFloor(col, row, this);
                         break;
                     case "11111111000000001111111100000000": //green
                         tiles[col][row] = new TileCrate(col, row, this);
                         break;
                     case "11111111000000001111111111111111": //cyan
-                        tiles[col][row] = new TileChest(col, row, this);
+                        tiles[col][row] = new TileDoor(col, row, this);
                         break;
                     case "11111111000000000000000011111111": //blue
 

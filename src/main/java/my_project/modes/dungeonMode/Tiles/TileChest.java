@@ -13,7 +13,7 @@ public class TileChest extends InteractiveTile {
     public void interact() {
         if (isClosed){
             isClosed = false;System.out.println("Chest interact");
-            dungeon.getPlayer().increaseMoney(10 + Math.random() * 10);
+            dungeon.getPlayer().increaseMoney(10 + (int)(Math.random() * 10));
         }
 
     }

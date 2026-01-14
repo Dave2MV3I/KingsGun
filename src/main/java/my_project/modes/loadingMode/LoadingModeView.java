@@ -16,12 +16,13 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
     public LoadingModeView(LoadingModeControl modeControl) {
         super(modeControl);
         animations = new HashMap<>();
-        animations.put("standart", new AnimatedSpriteSheet("transitions/standart animation.png", 1, 5));
+        animations.put("standart", new AnimatedSpriteSheet("transitions/standart animation.png", 1, 17));
         animations.put("exit Dungeon", new AnimatedSpriteSheet("transitions/exit dungeon.png", 1, 35));
         animations.put("death", new AnimatedSpriteSheet("transitions/death.png", 1, 29));
         animations.put("open map", new AnimatedSpriteSheet("transitions/open map.png", 1, 35));
         animations.put("close map", new AnimatedSpriteSheet("transitions/close map.png", 1, 35));
         animations.put("enter dungeon", new AnimatedSpriteSheet("transitions/enter dungeon.png", 1, 31));
+        animations.put("enter Village", new AnimatedSpriteSheet("transitions/travel to village.png", 1, 13));
 
     }
     public void setLoadedView(ModeView loadedView) {
