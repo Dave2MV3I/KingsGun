@@ -30,12 +30,10 @@ public abstract class Monster extends DungeonEntity {
     public Monster(DungeonModeControl dungeonModeControl, Attack[] attacks){
         super(dungeonModeControl);
         myAttacks = attacks;
-
         radius = 10;
-        texture = new AnimatedSpriteSheet("testSlime.png", 1, 2);
-        ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.5);
 
         this.dungeonPlayer = dungeonModeControl.getDungeonPlayer();
+
         //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
     }
 
@@ -83,6 +81,11 @@ public abstract class Monster extends DungeonEntity {
             setVelocityAS(getDirection(currentPath.top()), 50); // TODO every monster has its own speed
         }
 
+    }
+
+    protected void setAnimatedTexture(String spriteSheet, int rows, int cols){
+        texture = new AnimatedSpriteSheet(spriteSheet, rows, cols);
+        ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.5);
     }
 
     public void setPosition(double x, double y){
