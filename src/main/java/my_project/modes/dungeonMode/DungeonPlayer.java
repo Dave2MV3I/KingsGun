@@ -86,7 +86,9 @@ public class DungeonPlayer extends DungeonEntity {
         setVelocityY(localVy);
         texture.update(dt);
         super.update(dt);
-        control.getTileByCoord(x, y).setBrightness(1);
+        if (control.getTileByCoord(x, y) != null) {
+            control.getTileByCoord(x, y).setBrightness(1);
+        }
         MainView.follow(x, y, true);
         if (InputManager.isPressed("f")) {
             int range = 1;
