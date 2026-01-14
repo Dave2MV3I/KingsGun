@@ -39,6 +39,9 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         if (bandits.getContent() != null){ //I added this, so there would be no errors when there isn't a bandit.
             bandits.getContent().update(dt);
         }
+        if (carriage.outOfBounds){
+            mainController.loadMode("village", "enter Village");
+        }
 
 
     }
@@ -54,6 +57,7 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
             return false;
         }
     }
+
     public Carriage getCarriage(){
         return carriage;
     }

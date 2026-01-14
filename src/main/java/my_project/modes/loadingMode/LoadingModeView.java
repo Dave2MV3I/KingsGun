@@ -22,6 +22,7 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         animations.put("open map", new AnimatedSpriteSheet("transitions/open map.png", 1, 35));
         animations.put("close map", new AnimatedSpriteSheet("transitions/close map.png", 1, 35));
         animations.put("enter dungeon", new AnimatedSpriteSheet("transitions/enter dungeon.png", 1, 31));
+        animations.put("enter Village", new AnimatedSpriteSheet("transitions/travel to village.png", 1, 13));
 
     }
     public void setLoadedView(ModeView loadedView) {

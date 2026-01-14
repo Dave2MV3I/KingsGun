@@ -11,6 +11,7 @@ public class Archer extends Bandit {
     public double hP;
     private List<Arrow> arrows;
     private Carriage carriage;
+    private double time;
     public Archer(Carriage carriage){
         arrows = new List<>();
         this.texture = new Texture("archer.png");
@@ -24,7 +25,8 @@ public class Archer extends Bandit {
 
         private double vX;
         private double vY;
-        private double vel = 500;
+        private double vel = 200;
+        private boolean hasHit = false;
 
         private double abstandX;
         private double abstandY;
@@ -34,11 +36,12 @@ public class Archer extends Bandit {
 
             this.x = x;
             this.y = y;
+            this.radius = 2;
 
             this.car = carriage;
 
-            abstandX = car.getX() - this.x;
-            abstandY = car.getY() - this.y;
+            abstandX = (car.getX()+32) - this.x;
+            abstandY = (car.getY()+48) - this.y;
 
             abstand = Math.sqrt(Math.pow(abstandX, 2) + Math.pow(abstandY, 2));
             vX = (abstandX / abstand) * vel;
@@ -48,12 +51,18 @@ public class Archer extends Bandit {
         public void update(double dt){
             x = x + vX*dt;
             y = y + vY*dt;
+            if (collidesWith(car) && !hasHit){
+                car.loseHP(50);
+                System.out.println("damage!!!!!!!!!!");
+                hasHit = true;
+            }
         }
         @Override
         public void draw(DrawTool drawTool){
             drawTool.setCurrentColor(255,255,255,255);
             drawTool.drawFilledCircle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(2));
         }
+
     }
 
     public void draw(DrawTool drawtool){
@@ -67,13 +76,13 @@ public class Archer extends Bandit {
     }
     @Override
     public void update(double dt){
-        if (Math.random() < 0.5){
+        time += dt;
+        if (time >= 5){
             shoot(x, y);
             System.out.println("shoot");
-
-
-
+            time = 0;
         }
+
         arrows.toFirst();
         while (arrows.getContent() != null){
             arrows.getContent().update(dt);
