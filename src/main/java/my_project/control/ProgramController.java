@@ -1,6 +1,8 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import KAGO_framework.model.Sound;
+import javafx.embed.swing.JFXPanel;
 import my_project.view.InputManager;
 import my_project.view.Mouse;
 
@@ -22,6 +24,9 @@ public class ProgramController {
     private final MainController mainController = new MainController();
     private final InputManager inputManager = new InputManager(mainController);
     private final Mouse mouse = new Mouse();
+
+    private JFXPanel fxPanel = new JFXPanel();
+    private Sound music = new Sound("src/main/resources/sound/MainTheme.mp3","MainTheme", true);
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -38,8 +43,8 @@ public class ProgramController {
      * was zu diesem Zeipunkt passieren muss.
      */
     public void startProgram() {
-
-
+        music.play();
+        music.setVolume(0.2);
 
         // Teile dem ViewController-Objekt mit, dass das Objekt gezeichnet werden soll
         viewController.draw(mainController);
