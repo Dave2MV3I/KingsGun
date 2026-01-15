@@ -33,10 +33,10 @@ public class LoadingModeView extends ModeView<LoadingModeControl> {
         double progressionFactor = (modeControl.getTimer() / modeControl.getTransitionTime());
         updateAnimation(progressionFactor);
         super.draw(drawTool);
-        if (loadedView != null) {
+        if (loadedView != null && !(loadedView instanceof LoadingModeView)) {
             loadedView.draw(drawTool);
         } else {
-            System.err.println("Mode could not be drawn: " + loadedView);
+            //System.err.println("Mode could not be drawn: " + loadedView);
         }
 
         transitionAnimation.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);

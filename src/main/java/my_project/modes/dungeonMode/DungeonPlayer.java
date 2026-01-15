@@ -73,6 +73,7 @@ public class DungeonPlayer extends LivingDungeonEntity {
             ((AnimatedSpriteSheet) texture).setCurrentY(1);
 
         }
+        /*
         if (InputManager.isPressed("Space") && attackCooldown <= 0) {
             if (control.getMonster().getDistanceTo(this) < 128) {
                 System.out.println("Monster is hit");
@@ -80,6 +81,8 @@ public class DungeonPlayer extends LivingDungeonEntity {
                 attackCooldown = 1;
             }
         }
+
+         */
 
 
         setVelocityX(localVx);

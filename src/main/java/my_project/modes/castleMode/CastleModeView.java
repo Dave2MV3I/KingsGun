@@ -23,40 +23,55 @@ public class CastleModeView extends ModeView<CastleModeControl> {
                 createCredit("Mapmode", "Tomole Schuhkraft"),
                 createCredit("Travelmode", "Mykhailo Badasian"),
                 createCredit("Villagemode", "Tomole Schuhkraft"),
-                createCredit("Dungeonmode", new String[]{"Joshua Becker", "David Greggory Glussman"}),
+                createCredit("Dungeonmode", new String[]{"Joshua Becker", "David Gregory Glusmann"}),
                 createCredit("Castlemode", "Joshua Becker"),
-                createCredit("Settings", "David Greggory Glussman"),
+                "",
+                createCredit("Settings", "David Gregory Glusmann"),
                 createCredit("Backend Developer Acces", "Joshua Becker"),
                 createCredit("Transitionscreens", "Joshua Becker"),
                 createCredit("Grundlegende Struktur", "Joshua Becker"),
-                createCredit("Organisation", "David Greggory Glussman"),
+                "",
+                createCredit("Organisation", new String[]{"David Gregory Glusmann","Joshua Becker"}),
+                createCredit("Graphic Design", new String[]{"Joshua Becker", "Tomole Schuhkraft"}),
+                createCredit("Sound Design", new String[]{"David Gregory Glusmann"}),
         };
         int size = 50;
         int border = 4;
 
+        double time = modeControl.getTimer();
+        double x = 18;
+        double y = time * 90 - 1500;
+        double lineHeight = 40;
         for(int i = 0; i < credits.length; i++){
-            String credit = credits[i];
+            String credit = credits[credits.length - i -1];
             dt.setCurrentColor(Color.black);
             dt.formatText("Arial", 1, size);
 
-            dt.drawText(10-border, i*size, credit);
-            dt.drawText(10+border, i*size, credit);
-            dt.drawText(10, i*size-border, credit);
-            dt.drawText(10, i*size+border, credit);
+            dt.drawText(x-border, y + i*size + i*lineHeight, credit);
+            dt.drawText(x+border, y + i*size + i*lineHeight, credit);
+            dt.drawText(x, y + i*size-border + i*lineHeight, credit);
+            dt.drawText(x, y + i*size+border + i*lineHeight, credit);
             dt.formatText("Arial", 1, size);
             dt.setCurrentColor(Color.white);
-            dt.drawText(10, i*size, credit);
+            dt.drawText(x, y + i*size + i*lineHeight, credit);
         }
     }
     private String createCredit(String role, String[] person){
         String persons = "";
         for(int i = 0; i < person.length; i++){
-            persons += person[i] + ", ";
+            if (i+1 == person.length){
+                persons += person[i];
+            }else persons += person[i] + ", ";
+
+
         }
-        return role + ": " + person[0];
+        return role + ": " + persons;
     }
     private String createCredit(String role, String person){
         return createCredit(role, new String[]{person});
     }
 
+    public boolean creditsBelowScreen(){
+        return modeControl.getTimer() * 90 - 2000 > Config.WINDOW_HEIGHT;
+    }
 }

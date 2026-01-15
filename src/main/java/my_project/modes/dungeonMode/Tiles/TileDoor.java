@@ -25,9 +25,9 @@ public class TileDoor extends InteractiveTile{
     @Override
     public void update(double dt){
         cooldown += dt;
-        if(opening != 0 && cooldown >= 1){
+        if(opening != 0 && cooldown >= 0.7){
             ((SpriteSheet)texture).setCurrentX((int)((((SpriteSheet)texture).getCurrentX() + opening)));
-            cooldown = cooldown%1;
+            cooldown = cooldown%0.7;
         }
 
         if (((SpriteSheet)texture).getCurrentX() == 5){
