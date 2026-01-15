@@ -3,11 +3,12 @@ package my_project.modes.dungeonMode.Monsters;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import KAGO_framework.view.DrawTool;
+import my_project.modes.dungeonMode.Attacks.AttackRepresentation;
 import my_project.modes.dungeonMode.LivingDungeonEntity;
 import my_project.modes.dungeonMode.DungeonModeControl;
 import my_project.modes.dungeonMode.DungeonPlayer;
 import my_project.modes.dungeonMode.PathNode;
-import my_project.modes.dungeonMode.Tasks.AttackData;
+import my_project.modes.dungeonMode.Attacks.AttackData;
 import my_project.model.Graphics.AnimatedSpriteSheet;
 import my_project.modes.dungeonMode.Tiles.Tile;
 
@@ -25,6 +26,8 @@ public abstract class Monster extends LivingDungeonEntity {
     private double attackCoolDown = 2;
     private double pathCoolDown = 2;
     private Stack<Tile> currentPath = new Stack<>();
+    // TODO Monster kennt 1 oder mehr seiner Angriffe und DungeonModeView greift über DungeonModeControl auf diese Referenzen zu und
+    //  zeichnet die Angriffe/ updatet sie
 
     public Monster(DungeonModeControl dungeonModeControl, AttackData[] attacks){
         super(dungeonModeControl);
@@ -96,9 +99,9 @@ public abstract class Monster extends LivingDungeonEntity {
         // TODO animate attacks
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
-        AttackData attack = myAttacks[rndAttack];
-        double damage = attack.calculateDamage();
-        //System.out.println(damage + " damage");
+        AttackData attackData = myAttacks[rndAttack];
+        double damage = attackData.calculateDamage();
+        new AttackRepresentation(control, attackData, dungeonPlayer);
         dungeonPlayer.damage(damage);
         System.out.println(dungeonPlayer.getHealth());
         attackCoolDown = 2;
