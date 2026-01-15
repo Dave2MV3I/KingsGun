@@ -119,3 +119,13 @@ src/main/java/my_project/view/.DS_Store
 .idea/compiler.xml
 .idea/misc.xml
 src/main/java/my_project/.DS_Store
+*.properties
+.gradle/8.10/executionHistory/executionHistory.lock
+.gradle/8.10/fileChanges/last-build.bin
+.gradle/8.10/checksums/checksums.lock
+.gradle/8.10/fileHashes/fileHashes.bin
+.gradle/8.10/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
+.idea/compiler.xml
+.idea/misc.xml
