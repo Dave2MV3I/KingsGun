@@ -1,8 +1,10 @@
 package my_project.modes.travelMode;
 
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
 import my_project.model.Graphics.Texture;
+import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.view.InputManager;
 import my_project.view.MainView;
 
@@ -11,6 +13,7 @@ public class Carriage extends GameObject {
     private Gun gun;
     private double hP;
     public boolean outOfBounds = false;
+    private Stack<Ammunition> ammo;
     public Carriage() {
         ammoInvent = new AmmunitionInventory();
         gun = new Gun();
@@ -61,6 +64,14 @@ public class Carriage extends GameObject {
 
         drawTool.setCurrentColor(0,0,255,255);
         drawTool.drawText(MainView.translateAndScaleX(x+texture.getWidth()/2), MainView.translateAndScaleY(y), "" + hP);
+    }
+
+    public Stack<Ammunition> getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(Stack<Ammunition> ammo) {
+        this.ammo = ammo;
     }
 
 }
