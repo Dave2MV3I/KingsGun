@@ -22,9 +22,10 @@ public class Dungeon extends GraphicalObject {
         this.monsterClasses = monsterClasses;
         setMap("src/main/resources/graphic/Dungeon "+((int)(Math.random()*3)+1)+".png");
 
-        // TODO Choose random monsters, Powerful monsters spawn with less probability.
-        //  put them in queue and let them spawn in nearest spawn point to player
-        //monster = generateMonster(280,128);
+        // TODO ArrayList with all attacks right now, iterator for drawing and updating them
+        // Erst ArrayList lesen und versetehen
+        // In Präsi Anwendung einer Arraylist erklären und den iterator, mehr nicht notwendig
+
     }
 
     private Monster generateMonster(double x, double y){

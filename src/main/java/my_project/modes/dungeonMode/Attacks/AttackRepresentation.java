@@ -22,12 +22,22 @@ public class AttackRepresentation extends DungeonEntity {
 
     @Override
     public void update(double dt){
-        double d = getDirection(dungeonPlayer);
-        setVelocityAS(d, attackData.getStrength());
+        // TODO
+        switch(attackData.ANIMATION_TYPE){
+            case MOVING:
+                double d = getDirection(dungeonPlayer);
+                setVelocityAS(d, attackData.getSTRENGTH());
+                // TODO if collision mit Player dann löschen aus Arraylist
+            break;
+            case STATIC:
+                // TODO after 2 seks löschen aus ArrayList
+            break;
+        }
+
     }
 
     @Override
     public void draw(DrawTool drawTool){
-        texture = new Texture(attackData.getTexture());
+        texture = new Texture(attackData.getTEXTURE());
     }
 }
