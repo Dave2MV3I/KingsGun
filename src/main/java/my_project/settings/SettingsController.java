@@ -35,7 +35,7 @@ public class SettingsController {
         switch (setting) {
             case "musicVolume" : SettingsModel.setMusicVolume(value);
                 break;
-            case "soundsVolume" : SettingsModel.setSoundVolume(value);
+            case "soundVolume" : SettingsModel.setSoundVolume(value);
                 break;
             case "brightness" : SettingsModel.setBrightness(value);
                 break;

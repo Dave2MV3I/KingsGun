@@ -1,15 +1,18 @@
 package my_project.modes.mapMode;
 
+import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.model.Graphics.Texture;
 import my_project.modes.ModeView;
+import my_project.modes.villageMode.Village;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class MapModeView extends ModeView<MapModeControl> {
     private int amountVillages;
+    private List<Village> villages;
     private int[][] villagePos;
     private Texture mapTexture;
     private Texture mapSymbolVillage;
@@ -34,13 +37,16 @@ public class MapModeView extends ModeView<MapModeControl> {
         if(this.amountVillages == 0) {
             this.amountVillages = amountVillages;
             villagePos = new int[amountVillages + 2][2];
+            villages.toFirst();
             for (int i = 0; i < amountVillages + 2; i++) {
                 if (i == 0 || i == amountVillages + 1) {
                     villagePos[i][0] = Config.WINDOW_WIDTH / 2;
+                    villagePos[i][1] = (int) (Config.WINDOW_HEIGHT / 1.2 - ((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillages + 1) * (i));
                 } else {
-                    villagePos[i][0] = Config.WINDOW_WIDTH / 2 + (int) (Math.random() * 150) - 75;
+                    villagePos[i][0] = villages.getContent().getMapX();
+                    villagePos[i][1] = villages.getContent().getMapY();
+                    villages.next();
                 }
-                villagePos[i][1] = (int) (Config.WINDOW_HEIGHT / 1.2 - ((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillages + 1) * (i));
             }
         }
     }
@@ -124,5 +130,9 @@ public class MapModeView extends ModeView<MapModeControl> {
                 }
             }
         }
+    }
+
+    public void setVillages(List<Village> villages) {
+        this.villages = villages;
     }
 }

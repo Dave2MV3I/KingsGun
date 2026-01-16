@@ -24,6 +24,7 @@ public class MapModeControl extends ModeControl<MapModeView> {
     protected void activate() {
         villageModeControl = (VillageModeControl) mainController.getModeControls().get("village");
         villages = villageModeControl.getVillages();
+        modeView.setVillages(villages);
         modeView.setAmountVillages(villageModeControl.getAmountVillage());
     }
 
