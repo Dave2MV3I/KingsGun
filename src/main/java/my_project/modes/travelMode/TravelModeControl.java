@@ -25,19 +25,29 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         carriage = new Carriage();
         bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
         bandits.toFirst();
-        bandits.append(new Archer(carriage));
-        System.out.println("created Bandit");
+        for (int i = 0; i < 50; i++) {
+            int linkrecht = (int)(Math.random()*2);
+            bandits.append(new Archer(carriage, 500 - i*200, linkrecht));
+            System.out.println("created Bandit");
+        }
+        //bandits.append(new Archer(carriage, 500, 0));
+        //bandits.append(new Archer(carriage, 300, 1));
+        //bandits.append(new Archer(carriage, 100, 1));
+        //System.out.println("created Bandit");
     }
     @Override
     public void update(double dt){
         time = time + dt;
         carriage.update(dt);
-        if (checkAndHandleCollision(bandits.getContent())){
-            bandits.getContent().loseHP(100);
+        bandits.toFirst();
+        while (bandits.hasAccess()){
+            if (checkAndHandleCollision(bandits.getContent())){
+                bandits.getContent().loseHP(100);
 
-        }
-        if (bandits.getContent() != null){ //I added this, so there would be no errors when there isn't a bandit.
+            }
+            //if (bandits.getContent() != null){ //I added this, so there would be no errors when there isn't a bandit.
             bandits.getContent().update(dt);
+            bandits.next();
         }
         if (carriage.outOfBounds){
             mainController.loadMode("village", "enter Village");
@@ -64,5 +74,8 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
     public Bandit getBandit(){
         bandits.toFirst();
         return bandits.getContent();
+    }
+    public List<Bandit> getBandits(){
+        return bandits;
     }
 }

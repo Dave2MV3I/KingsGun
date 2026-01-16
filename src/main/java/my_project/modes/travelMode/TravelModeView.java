@@ -13,16 +13,19 @@ public class TravelModeView extends ModeView<TravelModeControl> {
 
         super(modeControl);
         roadTexture = new Texture("road_3.png");
-        yPos = 600;
+        yPos = 700;
         MainView.setScale(roadTexture.getScaleRelativeToWidth(Config.WINDOW_WIDTH));
     }
     @Override
     public void draw(DrawTool drawTool) {
-        for (int i = 0; i < 100; i++) {
-            roadTexture.autoDraw(drawTool, 0, i * 32, 256);
+        for (int i = 0; i < 50; i++) {
+            roadTexture.autoDraw(drawTool, 0, yPos - i * 32, 256);
         }
-        if (modeControl.getBandit() != null) {
-            modeControl.getBandit().draw(drawTool);
+        modeControl.getBandits().toFirst();
+        while (modeControl.getBandits().hasAccess()){
+            //if (bandits.getContent() != null){ //I added this, so there would be no errors when there isn't a bandit.
+            modeControl.getBandits().getContent().draw(drawTool);
+            modeControl.getBandits().next();
         }
 
         modeControl.getCarriage().draw(drawTool);
