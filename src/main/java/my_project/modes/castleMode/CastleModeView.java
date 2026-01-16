@@ -42,6 +42,7 @@ public class CastleModeView extends ModeView<CastleModeControl> {
         double x = 18;
         double y = time * 90 - 1500;
         double lineHeight = 40;
+        System.out.println(time + " " + y);
         for(int i = 0; i < credits.length; i++){
             String credit = credits[credits.length - i -1];
             dt.setCurrentColor(Color.black);
@@ -54,6 +55,7 @@ public class CastleModeView extends ModeView<CastleModeControl> {
             dt.formatText("Arial", 1, size);
             dt.setCurrentColor(Color.white);
             dt.drawText(x, y + i*size + i*lineHeight, credit);
+            System.out.println(credit);
         }
     }
     private String createCredit(String role, String[] person){
