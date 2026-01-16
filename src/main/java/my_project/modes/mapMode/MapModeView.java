@@ -4,6 +4,7 @@ import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.model.Graphics.Texture;
+import my_project.model.Player;
 import my_project.modes.ModeView;
 import my_project.modes.villageMode.Village;
 
@@ -17,13 +18,12 @@ public class MapModeView extends ModeView<MapModeControl> {
     private Texture mapTexture;
     private Texture mapSymbolVillage;
     private Texture mapSymbolCastle;
-    private int currentVillage = 0;
     private double radius = 15;
     private boolean inMoving = false;
+    private Player player = modeControl.getMainController().getCurrentPlayer();
 
     public MapModeView(MapModeControl modeControl) {
         super(modeControl);
-        //amountVillages = modeControl.getVillageControl().getAmountVillage();
         mapTexture = new Texture("Map.png");
         mapSymbolVillage = new Texture("MapSymbolVillage.png");
         mapSymbolCastle = new Texture("MapSymbolCastle.png");
@@ -77,12 +77,12 @@ public class MapModeView extends ModeView<MapModeControl> {
         drawTool.setLineWidth(4);
         for(int i = 1; i <= amountVillages+1; i++) {
             drawTool.setCurrentColor(new Color(194, 133, 105));
-            if(i < currentVillage+1) {
+            if(i < player.getCurrentVillage()+1) {
                 drawTool.setCurrentColor(new Color(234, 212, 170));
             }
             drawTool.drawFilledCircle(villagePos[i][0], villagePos[i][1], 15);
 
-            if(i == currentVillage+1) {
+            if(i == player.getCurrentVillage()+1) {
                 drawTool.setCurrentColor(new Color(234, 212, 170));
                 drawTool.drawCircle(villagePos[i][0], villagePos[i][1], radius);
             }
@@ -100,6 +100,9 @@ public class MapModeView extends ModeView<MapModeControl> {
     }
 
     public void update(double dt) {
+        if(player != modeControl.getMainController().getCurrentPlayer()) {
+            player = modeControl.getMainController().getCurrentPlayer();
+        }
         if(radius < 15) {
             inMoving = false;
         }else if(radius > 25) {
@@ -121,9 +124,9 @@ public class MapModeView extends ModeView<MapModeControl> {
                 } else {
                     System.out.println("Village " + i + " ist da");
                 }
-                if(i == currentVillage+1) {
+                if(i == player.getCurrentVillage()+1) {
                     modeControl.getMainController().loadMode("travel", "close map");
-                    currentVillage++;
+                    player.setCurrentVillage(player.getCurrentVillage()+1);
                     if(i == amountVillages+1) {
                         modeControl.getMainController().loadMode("castle", "close map");
                     }

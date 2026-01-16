@@ -15,8 +15,7 @@ public class Carriage extends GameObject {
     public boolean outOfBounds = false;
     private Stack<Ammunition> ammo;
     public Carriage() {
-        ammoInvent = new AmmunitionInventory();
-        gun = new Gun();
+        gun = new Gun(this);
         this.texture = new Texture("carriage.png");
         x = 96;
         y = 2400;
@@ -33,6 +32,7 @@ public class Carriage extends GameObject {
     @Override
     public void update(double dt){
         super.update(dt);
+        gun.update(dt);
         if(InputManager.isPressed("w")){
             moveY(-1);
         }

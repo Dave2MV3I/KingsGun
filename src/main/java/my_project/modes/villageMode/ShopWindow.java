@@ -1,12 +1,14 @@
 package my_project.modes.villageMode;
 
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import my_project.control.MainController;
 import my_project.model.Player;
 import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
 import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
 import my_project.modes.travelMode.Ammunition.NormalAmmunition;
+import my_project.modes.travelMode.TravelModeControl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +19,7 @@ public class ShopWindow {
     private MainController mainController;
 
     private Queue<Ammunition> shopItems;
+    private Stack<Ammunition> ammo;
 
     private JPanel shopPanal;
     private JButton discardButton;
@@ -36,6 +39,8 @@ public class ShopWindow {
 
     public ShopWindow(MainController mainController) {
         this.mainController = mainController;
+
+        ammo = mainController.getCurrentPlayer().getAmmo();
 
         initiateShopQueue();
         updateShopText();
@@ -67,6 +72,7 @@ public class ShopWindow {
                     shopItems.dequeue();
                     addAmmunition();
                     updateShopText();
+                    ammo.push(takenAmmunition);
                 }
             }
         });

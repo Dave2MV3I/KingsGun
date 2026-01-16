@@ -24,6 +24,7 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
     protected void activate() {
         carriage = new Carriage();
         bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
+        carriage.setAmmo(mainController.getCurrentPlayer().getAmmo());
         bandits.toFirst();
         for (int i = 0; i < 5; i++) {
             int linkrecht = (int)(Math.random()*2);
