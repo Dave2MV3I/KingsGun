@@ -13,12 +13,12 @@ public class TravelModeView extends ModeView<TravelModeControl> {
 
         super(modeControl);
         roadTexture = new Texture("road_3.png");
-        yPos = 700;
+        yPos = 2600;
         MainView.setScale(roadTexture.getScaleRelativeToWidth(Config.WINDOW_WIDTH));
     }
     @Override
     public void draw(DrawTool drawTool) {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             roadTexture.autoDraw(drawTool, 0, yPos - i * 32, 256);
         }
         modeControl.getBandits().toFirst();

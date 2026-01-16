@@ -25,9 +25,10 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         carriage = new Carriage();
         bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
         bandits.toFirst();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 5; i++) {
             int linkrecht = (int)(Math.random()*2);
-            bandits.append(new Archer(carriage, 500 - i*200, linkrecht));
+            int obenunten = ((int)(Math.random() * 2)) * 2 - 1;
+            bandits.append(new Archer(carriage, 1800 - i*400, linkrecht, obenunten));
             System.out.println("created Bandit");
         }
         //bandits.append(new Archer(carriage, 500, 0));

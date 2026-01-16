@@ -19,7 +19,7 @@ public class Carriage extends GameObject {
         gun = new Gun();
         this.texture = new Texture("carriage.png");
         x = 96;
-        y = 500;
+        y = 2400;
 
         width = 64;
         height = 96;
@@ -39,16 +39,19 @@ public class Carriage extends GameObject {
         if(InputManager.isPressed("a")){
             moveX(-20*dt);
         }
-        if(InputManager.isPressed("s")){
-            moveY(1);
-        }
         if(InputManager.isPressed("d")){
             moveX(20*dt);
         }
         MainView.follow(0, y - 64, false); //folgt immer der Kutsche
 
-        if (y<=-300){
+        if (y<=-400){
             outOfBounds = true;
+        }
+        if (x>195){
+            x = 195;
+        }
+        if (x<0){
+            x = 0;
         }
     }
 

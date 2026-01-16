@@ -3,22 +3,27 @@ package my_project.modes.travelMode.Bandits;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
+import my_project.model.Graphics.SpriteSheet;
 import my_project.model.Graphics.Texture;
 import my_project.modes.travelMode.Carriage;
 import my_project.view.MainView;
+
+import static my_project.Config.WINDOW_HEIGHT;
+import static my_project.Config.WINDOW_WIDTH;
 
 public class Archer extends Bandit {
     public double hP;
     private List<Arrow> arrows;
     private Carriage carriage;
     private double time;
-    public Archer(Carriage carriage, double y, int a){
+    public Archer(Carriage carriage, double y, int a, int b){
         arrows = new List<>();
-        this.texture = new Texture("archer.png");
+        this.texture = new SpriteSheet("mage1.png", 1, 5);
+        ((SpriteSheet) texture).setCurrent((int)(Math.random()*5), 0);
         this.carriage = carriage;
         hP = 500;
         x = Math.random()*40 + 15 + a*155;
-        this.y = y;
+        this.y = y + b*(Math.random()*400);
     }
     private class Arrow extends GameObject {
         public Carriage car;
@@ -43,7 +48,9 @@ public class Archer extends Bandit {
             abstandX = (car.getX()+32) - this.x;
             abstandY = (car.getY()+48) - this.y;
 
-            abstand = Math.sqrt(Math.pow(abstandX, 2) + Math.pow(abstandY, 2));
+            //abstand = Math.sqrt(Math.pow(abstandX, 2) + Math.pow(abstandY, 2));
+            abstand = getDistanceTo(car);
+
             vX = (abstandX / abstand) * vel;
             vY = (abstandY / abstand) * vel;
         }
@@ -55,6 +62,10 @@ public class Archer extends Bandit {
                 car.loseHP(50);
                 System.out.println("damage!!!!!!!!!!");
                 hasHit = true;
+                arrows.remove();
+            }
+            if (y>2200 || y<-400 || x>300 || x<0){
+                arrows.remove();
             }
         }
         @Override
@@ -91,9 +102,9 @@ public class Archer extends Bandit {
     }
 
     public void shoot(double xPos, double yPos){
-        //if(getDistanceTo(carriage) < 50){
+        if(getDistanceTo(carriage) < 300){
             arrows.append(new Arrow(xPos, yPos, carriage));
-        //}
+        }
 
     }
 }
