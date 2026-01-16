@@ -58,6 +58,7 @@
         </constraints>
         <properties>
           <maximum value="100"/>
+          <value value="50"/>
         </properties>
       </component>
       <vspacer id="24d8b">

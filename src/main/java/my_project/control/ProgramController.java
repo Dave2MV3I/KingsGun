@@ -3,6 +3,7 @@ package my_project.control;
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.Sound;
 import javafx.embed.swing.JFXPanel;
+import my_project.settings.SettingsModel;
 import my_project.view.InputManager;
 import my_project.view.Mouse;
 
@@ -44,7 +45,7 @@ public class ProgramController {
      */
     public void startProgram() {
         music.play();
-        music.setVolume(0.2);
+
 
         // Teile dem ViewController-Objekt mit, dass das Objekt gezeichnet werden soll
         viewController.draw(mainController);
@@ -57,6 +58,6 @@ public class ProgramController {
      * @param dt Zeit seit letztem Frame in Sekunden
      */
     public void updateProgram(double dt){
-
+        music.setVolume(SettingsModel.getMusicVolume() * SettingsModel.getSoundVolume());
     }
 }
