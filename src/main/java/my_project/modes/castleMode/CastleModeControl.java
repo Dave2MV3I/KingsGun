@@ -9,6 +9,7 @@ public class CastleModeControl extends ModeControl<CastleModeView> {
     }
     @Override
     public void update(double dt){
+        super.update(dt);
         if (modeView.creditsBelowScreen()){
             mainController.loadMode("start");
         }

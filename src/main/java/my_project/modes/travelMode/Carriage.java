@@ -44,7 +44,7 @@ public class Carriage extends GameObject {
         }
         MainView.follow(0, y - 64, false); //folgt immer der Kutsche
 
-        if (y<=0){
+        if (y<=-300){
             outOfBounds = true;
         }
     }

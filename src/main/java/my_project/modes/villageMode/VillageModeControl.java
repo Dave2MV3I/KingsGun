@@ -1,6 +1,7 @@
 package my_project.modes.villageMode;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
+import my_project.Config;
 import my_project.modes.ModeControl;
 import my_project.control.MainController;
 
@@ -24,7 +25,7 @@ public class VillageModeControl extends ModeControl<VillageModeView> {
     private void setUpVillages() {
         villages = new List<Village>();
         for (int i = 0; i < amountVillage; i++) {
-            Village v = new Village();
+            Village v = new Village(Config.WINDOW_WIDTH / 2 + (int) (Math.random() * 150) - 75,(int) (Config.WINDOW_HEIGHT / 1.2 - ((Config.WINDOW_HEIGHT / 1.2) - (Config.WINDOW_HEIGHT / 6)) / (amountVillage + 1) * (i+1)));
             villages.append(v);
         }
     }

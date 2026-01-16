@@ -12,13 +12,13 @@ public class Archer extends Bandit {
     private List<Arrow> arrows;
     private Carriage carriage;
     private double time;
-    public Archer(Carriage carriage){
+    public Archer(Carriage carriage, double y, int a){
         arrows = new List<>();
         this.texture = new Texture("archer.png");
         this.carriage = carriage;
         hP = 500;
-        x = 32;
-        y = 500;
+        x = Math.random()*40 + 15 + a*155;
+        this.y = y;
     }
     private class Arrow extends GameObject {
         public Carriage car;
@@ -91,7 +91,9 @@ public class Archer extends Bandit {
     }
 
     public void shoot(double xPos, double yPos){
-        arrows.append(new Arrow(xPos, yPos, carriage));
+        //if(getDistanceTo(carriage) < 50){
+            arrows.append(new Arrow(xPos, yPos, carriage));
+        //}
 
     }
 }
