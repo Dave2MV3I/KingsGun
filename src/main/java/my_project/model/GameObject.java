@@ -4,6 +4,7 @@ import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
 import my_project.model.Graphics.Texture;
+import my_project.settings.SettingsModel;
 import my_project.view.MainView;
 
 import java.awt.*;
@@ -32,7 +33,9 @@ public class GameObject extends GraphicalObject {
     }
     protected double getDirection(GraphicalObject object){
         return getDirection((object.getX() + object.getWidth()/2),(object.getY() + object.getHeight()/2));
-    }protected double getDirection(double x, double y){
+    }
+
+    public double getDirection(double x, double y){
         return Math.atan2((y) - (this.getY() + this.getHeight()/2),  (x) - (this.getX() + this.getWidth()/2));
     }
 
@@ -94,27 +97,33 @@ public class GameObject extends GraphicalObject {
         }
     }
     protected void drawHitbox(DrawTool drawTool) {
-        //TODO draw the *Auto Hitbox*
-        drawTool.setCurrentColor(new Color(255, 0, 0));
-        drawTool.drawRectangle(x, y, getWidth(), getHeight());
-        drawTool.setCurrentColor(new Color(0, 0, 255));
-        drawTool.drawCircle(x, y, getRadius());
-        drawTool.setCurrentColor(new Color(255, 98, 0));
-        drawTool.drawRectangle(x, y, getWidth(), getHeight());
-        drawTool.setCurrentColor(new Color(0, 255, 255));
-        drawTool.drawCircle(x, y, getRadius());
+        if (SettingsModel.isDebugging()) {
+            drawTool.setCurrentColor(new Color(255, 0, 0));
+            drawTool.drawRectangle(x, y, getWidth(), getHeight());
+            drawTool.setCurrentColor(new Color(0, 0, 255));
+            drawTool.drawCircle(x, y, getRadius());
+            drawTool.setCurrentColor(new Color(255, 98, 0));
+            drawTool.drawRectangle(x, y, getWidth(), getHeight());
+            drawTool.setCurrentColor(new Color(0, 255, 255));
+            drawTool.drawCircle(x, y, getRadius());
+        }
     }
     protected void autoDrawHitbox(DrawTool drawTool) {
-        drawTool.setCurrentColor(new Color(255, 0, 0));
-        drawTool.drawRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWidth()), MainView.scale(getWidth()));
-        drawTool.setCurrentColor(new Color(0, 0, 255));
-        drawTool.drawCircle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getRadius()));
+        if (SettingsModel.isDebugging()) {
+            drawTool.setCurrentColor(new Color(255, 0, 0));
+            drawTool.drawRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWidth()), MainView.scale(getWidth()));
+            drawTool.setCurrentColor(new Color(0, 0, 255));
+            drawTool.drawCircle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getRadius()));
 
 
-        drawTool.setCurrentColor(new Color(255, 0, 255));
-        drawTool.drawRectangle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getWidth()), MainView.scale(getWidth()));
-        drawTool.setCurrentColor(new Color(0, 255, 255));
-        drawTool.drawCircle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getRadius()));
+            drawTool.setCurrentColor(new Color(255, 0, 255));
+            drawTool.drawRectangle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getWidth()), MainView.scale(getWidth()));
+            drawTool.setCurrentColor(new Color(0, 255, 255));
+            drawTool.drawCircle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getRadius()));
+        }
+    }
+    public double getDistanceTo(double x, double y){
+        return Math.sqrt(Math.pow(x - getX(), 2) + Math.pow(y - getY(), 2));
     }
 }
 

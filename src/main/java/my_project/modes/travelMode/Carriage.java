@@ -35,7 +35,7 @@ public class Carriage extends GameObject {
     public void update(double dt){
         super.update(dt);
         if(InputManager.isPressed("w")){
-            moveY(-1);
+            moveY(-40*dt);
         }
         if(InputManager.isPressed("a")){
             moveX(-20*dt);

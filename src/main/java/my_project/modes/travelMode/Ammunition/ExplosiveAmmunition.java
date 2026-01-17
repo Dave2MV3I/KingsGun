@@ -8,7 +8,7 @@ import java.awt.*;
 public class ExplosiveAmmunition extends Ammunition {
     public ExplosiveAmmunition() {
         super(20, 20);
-        this.color = new Color(255, 60, 0);
+        this.color = new Color(228, 59, 68);
     }
     public void hit(Bandit bandit, List<Bandit> bandits, double hitX, double hitY) {
         bandit.loseHP(damage);

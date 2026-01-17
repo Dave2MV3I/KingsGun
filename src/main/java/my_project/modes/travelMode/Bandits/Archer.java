@@ -21,7 +21,7 @@ public class Archer extends Bandit {
         this.texture = new SpriteSheet("mage1.png", 1, 5);
         ((SpriteSheet) texture).setCurrent((int)(Math.random()*5), 0);
         this.carriage = carriage;
-        this.width = texture.getWidth();
+        this.width = texture.getWidth()/2;
         this.height = texture.getHeight();
         hP = 500;
         x = Math.random()*40 + 15 + a*155;
@@ -79,7 +79,7 @@ public class Archer extends Bandit {
     }
 
     public void draw(DrawTool drawtool){
-        texture.autoDraw(drawtool, x, y, 32);
+        texture.autoDraw(drawtool, x - texture.getWidth()/4, y, 32);
         autoDrawHitbox(drawtool);
         super.draw(drawtool);
         arrows.toFirst();

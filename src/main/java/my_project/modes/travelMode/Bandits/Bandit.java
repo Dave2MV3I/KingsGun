@@ -20,4 +20,6 @@ public abstract class Bandit extends GameObject {
         drawTool.setCurrentColor(255,255,255,255);
         drawTool.drawText(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), "" + hP);
     }
+
+
 }

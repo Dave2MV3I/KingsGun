@@ -56,7 +56,9 @@ public class LoadingModeControl extends ModeControl<LoadingModeView> {
             loadedMode = modeTo;
             loadedControl = mainController.getModeControls().get(modeTo);
             loadedControl.setActive(true);
+            loadedControl.update(0);
             modeView.setLoadedView(loadedControl.getModeView());
+
             modeGotLoaded = true;
         }
     }
