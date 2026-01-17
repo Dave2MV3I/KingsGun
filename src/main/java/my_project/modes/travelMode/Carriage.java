@@ -9,30 +9,31 @@ import my_project.view.InputManager;
 import my_project.view.MainView;
 
 public class Carriage extends GameObject {
-    private AmmunitionInventory ammoInvent;
     private Gun gun;
     private double hP;
     public boolean outOfBounds = false;
     private Stack<Ammunition> ammo;
-    public Carriage() {
+    private TravelModeControl travelModeControl;
+    public Carriage(TravelModeControl control) {
         gun = new Gun(this);
         this.texture = new Texture("carriage.png");
         x = 96;
         y = 2400;
-
+        travelModeControl = control;
         width = 64;
         height = 96;
         hP = 100;
     }
     public void draw(DrawTool drawtool){
         texture.autoDraw(drawtool, x, y, 64);
+        gun.draw(drawtool);
         showHP(drawtool);
+
     }
 
     @Override
     public void update(double dt){
         super.update(dt);
-        gun.update(dt);
         if(InputManager.isPressed("w")){
             moveY(-1);
         }
@@ -53,6 +54,7 @@ public class Carriage extends GameObject {
         if (x<0){
             x = 0;
         }
+        gun.update(dt);
     }
 
     public void loseHP(double damage){
@@ -77,4 +79,7 @@ public class Carriage extends GameObject {
         this.ammo = ammo;
     }
 
+    public TravelModeControl getTravelModeControl() {
+        return travelModeControl;
+    }
 }

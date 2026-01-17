@@ -146,7 +146,17 @@ public class MainView {
      * @param x Value to be translated and scaled on the X-Axis
      */
     public static double translateAndScaleX(double x) {
+        return translateAndScaleX(x, false);
+    }
+    public static double translateAndScaleX(double x, boolean reversed) {
+        if (reversed) {
+            return (x - SCREEN_OFFSET_X )/SCALE-OFFSET_X;
+        }
+
         return (x + OFFSET_X)* SCALE + SCREEN_OFFSET_X;
+        
+
+
     }
     /**
      * Translates the given position By the GLOBAL OFFSET and
@@ -155,6 +165,12 @@ public class MainView {
      * @param y Value to be translated and scaled on the Y-Axis
      */
     public static double translateAndScaleY(double y) {
+        return (y + OFFSET_Y)* SCALE + SCREEN_OFFSET_Y;
+    }
+    public static double translateAndScaleY(double y, boolean reversed) {
+        if (reversed) {
+            return (y - SCREEN_OFFSET_Y)/SCALE - OFFSET_Y;
+        }
         return (y + OFFSET_Y)* SCALE + SCREEN_OFFSET_Y;
     }
     /**

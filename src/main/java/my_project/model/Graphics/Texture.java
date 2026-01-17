@@ -20,13 +20,17 @@ public class Texture extends GraphicalObject {
         drawTool.drawTransformedImage(getMyImage(), x, y, 0, scale);
     }
 
-    public void autoDraw(DrawTool drawTool, double x, double y, double width) {
+    public void autoDraw(DrawTool drawTool, double x, double y, double width, double rotation) {
         //draw(drawTool, x, y, 1);
-        drawTool.drawTransformedImage(getMyImage(), MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), 0, MainView.scale(width/this.width));
+        drawTool.drawTransformedImage(getMyImage(), MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), rotation, MainView.scale(width/this.width));
 
     }
+    public void autoDraw(DrawTool drawTool, double x, double y, double width) {
+        //draw(drawTool, x, y, 1);
+        autoDraw(drawTool, x, y, width, 0);
+    }
     public void autoDraw(DrawTool drawTool, double x, double y) {
-        drawTool.drawTransformedImage(getMyImage(), MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), 0, MainView.scale(this.width));
+        autoDraw(drawTool, x, y, this.width, 0);
     }
 
     public void drawToWidth(DrawTool drawTool, double x, double y, double width) {
