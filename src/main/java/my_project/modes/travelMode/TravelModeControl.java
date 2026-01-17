@@ -13,8 +13,6 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
     private double time;
     public TravelModeControl(MainController mainController) {
         super(mainController);
-        carriage = new Carriage();
-        bandits = new List<Bandit>();
     }
     @Override
     protected void deactivate() {
@@ -22,9 +20,11 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
     }
     @Override
     protected void activate() {
-        carriage = new Carriage();
-        bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
+
+        carriage = new Carriage(this);
         carriage.setAmmo(mainController.getCurrentPlayer().getAmmo());
+        bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
+
         bandits.toFirst();
         for (int i = 0; i < 5; i++) {
             int linkrecht = (int)(Math.random()*2);

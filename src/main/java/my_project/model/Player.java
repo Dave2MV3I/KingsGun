@@ -3,6 +3,9 @@ package my_project.model;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import my_project.modes.dungeonMode.DungeonPlayer;
 import my_project.modes.travelMode.Ammunition.Ammunition;
+import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
+import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
+import my_project.modes.travelMode.Ammunition.NormalAmmunition;
 
 public class Player {
     private double money;
@@ -18,6 +21,9 @@ public class Player {
         money = 0;
         currentVillage = 0;
         ammo = new Stack<>();
+        ammo.push(new ElectricAmmunition());
+        ammo.push(new ExplosiveAmmunition());
+        ammo.push(new NormalAmmunition());
     }
 
     public void addMoney(double money) {

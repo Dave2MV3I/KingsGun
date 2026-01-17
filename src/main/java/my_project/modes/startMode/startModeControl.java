@@ -3,6 +3,7 @@ package my_project.modes.startMode;
 import com.sun.tools.javac.Main;
 import my_project.Config;
 import my_project.control.MainController;
+import my_project.model.Player;
 import my_project.modes.ModeControl;
 import my_project.view.InputManager;
 import my_project.view.Mouse;
@@ -17,7 +18,7 @@ public class startModeControl extends ModeControl<startModeView> {
 
     @Override
     protected void activate() {
-
+        mainController.setCurrentPlayer(new Player());
 
 
     }

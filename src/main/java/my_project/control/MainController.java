@@ -135,4 +135,7 @@ public class MainController extends GraphicalObject {
         return currentPlayer;
     }
 
+    public void setCurrentPlayer(Player player) {
+        currentPlayer = player;
+    }
 }
