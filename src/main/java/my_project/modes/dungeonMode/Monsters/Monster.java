@@ -101,11 +101,12 @@ public abstract class Monster extends LivingDungeonEntity {
 
     private void attack(){
         // TODO animate attacks
+        // TODO attacks get deleted from arrayList after attack
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
         AttackData attackData = myAttacks[rndAttack];
         double damage = attackData.calculateDamage();
-        new AttackRepresentation(control, attackData, dungeonPlayer);
+        control.getDungeon().getCurrentAttacks().add(new AttackRepresentation(control, attackData, dungeonPlayer));
         dungeonPlayer.damage(damage);
         System.out.println(dungeonPlayer.getHealth());
         attackCoolDown = 2;
