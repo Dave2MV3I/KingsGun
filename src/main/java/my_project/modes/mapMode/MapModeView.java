@@ -18,8 +18,10 @@ public class MapModeView extends ModeView<MapModeControl> {
     private Texture mapTexture;
     private Texture mapSymbolVillage;
     private Texture mapSymbolCastle;
+
     private double radius = 15;
     private boolean inMoving = false;
+
     private Player player = modeControl.getMainController().getCurrentPlayer();
 
     public MapModeView(MapModeControl modeControl) {
@@ -33,7 +35,7 @@ public class MapModeView extends ModeView<MapModeControl> {
      * Fills the 2D Array with the amount of Villages and their drawn x- and y-Pos.
      * @param amountVillages
      */
-    public void setAmountVillages(int amountVillages) {
+    public void setRelativeVillagePositions(int amountVillages) {
         if(this.amountVillages == 0) {
             this.amountVillages = amountVillages;
             villagePos = new int[amountVillages + 2][2];
@@ -67,12 +69,6 @@ public class MapModeView extends ModeView<MapModeControl> {
 
         //Draw Castle
         mapSymbolCastle.drawToWidth(drawTool, Config.WINDOW_WIDTH/2 -65, 50, 130);
-        /*drawTool.setCurrentColor(new Color(194, 133, 105));
-        drawTool.drawFilledCircle(Config.WINDOW_WIDTH/2, Config.WINDOW_HEIGHT/6,15);
-        drawTool.setCurrentColor(new Color(38, 43, 68));
-        drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10,100,40);
-        drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2-50, Config.WINDOW_HEIGHT/10-40,35,40);
-        drawTool.drawFilledRectangle(Config.WINDOW_WIDTH/2+15, Config.WINDOW_HEIGHT/10-40,35,40);*/
 
         drawTool.setLineWidth(4);
         for(int i = 1; i <= amountVillages+1; i++) {
@@ -103,6 +99,7 @@ public class MapModeView extends ModeView<MapModeControl> {
         if(player != modeControl.getMainController().getCurrentPlayer()) {
             player = modeControl.getMainController().getCurrentPlayer();
         }
+
         if(radius < 15) {
             inMoving = false;
         }else if(radius > 25) {
@@ -116,26 +113,17 @@ public class MapModeView extends ModeView<MapModeControl> {
     }
 
     public void manageMouseInput(MouseEvent e) {
-        System.out.println("e ist da");
         for(int i = 1; i < amountVillages+2; i++) {
             if (Math.sqrt(Math.pow(e.getX()-villagePos[i][0],2)+Math.pow(e.getY()-villagePos[i][1],2)) < 30){
-                if(i == amountVillages+1) {
-                    System.out.println("Castle");
-                } else {
-                    System.out.println("Village " + i + " ist da");
-                }
                 if(i == player.getCurrentVillage()+1) {
-                    modeControl.getMainController().loadMode("travel", "close map");
-                    player.setCurrentVillage(player.getCurrentVillage()+1);
                     if(i == amountVillages+1) {
                         modeControl.getMainController().loadMode("castle", "close map");
-                    }
+                    }else modeControl.getMainController().loadMode("travel", "close map");
+                    player.setCurrentVillage(player.getCurrentVillage()+1);
                 }
             }
         }
     }
 
-    public void setVillages(List<Village> villages) {
-        this.villages = villages;
-    }
+    public void setVillages(List<Village> villages) {this.villages = villages;}
 }

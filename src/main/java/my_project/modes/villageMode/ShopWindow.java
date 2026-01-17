@@ -45,6 +45,7 @@ public class ShopWindow {
         initiateShopQueue();
         updateShopText();
 
+        playerMoney.setIcon(coinIcon);
         priceLabel.setIcon(coinIcon);
         discardPrice.setIcon(coinIcon);
         discardPrice.setText("2");
@@ -118,7 +119,6 @@ public class ShopWindow {
             priceLabel.setText("15");
         }
         shopOption.setText(ammoType);
-        playerMoney.setIcon(coinIcon);
         playerMoney.setText(String.valueOf(mainController.getCurrentPlayer().getMoney()));
     }
 

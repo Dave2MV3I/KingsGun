@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class VillageModeView extends ModeView<VillageModeControl> {
-    private Village currentVillage;
     private JFrame shopFrame;
     private Texture villageBackground;
 
@@ -20,8 +19,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
         villageBackground = new Texture("VillageBackground.png");
     }
 
-    public void activationVillage(Village village) {
-        currentVillage = village;
+    public void activationVillage() {
         ShopWindow shopWindow = new ShopWindow(modeControl.getMainController());
         shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 300, false);
         shopFrame.setLocation(570, 200);
@@ -30,7 +28,6 @@ public class VillageModeView extends ModeView<VillageModeControl> {
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(new Color(255, 255, 255));
         villageBackground.drawToWidth(drawTool, 0, 0, Config.WINDOW_WIDTH);
-        //drawTool.drawFilledRectangle(570, 200, 300, 300);
     }
 
     public void manageMouseInput(MouseEvent e) {
