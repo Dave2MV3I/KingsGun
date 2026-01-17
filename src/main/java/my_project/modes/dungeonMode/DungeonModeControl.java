@@ -3,6 +3,7 @@ package my_project.modes.dungeonMode;
 import KAGO_framework.model.abitur.datenstrukturen.*;
 import my_project.control.MainController;
 import my_project.model.Player;
+import my_project.modes.dungeonMode.Attacks.AttackRepresentation;
 import my_project.modes.dungeonMode.Monsters.*;
 import my_project.modes.dungeonMode.Tiles.*;
 import my_project.modes.*;
@@ -42,6 +43,7 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         dungeon.update(dt);
         dungeonPlayer.update(dt);
         getMonster().update(dt);
+        for (AttackRepresentation aR: dungeon.getCurrentAttacks()) update(dt);
     }
 
     public void setDungeon(Dungeon dungeon){

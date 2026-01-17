@@ -6,6 +6,6 @@ import my_project.modes.dungeonMode.Attacks.AttackData;
 public class Troll extends Monster{
     public Troll(DungeonModeControl dungeonModeControl) {
         super(dungeonModeControl, new AttackData[]{AttackData.WEIGHT_ATTACK});
-        setAnimatedTexture("testSlime.png", 1, 2);
+        setAnimatedTexture("troll.png", 1, 4);
     }
 }

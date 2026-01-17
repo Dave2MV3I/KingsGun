@@ -2,10 +2,12 @@ package my_project.modes.dungeonMode;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
+import my_project.modes.dungeonMode.Attacks.AttackRepresentation;
 import my_project.modes.dungeonMode.Monsters.Monster;
 import my_project.modes.dungeonMode.Tiles.*;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /** Dungeon Object, which
  *
@@ -15,7 +17,8 @@ public class Dungeon extends GraphicalObject {
 
     private final DungeonModeControl control;
     private Monster monster;
-    private List<Class<? extends Monster>> monsterClasses;
+    private final List<Class<? extends Monster>> monsterClasses;
+    private ArrayList<AttackRepresentation> currentAttacks = new ArrayList<>();
 
     public Dungeon(DungeonModeControl control, List<Class<? extends Monster>> monsterClasses) {
         this.control = control;
@@ -23,7 +26,7 @@ public class Dungeon extends GraphicalObject {
         setMap("src/main/resources/graphic/Dungeon "+((int)(Math.random()*3)+1)+".png");
 
         // TODO ArrayList with all attacks right now, iterator for drawing and updating them
-        // Erst ArrayList lesen und versetehen
+        // Erst ArrayList lesen und verstehen
         // In Präsi Anwendung einer Arraylist erklären und den iterator, mehr nicht notwendig
 
     }
@@ -151,4 +154,5 @@ public class Dungeon extends GraphicalObject {
     public DungeonPlayer getPlayer() {
         return control.getDungeonPlayer();
     }
+    public ArrayList<AttackRepresentation> getCurrentAttacks(){return currentAttacks;}
 }

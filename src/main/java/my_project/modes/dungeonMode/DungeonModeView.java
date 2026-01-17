@@ -2,6 +2,7 @@ package my_project.modes.dungeonMode;
 
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
+import my_project.modes.dungeonMode.Attacks.AttackRepresentation;
 import my_project.modes.dungeonMode.Tiles.Tile;
 import my_project.modes.ModeView;
 
@@ -47,5 +48,7 @@ public class DungeonModeView extends ModeView<DungeonModeControl> {
             }
 
         }
+
+        for (AttackRepresentation aR: modeControl.getDungeon().getCurrentAttacks()) draw(drawTool);
     }
 }

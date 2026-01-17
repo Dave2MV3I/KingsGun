@@ -37,6 +37,10 @@ public abstract class Monster extends LivingDungeonEntity {
         this.dungeonPlayer = dungeonModeControl.getDungeonPlayer();
 
         //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
+
+
+        // TODO ? David: Monster in enum reintun und nur class Monster nutzen, Instanziierung mitten im Spiel lassen aber ändern,
+        //  in beiden Fällen alten Monstercode nutzen um zu zeigen, wann enums nützlich sind und dann Attack zeigen
     }
 
     @Override
