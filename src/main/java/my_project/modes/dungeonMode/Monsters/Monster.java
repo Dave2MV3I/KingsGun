@@ -45,7 +45,7 @@ public abstract class Monster extends LivingDungeonEntity {
 
     @Override
     public void draw(DrawTool drawTool){
-        texture.autoDraw(drawTool, x-radius, y-radius, 20); // TODO give the monsters their textures
+        texture.autoDraw(drawTool, x-radius, y-radius, 32); // TODO give the monsters their textures
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
     }
@@ -84,7 +84,10 @@ public abstract class Monster extends LivingDungeonEntity {
                     currentPath.top().mark("green");
                 }
             }
-            setVelocityAS(getDirection(currentPath.top()), 50); // TODO every monster has its own speed
+            if (currentPath.top() != null) {
+                setVelocityAS(getDirection(currentPath.top()), 50); // TODO every monster has its own speed
+            }
+
         }
 
     }
@@ -100,15 +103,17 @@ public abstract class Monster extends LivingDungeonEntity {
     }
 
     private void attack(){
+
         // TODO animate attacks
         // TODO attacks get deleted from arrayList after attack
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
         AttackData attackData = myAttacks[rndAttack];
         double damage = attackData.calculateDamage();
-        control.getDungeon().getCurrentAttacks().add(new AttackRepresentation(control, attackData, dungeonPlayer));
+
+        control.getDungeon().getCurrentAttacks().add(new AttackRepresentation(control, attackData, dungeonPlayer, x, y));
         dungeonPlayer.damage(damage);
-        System.out.println(dungeonPlayer.getHealth());
+
         attackCoolDown = 2;
     }
 

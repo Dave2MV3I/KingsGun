@@ -43,7 +43,12 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         dungeon.update(dt);
         dungeonPlayer.update(dt);
         getMonster().update(dt);
-        for (AttackRepresentation aR: dungeon.getCurrentAttacks()) update(dt);
+        
+        for (AttackRepresentation aR: dungeon.getCurrentAttacks()) {
+            aR.update(dt);
+        }
+
+
     }
 
     public void setDungeon(Dungeon dungeon){

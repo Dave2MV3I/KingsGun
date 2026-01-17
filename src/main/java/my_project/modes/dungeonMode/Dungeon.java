@@ -23,7 +23,7 @@ public class Dungeon extends GraphicalObject {
     public Dungeon(DungeonModeControl control, List<Class<? extends Monster>> monsterClasses) {
         this.control = control;
         this.monsterClasses = monsterClasses;
-        setMap("src/main/resources/graphic/Dungeon "+((int)(Math.random()*3)+1)+".png");
+        setMap("src/main/resources/graphic/Dungeon "+((int)(Math.random()*5)+1)+".png");
 
         // TODO ArrayList with all attacks right now, iterator for drawing and updating them
         // Erst ArrayList lesen und verstehen

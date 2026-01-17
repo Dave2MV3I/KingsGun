@@ -14,30 +14,36 @@ public class AttackRepresentation extends DungeonEntity {
     AttackData attackData;
     DungeonPlayer dungeonPlayer;
 
-    public AttackRepresentation(DungeonModeControl dungeonModeControl, AttackData attackData, DungeonPlayer player){
+    public AttackRepresentation(DungeonModeControl dungeonModeControl, AttackData attackData, DungeonPlayer player, double x, double y) {
+
         super(dungeonModeControl);
+        this.x = x;
+        this.y = y;
         this.attackData = attackData;
-        this.dungeonPlayer = dungeonPlayer;
+        this.dungeonPlayer = player;
+        if (dungeonPlayer != null && attackData.ANIMATION_TYPE.equals(AttackData.AnimationType.MOVING)){
+            System.out.println("helpmeeeeeeee");
+            double d = getDirection(dungeonPlayer);
+            setVelocityAS(d, attackData.getSTRENGTH());
+        }
     }
 
     @Override
     public void update(double dt){
-        // TODO
         switch(attackData.ANIMATION_TYPE){
             case MOVING:
-                double d = getDirection(dungeonPlayer);
-                setVelocityAS(d, attackData.getSTRENGTH());
                 // TODO if collision mit Player dann löschen aus Arraylist
             break;
             case STATIC:
                 // TODO after 2 seks löschen aus ArrayList
             break;
         }
-
+    super.update(dt);
     }
 
     @Override
     public void draw(DrawTool drawTool){
         texture = new Texture(attackData.getTEXTURE());
+        texture.autoDraw(drawTool, x, y);
     }
 }

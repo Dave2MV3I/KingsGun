@@ -49,6 +49,8 @@ public class DungeonModeView extends ModeView<DungeonModeControl> {
 
         }
 
-        for (AttackRepresentation aR: modeControl.getDungeon().getCurrentAttacks()) draw(drawTool);
+        for (AttackRepresentation aR: modeControl.getDungeon().getCurrentAttacks()) {
+            aR.draw(drawTool);
+        }
     }
 }
