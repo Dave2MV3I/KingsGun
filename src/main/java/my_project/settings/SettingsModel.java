@@ -11,8 +11,8 @@ public class SettingsModel {
     }
 
     // sound
-    private static float _soundVolume; // 0-1
-    private static float _musicVolume; // 0-1
+    private static float _soundVolume = 0.5F; // 0-1
+    private static float _musicVolume = 0.5F; // 0-1
 
     // image
     private static float _brightness = 1; // 0-1

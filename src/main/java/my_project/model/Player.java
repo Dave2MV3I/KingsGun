@@ -13,12 +13,14 @@ public class Player {
 
     //private DungeonPlayer dungeonPlayer;
     private Stack<Ammunition> ammo;
+    private double carHp;
 
 
 
     private int currentVillage;
     public Player() {
         money = 0;
+        carHp = 500;
         currentVillage = 0;
         ammo = new Stack<>();
         ammo.push(new ElectricAmmunition());
@@ -49,4 +51,11 @@ public class Player {
         this.ammo = ammo;
     }
 
+    public double getCarHp() {
+        return carHp;
+    }
+
+    public void setCarHp(double carHp) {
+        this.carHp = carHp;
+    }
 }

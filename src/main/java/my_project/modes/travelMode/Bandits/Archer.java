@@ -22,7 +22,7 @@ public class Archer extends Bandit {
         this.carriage = carriage;
         this.width = texture.getWidth()/2;
         this.height = texture.getHeight();
-        hP = 50;
+        hP = 24;
         x = Math.random()*40 + 15 + a*155;
         this.y = y + b*(Math.random()*400);
     }

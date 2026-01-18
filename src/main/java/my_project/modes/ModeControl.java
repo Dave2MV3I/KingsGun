@@ -58,4 +58,8 @@ public abstract class ModeControl<MV extends ModeView>{
      * @return duration in seconds
      */
     public double getTimer(){return timer;}
+
+    public MainController getMainController() {
+        return mainController;
+    }
 }

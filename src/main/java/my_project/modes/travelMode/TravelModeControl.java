@@ -54,6 +54,7 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
 
         }
         if (carriage.outOfBounds){
+            getMainController().getCurrentPlayer().setCarHp(carriage.getHP());
             mainController.loadMode("village", "enter Village");
         }
         if (carriage.getHP() <= 0){

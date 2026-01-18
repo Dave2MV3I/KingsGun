@@ -22,7 +22,7 @@ public class Carriage extends GameObject {
         travelModeControl = control;
         width = 64;
         height = 96;
-        hP = 100;
+        hP = control.getMainController().getCurrentPlayer().getCarHp();
     }
     public void draw(DrawTool drawtool){
         texture.autoDraw(drawtool, x, y, 64);
@@ -55,6 +55,7 @@ public class Carriage extends GameObject {
             x = 0;
         }
         gun.update(dt);
+        travelModeControl.getMainController().getCurrentPlayer().setCarHp(hP);
     }
 
     public void loseHP(double damage){
@@ -65,7 +66,7 @@ public class Carriage extends GameObject {
         drawTool.setCurrentColor(255,255,255,255);
         drawTool.drawFilledRectangle(MainView.translateAndScaleX(x+texture.getWidth()/2), MainView.translateAndScaleY(y), MainView.scale(30), MainView.scale(8));
         drawTool.setCurrentColor(0,0,255,255);
-        drawTool.drawFilledRectangle(MainView.translateAndScaleX(x+texture.getWidth()/2+1), MainView.translateAndScaleY(y+1), MainView.scale(28 - ((100-hP)*0.28) ), MainView.scale(6));
+        drawTool.drawFilledRectangle(MainView.translateAndScaleX(x+texture.getWidth()/2+1), MainView.translateAndScaleY(y+1), MainView.scale(28 * (hP/500)), MainView.scale(6));
 
         drawTool.setCurrentColor(0,0,255,255);
         drawTool.drawText(MainView.translateAndScaleX(x+texture.getWidth()/2), MainView.translateAndScaleY(y), "" + hP);

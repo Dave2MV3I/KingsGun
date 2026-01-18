@@ -28,7 +28,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
 
     public void activationVillage() {
         ShopWindow shopWindow = new ShopWindow(modeControl.getMainController());
-        shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 300, false);
+        shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 320, false);
         shopFrame.setLocation(570, 200);
     }
 

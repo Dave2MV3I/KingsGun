@@ -5,12 +5,10 @@ import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import javafx.embed.swing.JFXPanel;
 import my_project.control.MainController;
-import my_project.model.Player;
 import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
 import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
 import my_project.modes.travelMode.Ammunition.NormalAmmunition;
-import my_project.modes.travelMode.TravelModeControl;
 import my_project.settings.SettingsModel;
 
 import javax.swing.*;
@@ -33,6 +31,9 @@ public class ShopWindow {
     private JLabel tippLabel;
     private JLabel playerMoney;
     private JLabel discardPrice;
+    private JButton repairCarriageButton;
+    private JLabel carriageHealth;
+    private JLabel carriageRepairPriceLabel;
 
     private ImageIcon normalIcon = new ImageIcon("src/main/resources/graphic/NormalAmmo.png");
     private ImageIcon electricIcon = new ImageIcon("src/main/resources/graphic/ElektricAmmo.png");
@@ -53,6 +54,7 @@ public class ShopWindow {
         playerMoney.setIcon(coinIcon);
         priceLabel.setIcon(coinIcon);
         discardPrice.setIcon(coinIcon);
+        carriageRepairPriceLabel.setIcon(coinIcon);
         discardPrice.setText("2");
 
         normalIcon.setImage(normalIcon.getImage().getScaledInstance(24*3, 32*3, Image.SCALE_DEFAULT));
@@ -90,6 +92,20 @@ public class ShopWindow {
                 }
             }
         });
+        repairCarriageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (mainController.getCurrentPlayer().getMoney() >= 30) {
+                    mainController.getCurrentPlayer().addMoney(-30);
+                    mainController.getCurrentPlayer().setCarHp(mainController.getCurrentPlayer().getCarHp() + 50);
+                    shopSound.setVolume(SettingsModel.getSoundVolume());
+                    if (shopSound.isPlaying()) shopSound.stop();
+                    shopSound.play();
+                    updateShopText();
+                }
+            }
+        });
+
     }
 
     private boolean checkingToBuy(Ammunition ammo) {
@@ -133,6 +149,9 @@ public class ShopWindow {
         }
         shopOption.setText(ammoType);
         playerMoney.setText(String.valueOf(mainController.getCurrentPlayer().getMoney()));
+
+        carriageHealth.setText("Carriage HP: " + mainController.getCurrentPlayer().getCarHp() + " /500.0");
+        carriageRepairPriceLabel.setText("30");
     }
 
     private void addAmmunition() {
