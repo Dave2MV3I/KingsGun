@@ -11,7 +11,11 @@ public class DungeonEntity extends GameObject {
 
     @Override
     protected boolean movementCondition() {
-        return !(checkForWall(x, y) || checkForWall(x-16, y) || checkForWall(x, y-16) || checkForWall(x+16, y) || checkForWall(x, y+16));
+        if (checkForWall(x, y) || checkForWall(x-16, y) || checkForWall(x, y-16) || checkForWall(x+16, y) || checkForWall(x, y+16)){
+            onCollision();
+            return false;
+        }
+        return true;
     }
     private boolean checkForWall(double x, double y){
         if (control.getTileByCoord(x, y) == null){
@@ -19,4 +23,9 @@ public class DungeonEntity extends GameObject {
         }
         return (control.getTileByCoord(x, y).isSolid() && control.getTileByCoord(x, y).collidesWith(this));
     }
+    /**
+     This method is automatically executed when a gameobject collides with something.
+     Every inheriting Class should @Override this function if they want something special to happen on collision.
+     */
+    protected void onCollision() {}
 }

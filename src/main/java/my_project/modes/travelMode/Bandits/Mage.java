@@ -4,18 +4,14 @@ import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
 import my_project.model.Graphics.SpriteSheet;
-import my_project.model.Graphics.Texture;
 import my_project.modes.travelMode.Carriage;
 import my_project.view.MainView;
 
-import static my_project.Config.WINDOW_HEIGHT;
-import static my_project.Config.WINDOW_WIDTH;
-
-public class Archer extends Bandit {
+public class Mage extends Bandit {
     private List<Arrow> arrows;
     private Carriage carriage;
     private double time;
-    public Archer(Carriage carriage, double y, int a, int b){
+    public Mage(Carriage carriage, double y, int a, int b){
         arrows = new List<>();
         this.texture = new SpriteSheet("mage1.png", 1, 5);
         ((SpriteSheet) texture).setCurrent((int)(Math.random()*5), 0);
