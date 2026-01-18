@@ -101,7 +101,7 @@ public class MapModeView extends ModeView<MapModeControl> {
     }
 
     public void update(double dt) {
-        openMap.setVolume(SettingsModel.getSoundVolume());
+        openMap.setVolume(SettingsModel.getMasterVolume());
         if(player != modeControl.getMainController().getCurrentPlayer()) {
             player = modeControl.getMainController().getCurrentPlayer();
         }

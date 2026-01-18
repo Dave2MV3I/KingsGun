@@ -11,8 +11,11 @@ public class SettingsModel {
     }
 
     // sound
-    private static float _soundVolume = 0.5F; // 0-1
+    private static float _masterVolume = 0.5F; // 0-1
     private static float _musicVolume = 0.5F; // 0-1
+    // private static float _soundsVolume = 0.5F; // 0-1
+    // TODO Sounds Volume
+
 
     // image
     private static float _brightness = 1; // 0-1
@@ -22,9 +25,17 @@ public class SettingsModel {
     private static boolean _debugging = false;
 
     // getter and setter methods
-    public static float getSoundVolume() {return _soundVolume;}
+    public static float getMasterVolume() {return _masterVolume;}
 
-    public static void setSoundVolume(float newSoundVolume) {_soundVolume = newSoundVolume;}
+    public static void setMasterVolume(float newMasterVolume) {
+        _masterVolume = newMasterVolume;
+    }
+
+    /*public static float getSoundsVolume() {return _soundsVolume;}
+
+    public static void setSoundsVolume(float newSoundVolume) {
+        _masterVolume = newSoundVolume;
+    }*/
 
     public static float getMusicVolume() {return _musicVolume;}
 

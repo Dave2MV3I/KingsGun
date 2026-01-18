@@ -41,14 +41,14 @@ public class VillageModeView extends ModeView<VillageModeControl> {
         if (e.getX() > 570 && e.getX() < 870 && e.getY() > 200 && e.getY() < 500) {
             shopFrame.setVisible(true);
             if(openShop.isPlaying()) openShop.stop();
-            openShop.setVolume(SettingsModel.getSoundVolume());
+            openShop.setVolume(SettingsModel.getMasterVolume());
             openShop.play();
         }
         if (e.getX() > 0 && e.getX() < 300 && e.getY() > 500 && e.getY() < 900) {
             if(!shopFrame.isVisible()) {
                 modeControl.getMainController().loadMode("map", "open map");
                 if(openMap.isPlaying()) openMap.stop();
-                openMap.setVolume(SettingsModel.getSoundVolume());
+                openMap.setVolume(SettingsModel.getMasterVolume());
                 openMap.play();
             }
         }
@@ -56,7 +56,7 @@ public class VillageModeView extends ModeView<VillageModeControl> {
             if(!shopFrame.isVisible()) {
                 modeControl.getMainController().loadMode("dungeon", "enter dungeon");
                 if(openDungeon.isPlaying()) openDungeon.stop();
-                openDungeon.setVolume(SettingsModel.getSoundVolume());
+                openDungeon.setVolume(SettingsModel.getMasterVolume());
                 openDungeon.play();
             }
         }

@@ -66,7 +66,7 @@ public class ShopWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(mainController.getCurrentPlayer().getMoney() >= 2) {
-                    shopSound.setVolume(SettingsModel.getSoundVolume());
+                    shopSound.setVolume(SettingsModel.getMasterVolume());
                     if(shopSound.isPlaying()) shopSound.stop();
                     shopSound.play();
 
@@ -81,7 +81,7 @@ public class ShopWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(checkingToBuy(shopItems.front())) {
-                    shopSound.setVolume(SettingsModel.getSoundVolume());
+                    shopSound.setVolume(SettingsModel.getMasterVolume());
                     if(shopSound.isPlaying()) shopSound.stop();
                     shopSound.play();
 
@@ -99,7 +99,7 @@ public class ShopWindow {
                 if (mainController.getCurrentPlayer().getMoney() >= 30) {
                     mainController.getCurrentPlayer().addMoney(-30);
                     mainController.getCurrentPlayer().setCarHp(mainController.getCurrentPlayer().getCarHp() + 50);
-                    shopSound.setVolume(SettingsModel.getSoundVolume());
+                    shopSound.setVolume(SettingsModel.getMasterVolume());
                     if (shopSound.isPlaying()) shopSound.stop();
                     shopSound.play();
                     updateShopText();
@@ -131,7 +131,7 @@ public class ShopWindow {
 
     private void showTipp() {
         tippLabel.setText("Tipp: Go to the Dungeon to get Money");
-        declineSound.setVolume(SettingsModel.getSoundVolume());
+        declineSound.setVolume(SettingsModel.getMasterVolume());
         if(declineSound.isPlaying()) declineSound.stop();
         declineSound.play();
     }
