@@ -193,6 +193,11 @@ public abstract class Monster extends LivingDungeonEntity {
         } else list.insert(pathNode);
     }
 
+    /**
+     * Reconstructs way from the goal to the monsters current position
+     * @param goalNode Node on the pathfinding representing the goal tile
+     * @return reconstructed path
+     */
     private Stack<Tile> reconstructPath(PathNode goalNode){
         Stack<Tile> path = new Stack<>();
         PathNode current = goalNode;
