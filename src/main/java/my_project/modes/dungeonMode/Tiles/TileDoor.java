@@ -10,7 +10,7 @@ public class TileDoor extends InteractiveTile{
     private double cooldown = 0.0;
     public TileDoor(int x, int y, Dungeon dungeon) {
         super(x, y, new SpriteSheet("Door.png", 1, 6), dungeon);
-
+        spreadFactor = 1;
     }
     public void interact() {
         if (((SpriteSheet)texture).getCurrentX() == 5) {
@@ -39,6 +39,11 @@ public class TileDoor extends InteractiveTile{
         } else{
             setSolid(true);
 
+        }
+        if(isSolid()){
+            spreadFactor = 1;
+        }else {
+            spreadFactor = 1;
         }
     }
 }

@@ -26,10 +26,10 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
 
         bandits.toFirst();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 500; i++) {
             int linkrecht = (int)(Math.random()*2);
             int obenunten = ((int)(Math.random() * 2)) * 2 - 1;
-            bandits.append(new Archer(carriage, 1800 - i*400, linkrecht, obenunten));
+            bandits.append(new Archer(carriage, 1800 - i*40, linkrecht, obenunten));
             System.out.println("created Bandit");
         }
         //bandits.append(new Archer(carriage, 500, 0));
@@ -47,14 +47,18 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
                 bandits.getContent().loseHP(100);
 
             }
-            //if (bandits.getContent() != null){ //I added this, so there would be no errors when there isn't a bandit.
             bandits.getContent().update(dt);
-            bandits.next();
+            if (bandits.getContent().hP <= 0){
+                bandits.remove();
+            }else bandits.next();
+
         }
         if (carriage.outOfBounds){
             mainController.loadMode("village", "enter Village");
         }
-
+        if (carriage.getHP() <= 0){
+            mainController.loadMode("start", "death");
+        }
 
     }
 

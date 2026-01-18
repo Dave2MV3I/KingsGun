@@ -19,7 +19,7 @@ public class SettingsModel {
     private static float _performance = 2; // 0-4
 
     //debugging
-    private static boolean _debugging = true;
+    private static boolean _debugging = false;
 
     // getter and setter methods
     public static float getSoundVolume() {return _soundVolume;}

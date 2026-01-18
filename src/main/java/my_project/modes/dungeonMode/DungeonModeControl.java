@@ -16,13 +16,14 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     public DungeonModeControl(MainController mainController) {
         super(mainController);
         // Add the classes of possible monsters to the linked list with all monster classes
-        monsterClasses.append(Dragon.class);
-        monsterClasses.append(Goblin.class);
-        monsterClasses.append(Orc.class);
-        monsterClasses.append(Dwarf.class);
-        monsterClasses.append(Elf.class);
-        monsterClasses.append(Ogre.class);
         monsterClasses.append(Troll.class);
+        monsterClasses.append(Ogre.class);
+        monsterClasses.append(Elf.class);
+        monsterClasses.append(Dwarf.class);
+        monsterClasses.append(Orc.class);
+        monsterClasses.append(Goblin.class);
+        monsterClasses.append(Dragon.class);
+
     }
 
     @Override

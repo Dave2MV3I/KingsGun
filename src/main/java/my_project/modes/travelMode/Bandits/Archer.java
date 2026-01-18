@@ -12,7 +12,6 @@ import static my_project.Config.WINDOW_HEIGHT;
 import static my_project.Config.WINDOW_WIDTH;
 
 public class Archer extends Bandit {
-    public double hP;
     private List<Arrow> arrows;
     private Carriage carriage;
     private double time;
@@ -23,7 +22,7 @@ public class Archer extends Bandit {
         this.carriage = carriage;
         this.width = texture.getWidth()/2;
         this.height = texture.getHeight();
-        hP = 500;
+        hP = 50;
         x = Math.random()*40 + 15 + a*155;
         this.y = y + b*(Math.random()*400);
     }
@@ -61,7 +60,7 @@ public class Archer extends Bandit {
             x = x + vX*dt;
             y = y + vY*dt;
             if (collidesWith(car) && !hasHit){
-                car.loseHP(50);
+                car.loseHP(5);
                 System.out.println("damage!!!!!!!!!!");
                 hasHit = true;
                 arrows.remove();

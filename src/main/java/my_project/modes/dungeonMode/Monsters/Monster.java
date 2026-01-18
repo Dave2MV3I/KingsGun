@@ -45,7 +45,7 @@ public abstract class Monster extends LivingDungeonEntity {
 
     @Override
     public void draw(DrawTool drawTool){
-        texture.autoDraw(drawTool, x-radius, y-radius, 32); // TODO give the monsters their textures
+        texture.autoDraw(drawTool, x-16, y-16, 32); // TODO give the monsters their textures
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
     }
@@ -94,7 +94,7 @@ public abstract class Monster extends LivingDungeonEntity {
 
     protected void setAnimatedTexture(String spriteSheet, int rows, int cols){
         texture = new AnimatedSpriteSheet(spriteSheet, rows, cols);
-        ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.5);
+        ((AnimatedSpriteSheet)texture).setFrameCooldownX(0.1);
     }
 
     public void setPosition(double x, double y){
