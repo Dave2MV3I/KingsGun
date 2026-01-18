@@ -3,6 +3,9 @@ package my_project.modes.loadingMode;
 import my_project.control.MainController;
 import my_project.modes.ModeControl;
 
+/**Control Class for the loading Mode
+ * By Joshua Becker
+ */
 public class LoadingModeControl extends ModeControl<LoadingModeView> {
     private String loadedMode;
     private String loadToMode;

@@ -8,7 +8,9 @@ import my_project.modes.ModeView;
 
 import java.awt.*;
 import java.util.HashMap;
-
+/**View Class for the loading Mode
+ * By Joshua Becker
+ */
 public class LoadingModeView extends ModeView<LoadingModeControl> {
     private ModeView loadedView;
     private AnimatedSpriteSheet transitionAnimation;
