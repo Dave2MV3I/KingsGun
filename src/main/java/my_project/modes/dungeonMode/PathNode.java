@@ -2,10 +2,9 @@ package my_project.modes.dungeonMode;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import my_project.modes.dungeonMode.Tiles.Tile;
-import my_project.modes.dungeonMode.Tiles.TileWall;
 
 /**
- * A PathNode is a possible node in the path to the monsters destination.
+ * A PathNode is a node in the path finding algorithm of the monsters.
  * This wrapper class saves one Tile with added information needed for the path finding algorithm to work.
  */
 public class PathNode {
@@ -19,34 +18,35 @@ public class PathNode {
         this.tile = t;
         heuristic = tile.getDistanceTo(goalTile);
     }
-
-    /**
-     *
-     * @return the tile which belongs to the pathTile
-     */
+    
     public Tile getTile() {return tile;}
 
     /**
-     *
-     * @param t sets the previous pathTile in the path which leads to this one
+     * Set the previous pathNode for making the cost calculation and path reconstruction possible.
+     * @param t the previous pathNode needed to get to this one
      */
     public void setParent(PathNode t) {this.parent = t;}
-    public PathNode getParent() {return parent;}
 
     /**
-     *
-     * @param d the distance from the paths start to this pathTile
+     * 
+     * @return the previous pathNode needed to get to this one
      */
+    public PathNode getParent() {return parent;}
+
     public void setDistance(double d) {distance = d;}
     public double getDistance() {return distance;}
 
     /**
-     * Calculates the cost of going over this PT. distance from start to this PT + estimated distance from this PT to the destination
+     * Adds the heuristic to the current distance needed to get to this pathNode. This ist the new cost of going over this pathTile.
      */
     public void calculateCost() {cost = distance + heuristic;}
     public double getCost() {return cost;}
 
-    public Tile[] getNotWallNeighboringTiles() {
+    /**
+     * 
+     * @return all 8 tiles surrounding this one which are not walls or chests (solid).
+     */
+    public Tile[] getNotSolidNeighboringTiles() {
         Queue<Tile> queue = new Queue<Tile>();
         Stack<Tile> stack = new Stack<Tile>();
 

@@ -1,21 +1,16 @@
 package my_project.settings;
 
 /**
- * SettingModel is a container class for all settings in the game. <br>
+ * SettingModel is a container class for all settings in the game.
+ * <br>
  * David Glusmann
  */
 public class SettingsModel {
-
-    public SettingsModel() {
-
-    }
-
     // sound
     private static float _masterVolume = 0.5F; // 0-1
     private static float _musicVolume = 0.5F; // 0-1
     // private static float _soundsVolume = 0.5F; // 0-1
     // TODO Sounds Volume
-
 
     // image
     private static float _brightness = 1; // 0-1

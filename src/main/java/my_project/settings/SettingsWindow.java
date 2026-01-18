@@ -5,8 +5,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * SettingsWindow is a View Class for the Settings GUI.
- * <br><br>
+ * SettingsWindow is a View class for the Settings GUI.
+ * <br>
  * David Glusmann
  */
 public class SettingsWindow {
@@ -24,7 +24,7 @@ public class SettingsWindow {
     private SettingsController settingController;
 
     /**
-     * Constructor adds Change Listeners to the swing elements.
+     * Constructor adds change Listeners to the swing elements.
      */
     public SettingsWindow(SettingsController settingController) {
         this.settingController = settingController;
