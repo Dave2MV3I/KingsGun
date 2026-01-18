@@ -82,4 +82,7 @@ public class Carriage extends GameObject {
     public TravelModeControl getTravelModeControl() {
         return travelModeControl;
     }
+    public double getHP() {
+        return hP;
+    }
 }
