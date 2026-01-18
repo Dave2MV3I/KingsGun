@@ -7,7 +7,10 @@ import my_project.modes.dungeonMode.Tiles.Tile;
 import my_project.modes.ModeView;
 
 import java.awt.*;
-
+/**
+ * View Class for the Dungeon Mode
+ * By Joshua Becker, David Gregory Glusmann
+ */
 public class DungeonModeView extends ModeView<DungeonModeControl> {
     public DungeonModeView(DungeonModeControl modeControl) {
         super(modeControl);

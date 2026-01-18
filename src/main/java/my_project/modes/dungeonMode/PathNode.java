@@ -6,6 +6,7 @@ import my_project.modes.dungeonMode.Tiles.Tile;
 /**
  * A PathNode is a node in the path finding algorithm of the monsters.
  * This wrapper class saves one Tile with added information needed for the path finding algorithm to work.
+ * By David Gregory Glusmann
  */
 public class PathNode {
     private PathNode parent;

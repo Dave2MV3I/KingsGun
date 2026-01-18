@@ -21,9 +21,7 @@ public class Texture extends GraphicalObject {
     }
 
     public void autoDraw(DrawTool drawTool, double x, double y, double width, double rotation) {
-        //draw(drawTool, x, y, 1);
         drawTool.drawTransformedImage(getMyImage(), MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), rotation, MainView.scale(width/this.width));
-
     }
     public void autoDraw(DrawTool drawTool, double x, double y, double width) {
         //draw(drawTool, x, y, 1);

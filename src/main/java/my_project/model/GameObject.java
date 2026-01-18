@@ -111,13 +111,13 @@ public class GameObject extends GraphicalObject {
     protected void autoDrawHitbox(DrawTool drawTool) {
         if (SettingsModel.isDebugging()) {
             drawTool.setCurrentColor(new Color(255, 0, 0));
-            drawTool.drawRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWidth()), MainView.scale(getWidth()));
+            drawTool.drawRectangle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getWidth()), MainView.scale(getHeight()));
             drawTool.setCurrentColor(new Color(0, 0, 255));
             drawTool.drawCircle(MainView.translateAndScaleX(x), MainView.translateAndScaleY(y), MainView.scale(getRadius()));
 
 
             drawTool.setCurrentColor(new Color(255, 0, 255));
-            drawTool.drawRectangle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getWidth()), MainView.scale(getWidth()));
+            drawTool.drawRectangle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getWidth()), MainView.scale(getHeight()));
             drawTool.setCurrentColor(new Color(0, 255, 255));
             drawTool.drawCircle(MainView.translateAndScaleX(getX()), MainView.translateAndScaleY(getY()), MainView.scale(getRadius()));
         }

@@ -2,6 +2,10 @@ package my_project.modes.dungeonMode;
 
 import my_project.model.GameObject;
 
+/**
+ * Gameobjects with properties practical for use in dungeon
+ * by David Gregory Glusmann, Joshua Becker
+ */
 public class DungeonEntity extends GameObject {
     protected DungeonModeControl control;
 

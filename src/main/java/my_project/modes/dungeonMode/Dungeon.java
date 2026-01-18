@@ -9,8 +9,8 @@ import my_project.modes.dungeonMode.Tiles.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/** Dungeon Object, which
- *
+/** Dungeon Object, which provides the player with loot
+ * By Joshua Becker
  */
 public class Dungeon extends GraphicalObject {
     private Tile[][] tiles;
@@ -87,21 +87,21 @@ public class Dungeon extends GraphicalObject {
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                switch (Integer.toBinaryString(map.getRGB(col, row))) { //aaaaaaaarrrrrrrrggggggggbbbbbbbb
-                    case "11111111000000000000000000000000": //black: wall
+                switch (Integer.toBinaryString(map.getRGB(col, row))) {
+                    case "11111111000000000000000000000000":
                         tiles[col][row] = new TileWall(col, row, this);
                         break;
-                    case "11111111111111110000000011111111": //magenta
+                    case "11111111111111110000000011111111":
                         tiles[col][row] = new TileChest(col, row, this);
                         break;
-                    case "11111111111111110000000000000000": //red
+                    case "11111111111111110000000000000000":
                         monster = generateMonster(col * Tile.getWIDTH(), row* Tile.getHEIGHT());
 
                         tiles[col][row] = new TileFloor(col, row, this);
                         break;
-                    case "11111111111111111111111100000000": //yellow
-                        getPlayer().setX(col * Tile.getWIDTH());
-                        getPlayer().setY(row * Tile.getHEIGHT());
+                    case "11111111111111111111111100000000":
+                        getPlayer().setX((col+0.5) * Tile.getWIDTH());
+                        getPlayer().setY((row+0.5) * Tile.getHEIGHT());
                         tiles[col][row] = new TileFloor(col, row, this);
                         break;
                     case "11111111000000001111111100000000": //green

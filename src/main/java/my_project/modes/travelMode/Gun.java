@@ -22,6 +22,7 @@ public class Gun extends GameObject {
     private Carriage carriage;
     private List<Ammunition> shotsFired;
     private double direction;
+
     public Gun(Carriage carriage) {
         this.texture = new AnimatedSpriteSheet("Minigun.png", 1, 3);
         this.carriage = carriage;
@@ -31,15 +32,14 @@ public class Gun extends GameObject {
         this.radius = 16;
         this.direction = 0;
         ((AnimatedSpriteSheet) texture).setFrameCooldownX(0.1);
-
-
     }
+
     @Override
     public void update(double dt) {
         timer -= dt;
         this.x = carriage.getX() + carriage.getWidth() / 2;
         this.y = carriage.getY() + carriage.getHeight() / 2;
-        ((AnimatedSpriteSheet) texture).update(dt);
+        texture.update(dt);
         double aimX = MainView.translateAndScaleX(Mouse.getPosition().x, true);
         double aimY = MainView.translateAndScaleY(Mouse.getPosition().y, true);
         this.direction = getDirection(aimX, aimY);
