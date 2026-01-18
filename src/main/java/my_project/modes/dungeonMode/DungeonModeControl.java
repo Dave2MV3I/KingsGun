@@ -89,4 +89,8 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
     public Player getPlayer() {
         return mainController.getCurrentPlayer();
     }
+
+    public void removeAttack(AttackRepresentation aR){
+        dungeon.getCurrentAttacks().remove(aR);
+    }
 }

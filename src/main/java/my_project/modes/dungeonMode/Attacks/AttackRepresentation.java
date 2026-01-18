@@ -32,6 +32,7 @@ public class AttackRepresentation extends DungeonEntity {
     public void update(double dt){
         switch(attackData.ANIMATION_TYPE){
             case MOVING:
+                if (collidesWith(dungeonPlayer) || !(movementCondition())) control.removeAttack(this);
                 // TODO if collision mit Player dann löschen aus Arraylist
             break;
             case STATIC:

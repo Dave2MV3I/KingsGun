@@ -26,8 +26,6 @@ public abstract class Monster extends LivingDungeonEntity {
     private double attackCoolDown = 2;
     private double pathCoolDown = 2;
     private Stack<Tile> currentPath = new Stack<>();
-    // TODO Monster kennt 1 oder mehr seiner Angriffe und DungeonModeView greift über DungeonModeControl auf diese Referenzen zu und
-    //  zeichnet die Angriffe/ updatet sie
 
     public Monster(DungeonModeControl dungeonModeControl, AttackData[] attacks){
         super(dungeonModeControl);
@@ -36,8 +34,7 @@ public abstract class Monster extends LivingDungeonEntity {
 
         this.dungeonPlayer = dungeonModeControl.getDungeonPlayer();
 
-        //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
-
+        //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasksd
 
         // TODO ? David: Monster in enum reintun und nur class Monster nutzen, Instanziierung mitten im Spiel lassen aber ändern,
         //  in beiden Fällen alten Monstercode nutzen um zu zeigen, wann enums nützlich sind und dann Attack zeigen
@@ -115,6 +112,7 @@ public abstract class Monster extends LivingDungeonEntity {
         dungeonPlayer.damage(damage);
 
         attackCoolDown = 2;
+        System.out.println("Attacked");
     }
 
     /**

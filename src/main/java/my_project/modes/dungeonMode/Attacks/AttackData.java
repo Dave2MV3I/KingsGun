@@ -4,12 +4,12 @@ package my_project.modes.dungeonMode.Attacks;
  * AttackData stores model information for each monster attack.
  */
 public enum AttackData {
-    WEIGHT_ATTACK(50, 75, "dagger.png", 10, AnimationType.MOVING),
-    AXE_ATTACK(25, 50, "dagger.png", 10, AnimationType.MOVING),
-    SPEAR_ATTACK(10, 50, "dagger.png", 10, AnimationType.MOVING),
-    SWORD_ATTACK(10, 20, "dagger.png", 10, AnimationType.MOVING, 1),
-    FIRE_ATTACK(70, 90, "dagger.png", 10, AnimationType.STATIC, 0.8);
-
+    WEIGHT_ATTACK(50, 75, "dagger.png", 50, AnimationType.MOVING),
+    AXE_ATTACK(25, 50, "dagger.png", 50, AnimationType.MOVING),
+    SPEAR_ATTACK(10, 50, "dagger.png", 50, AnimationType.MOVING),
+    SWORD_ATTACK(10, 20, "dagger.png", 50, AnimationType.MOVING, 1),
+    FIRE_ATTACK(70, 90, "dagger.png", 50, AnimationType.STATIC, 0.8);
+    // Elf Goblin, (Fire), Axe, Spear, Sword, eines zu Dagger, Weight entfernen
     public final double MIN_DAMAGE;
     public final double MAX_DAMAGE;
     public final double ATTACK_FREQUENCY;
@@ -46,4 +46,3 @@ public enum AttackData {
     public double getSTRENGTH(){return STRENGTH;}
 
 }
-// TODO (IDEE): Je länger man einen Button hält (Waffe aufladen) oder je schneller man sich bewegt, desto mehr Schaden
