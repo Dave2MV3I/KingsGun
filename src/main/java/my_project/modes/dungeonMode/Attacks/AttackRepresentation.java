@@ -8,8 +8,11 @@ import my_project.modes.dungeonMode.DungeonPlayer;
 import my_project.modes.dungeonMode.Monsters.Monster;
 
 /**
- * Attack representations are moving textures for monster attacks, e.g. fire <br>
+ * Attack representations are moving textures for monster attacks, e.g. fire
+ * <br>
  * Note: MVC is broken bcs of practical reasons: V takes data from M without C
+ * <br>
+ * David Glusmann
  */
 public class AttackRepresentation extends DungeonEntity {
     private AttackData attackData;
@@ -56,6 +59,9 @@ public class AttackRepresentation extends DungeonEntity {
         super.update(dt);
     }
 
+    /**
+     * What happens when attack reaches the wall.
+     */
     @Override
     public void onCollision(){control.removeAttack(this);}
 

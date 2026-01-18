@@ -3,7 +3,11 @@ package my_project.modes.travelMode.Bandits;
 import KAGO_framework.view.DrawTool;
 import my_project.model.GameObject;
 import my_project.view.MainView;
-/**By Mykhailo Badasian
+
+/**
+ * Class for Road Bandits that attack the Carriage
+ * <br><br>
+ * Mykhailo Badasian
  */
 public abstract class Bandit extends GameObject {
     public double hP;

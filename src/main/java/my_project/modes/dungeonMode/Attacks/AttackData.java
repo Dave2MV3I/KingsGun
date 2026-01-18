@@ -2,7 +2,10 @@ package my_project.modes.dungeonMode.Attacks;
 
 /**
  * AttackData stores model information for each monster attack.
+ * <br>
+ * David Glusmann
  */
+
 public enum AttackData {
     DAGGER_ATTACK(5, 10, "dagger.png", 50, AnimationType.MOVING),
     AXE_ATTACK(25, 50, "axe.png", AnimationType.STATIC),
@@ -36,6 +39,10 @@ public enum AttackData {
         this.ANIMATION_TYPE = animationType;
     }
 
+    /**
+     *
+     * @return the damage this attack makes if it touches the player.
+     */
     public double calculateDamage(){
         return MIN_DAMAGE + Math.random()*(MAX_DAMAGE - MIN_DAMAGE);
     }

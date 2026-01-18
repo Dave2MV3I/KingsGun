@@ -16,7 +16,11 @@ import my_project.view.Mouse;
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
-/**By Joshua Becker
+
+/**
+ * Minigun, that the Carriage shoots with
+ * <br><br>
+ * Mykhailo Badasian
  */
 public class Gun extends GameObject {
     private double timer;
@@ -67,10 +71,5 @@ public class Gun extends GameObject {
         texture.autoDraw(drawTool, x-this.radius, y-this.radius*2, this.radius*2, (direction/Math.PI)*180+90);
         //drawCursor(drawTool);
     }
-    private void drawCursor(DrawTool drawTool){
-        double mx = MainView.translateAndScaleX(Mouse.getPosition().x, true);
-        double my = MainView.translateAndScaleY(Mouse.getPosition().y, true);
-        drawTool.drawFilledCircle(MainView.translateAndScaleX(mx), MainView.translateAndScaleY(my), MainView.scale(5));
-        drawTool.drawLine(Mouse.getPosition().x, Mouse.getPosition().y, MainView.translateAndScaleX(mx), MainView.translateAndScaleY(my));
-    }
+
 }

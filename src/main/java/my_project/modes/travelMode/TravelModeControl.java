@@ -6,8 +6,11 @@ import my_project.control.MainController;
 import my_project.modes.ModeControl;
 import my_project.modes.travelMode.Bandits.Mage;
 import my_project.modes.travelMode.Bandits.Bandit;
-/**Control Class for the Travel Mode
- * By Mykhailo Badasian
+
+/**
+ * Control Class of Travel Mode
+ * <br><br>
+ * Mykhailo Badasian
  */
 public class TravelModeControl extends ModeControl<TravelModeView> {
     private Carriage carriage;
@@ -28,16 +31,13 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         bandits = new List<Bandit>();//delete all Bandits by creating a new empty List of Bandits
 
         bandits.toFirst();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 60; i++) {
             int linkrecht = (int)(Math.random()*2);
             int obenunten = ((int)(Math.random() * 2)) * 2 - 1;
             bandits.append(new Mage(carriage, 1800 - i*40, linkrecht, obenunten));
             System.out.println("created Bandit");
         }
-        //bandits.append(new Mage(carriage, 500, 0));
-        //bandits.append(new Mage(carriage, 300, 1));
-        //bandits.append(new Mage(carriage, 100, 1));
-        //System.out.println("created Bandit");
+
     }
     @Override
     public void update(double dt){
@@ -80,10 +80,7 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
     public Carriage getCarriage(){
         return carriage;
     }
-    public Bandit getBandit(){
-        bandits.toFirst();
-        return bandits.getContent();
-    }
+
     public List<Bandit> getBandits(){
         return bandits;
     }

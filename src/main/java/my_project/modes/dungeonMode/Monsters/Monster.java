@@ -107,7 +107,6 @@ public abstract class Monster extends LivingDungeonEntity {
         control.getDungeon().getCurrentAttacks().add(attack);
         if (attackData.ANIMATION_TYPE.equals(AttackData.AnimationType.STATIC)) attack.setMonster(this);
 
-
         attackCoolDown = 2;
         System.out.println("Attacked");
     }
@@ -143,7 +142,7 @@ public abstract class Monster extends LivingDungeonEntity {
             closedList.append(current);
             openList.remove();
 
-            Tile[] neighbors = current.getNotWallNeighboringTiles();
+            Tile[] neighbors = current.getNotSolidNeighboringTiles();
             outer:
             for (Tile neighbor : neighbors){
 
