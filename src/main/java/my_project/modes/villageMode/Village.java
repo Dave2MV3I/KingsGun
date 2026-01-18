@@ -1,5 +1,8 @@
 package my_project.modes.villageMode;
 
+/**
+ * Tomole
+ */
 public class Village {
     private String dungeonMap = "src/main/resources/graphic/testImage.png";
     private int mapX;
