@@ -1,5 +1,6 @@
 package my_project.model.Graphics;
-
+/**By Joshua Becker
+ */
 public class AnimatedSpriteSheet extends SpriteSheet{
     private double frameCooldownX;
     private double frameCooldownY;

@@ -7,7 +7,8 @@ import my_project.model.Graphics.Texture;
 import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.view.InputManager;
 import my_project.view.MainView;
-
+/**By Mykhailo Badasian
+ */
 public class Carriage extends GameObject {
     private Gun gun;
     private double hP;

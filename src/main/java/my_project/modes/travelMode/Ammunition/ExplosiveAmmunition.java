@@ -4,7 +4,8 @@ import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.modes.travelMode.Bandits.Bandit;
 
 import java.awt.*;
-
+/**By Joshua Becker
+ */
 public class ExplosiveAmmunition extends Ammunition {
     public ExplosiveAmmunition() {
         super(20, 20);

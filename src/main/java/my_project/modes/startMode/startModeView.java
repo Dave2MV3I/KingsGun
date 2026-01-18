@@ -8,7 +8,9 @@ import my_project.view.InputManager;
 import my_project.view.Mouse;
 
 import java.awt.*;
-
+/**View Class for th Start Mode
+ * By Joshua Becker
+ */
 public class startModeView extends ModeView<startModeControl> {
     SpriteSheet spriteSheet;
     public startModeView(startModeControl modeControl) {

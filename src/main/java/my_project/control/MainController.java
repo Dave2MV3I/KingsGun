@@ -107,9 +107,9 @@ public class MainController extends GraphicalObject {
     public void processInput(String c){
         switch (c) {
             case "settings" : settingsController.getSettingsFrame().setVisible(true); break;
-            case "zoomIn" : MainView.setScale(MainView.getScale() + 1); break;
-            case "zoomOut" : MainView.setScale(MainView.getScale() - 1); System.out.println("out"); break;
-            case "centerCamera" : MainView.centerCamera(!MainView.isCameraCentered()); break;
+            //case "zoomIn" : MainView.setScale(MainView.getScale() + 1); break;
+            //case "zoomOut" : MainView.setScale(MainView.getScale() - 1); System.out.println("out"); break;
+            //case "centerCamera" : MainView.centerCamera(!MainView.isCameraCentered()); break;
         }
     }
 

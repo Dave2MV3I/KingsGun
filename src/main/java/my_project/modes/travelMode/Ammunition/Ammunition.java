@@ -8,7 +8,8 @@ import my_project.modes.travelMode.Bandits.Bandit;
 import my_project.view.MainView;
 
 import java.awt.*;
-
+/**By Joshua Becker
+ */
 public abstract class Ammunition extends GameObject {
     private static final double MAX_SHOTS = 100;
     private static double AMOUNT_SHOTS = 0;

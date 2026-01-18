@@ -6,7 +6,8 @@ import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
 import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
 import my_project.modes.travelMode.Ammunition.NormalAmmunition;
-
+/**By Joshua Becker
+ */
 public class Player {
     private double money;
 

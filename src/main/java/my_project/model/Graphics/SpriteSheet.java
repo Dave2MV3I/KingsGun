@@ -1,7 +1,8 @@
 package my_project.model.Graphics;
 
 import java.awt.image.BufferedImage;
-
+/**By Joshua Becker
+ */
 public class SpriteSheet extends Texture {
     BufferedImage[][] subImages;
     protected int currentX;

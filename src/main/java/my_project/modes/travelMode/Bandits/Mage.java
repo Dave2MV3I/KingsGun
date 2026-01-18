@@ -6,7 +6,8 @@ import my_project.model.GameObject;
 import my_project.model.Graphics.SpriteSheet;
 import my_project.modes.travelMode.Carriage;
 import my_project.view.MainView;
-
+/**By Mykhailo Badasian
+ */
 public class Mage extends Bandit {
     private List<Arrow> arrows;
     private Carriage carriage;

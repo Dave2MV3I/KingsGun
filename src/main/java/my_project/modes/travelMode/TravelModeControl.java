@@ -6,7 +6,9 @@ import my_project.control.MainController;
 import my_project.modes.ModeControl;
 import my_project.modes.travelMode.Bandits.Mage;
 import my_project.modes.travelMode.Bandits.Bandit;
-
+/**Control Class for the Travel Mode
+ * By Mykhailo Badasian
+ */
 public class TravelModeControl extends ModeControl<TravelModeView> {
     private Carriage carriage;
     private List<Bandit> bandits;

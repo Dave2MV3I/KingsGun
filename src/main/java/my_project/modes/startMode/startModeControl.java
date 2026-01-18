@@ -13,6 +13,9 @@ import my_project.view.Mouse;
 
 import java.awt.event.KeyEvent;
 
+/**Control Class for th Start Mode
+ * By Joshua Becker
+ */
 public class startModeControl extends ModeControl<startModeView> {
     private JFXPanel fxPanel = new JFXPanel();
     private Sound openMap = new Sound("src/main/resources/sound/OpenMap.mp3","Open Map", false);

@@ -16,7 +16,8 @@ import my_project.view.Mouse;
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
-
+/**By Joshua Becker
+ */
 public class Gun extends GameObject {
     private double timer;
     private Carriage carriage;

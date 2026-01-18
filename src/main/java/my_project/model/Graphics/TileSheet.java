@@ -5,7 +5,8 @@ import com.sun.javafx.geom.Vec2d;
 import java.awt.image.BufferedImage;
 
 
-
+/**By Joshua Becker
+ */
 public class TileSheet extends SpriteSheet{
     private Vec2d[][][][][][][][] tileOrientations;
     private boolean[] currentBool;

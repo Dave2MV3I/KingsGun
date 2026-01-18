@@ -3,7 +3,8 @@ package my_project.model.Graphics;
 import KAGO_framework.model.*;
 import KAGO_framework.view.*;
 import my_project.view.*;
-
+/**By Joshua Becker
+ */
 public class Texture extends GraphicalObject {
     /** Creates a Texture Object
      *

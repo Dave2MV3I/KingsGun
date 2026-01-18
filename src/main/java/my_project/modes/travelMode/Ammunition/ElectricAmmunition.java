@@ -5,7 +5,8 @@ import my_project.modes.travelMode.Bandits.Bandit;
 import my_project.modes.travelMode.Carriage;
 
 import java.awt.*;
-
+/**By Joshua Becker
+ */
 public class ElectricAmmunition extends Ammunition {
     public ElectricAmmunition() {
         super(35, 10);
