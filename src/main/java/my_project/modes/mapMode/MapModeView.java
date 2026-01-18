@@ -1,12 +1,15 @@
 package my_project.modes.mapMode;
 
+import KAGO_framework.model.Sound;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.view.DrawTool;
+import javafx.embed.swing.JFXPanel;
 import my_project.Config;
 import my_project.model.Graphics.Texture;
 import my_project.model.Player;
 import my_project.modes.ModeView;
 import my_project.modes.villageMode.Village;
+import my_project.settings.SettingsModel;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -23,6 +26,8 @@ public class MapModeView extends ModeView<MapModeControl> {
     private boolean inMoving = false;
 
     private Player player = modeControl.getMainController().getCurrentPlayer();
+    private JFXPanel fxPanel = new JFXPanel();
+    private Sound openMap = new Sound("src/main/resources/sound/OpenMap.mp3","Open Map", false);
 
     public MapModeView(MapModeControl modeControl) {
         super(modeControl);
@@ -96,6 +101,7 @@ public class MapModeView extends ModeView<MapModeControl> {
     }
 
     public void update(double dt) {
+        openMap.setVolume(SettingsModel.getSoundVolume());
         if(player != modeControl.getMainController().getCurrentPlayer()) {
             player = modeControl.getMainController().getCurrentPlayer();
         }
@@ -120,6 +126,8 @@ public class MapModeView extends ModeView<MapModeControl> {
                         modeControl.getMainController().loadMode("castle", "close map");
                     }else modeControl.getMainController().loadMode("travel", "close map");
                     player.setCurrentVillage(player.getCurrentVillage()+1);
+                    if(openMap.isPlaying()) openMap.stop();
+                    openMap.play();
                 }
             }
         }

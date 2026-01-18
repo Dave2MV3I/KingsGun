@@ -1,7 +1,9 @@
 package my_project.modes.villageMode;
 
+import KAGO_framework.model.Sound;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
+import javafx.embed.swing.JFXPanel;
 import my_project.control.MainController;
 import my_project.model.Player;
 import my_project.modes.travelMode.Ammunition.Ammunition;
@@ -9,6 +11,7 @@ import my_project.modes.travelMode.Ammunition.ElectricAmmunition;
 import my_project.modes.travelMode.Ammunition.ExplosiveAmmunition;
 import my_project.modes.travelMode.Ammunition.NormalAmmunition;
 import my_project.modes.travelMode.TravelModeControl;
+import my_project.settings.SettingsModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +39,8 @@ public class ShopWindow {
     private ImageIcon explodingIcon = new ImageIcon("src/main/resources/graphic/ExplodingAmmo.png");
 
     private ImageIcon coinIcon = new ImageIcon("src/main/resources/graphic/Coin.png");
+    private JFXPanel fxPanel = new JFXPanel();
+    private Sound shopSound = new Sound("src/main/resources/sound/Buying.mp3","Buying", false);
 
     public ShopWindow(MainController mainController) {
         this.mainController = mainController;
@@ -58,6 +63,10 @@ public class ShopWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(mainController.getCurrentPlayer().getMoney() >= 2) {
+                    shopSound.setVolume(SettingsModel.getSoundVolume());
+                    if(shopSound.isPlaying()) shopSound.stop();
+                    shopSound.play();
+
                     mainController.getCurrentPlayer().addMoney(-2);
                     shopItems.dequeue();
                     addAmmunition();
@@ -69,6 +78,10 @@ public class ShopWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(checkingToBuy(shopItems.front())) {
+                    shopSound.setVolume(SettingsModel.getSoundVolume());
+                    if(shopSound.isPlaying()) shopSound.stop();
+                    shopSound.play();
+
                     Ammunition takenAmmunition = shopItems.front();
                     shopItems.dequeue();
                     addAmmunition();
