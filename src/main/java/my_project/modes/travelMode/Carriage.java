@@ -20,13 +20,14 @@ public class Carriage extends GameObject {
         x = 96;
         y = 2400;
         travelModeControl = control;
-        width = 64;
-        height = 96;
+        width = 34;
+        height = 54;
         hP = control.getMainController().getCurrentPlayer().getCarHp();
     }
     public void draw(DrawTool drawtool){
-        texture.autoDraw(drawtool, x, y, 64);
+        texture.autoDraw(drawtool, x-15, y-31, 64);
         gun.draw(drawtool);
+        autoDrawHitbox(drawtool);
         showHP(drawtool);
 
     }
