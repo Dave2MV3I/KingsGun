@@ -7,7 +7,7 @@ import my_project.modes.villageMode.VillageModeControl;
 import my_project.modes.villageMode.Village;
 
 /**
- *
+ * Tomole
  */
 public class MapModeControl extends ModeControl<MapModeView> {
     private List<Village> villages;

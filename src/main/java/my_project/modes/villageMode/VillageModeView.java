@@ -13,6 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+/**
+ * Tomole
+ */
 public class VillageModeView extends ModeView<VillageModeControl> {
     private JFrame shopFrame;
     private Texture villageBackground;
@@ -24,9 +27,6 @@ public class VillageModeView extends ModeView<VillageModeControl> {
     public VillageModeView(VillageModeControl modeControl) {
         super(modeControl);
         villageBackground = new Texture("VillageBackground.png");
-    }
-
-    public void activationVillage() {
         ShopWindow shopWindow = new ShopWindow(modeControl.getMainController());
         shopFrame = modeControl.getMainController().createJFrame(shopWindow.getShopPane(), 400, 350, false);
         shopFrame.setLocation(570, 200);
