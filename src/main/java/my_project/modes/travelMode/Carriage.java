@@ -8,6 +8,11 @@ import my_project.modes.travelMode.Ammunition.Ammunition;
 import my_project.view.InputManager;
 import my_project.view.MainView;
 
+/**
+ * Class for Carriage, that carries the player through the Travel Mode
+ * <br><br>
+ * Mykhailo Badasian
+ */
 public class Carriage extends GameObject {
     private Gun gun;
     private double hP;

@@ -6,6 +6,11 @@ import my_project.model.Graphics.Texture;
 import my_project.view.MainView;
 import my_project.modes.ModeView;
 
+/**
+ * View Class of Travel Mode
+ * <br><br>
+ * Mykhailo Badasian
+ */
 public class TravelModeView extends ModeView<TravelModeControl> {
     private Texture roadTexture;
     public double yPos;

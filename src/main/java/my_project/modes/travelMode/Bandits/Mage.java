@@ -7,6 +7,11 @@ import my_project.model.Graphics.SpriteSheet;
 import my_project.modes.travelMode.Carriage;
 import my_project.view.MainView;
 
+/**
+ * Mage: Type of Road Bandit
+ * <br><br>
+ * Mykhailo Badasian
+ */
 public class Mage extends Bandit {
     private List<Arrow> arrows;
     private Carriage carriage;
@@ -22,6 +27,11 @@ public class Mage extends Bandit {
         x = Math.random()*40 + 15 + a*155;
         this.y = y + b*(Math.random()*400);
     }
+    /**
+     * Arrows, the Magicians shoot
+     * <br><br>
+     * Mykhailo Badasian
+     */
     private class Arrow extends GameObject {
         public Carriage car;
 
@@ -45,7 +55,6 @@ public class Mage extends Bandit {
             abstandX = (car.getX()+32) - this.x;
             abstandY = (car.getY()+48) - this.y;
 
-            //abstand = Math.sqrt(Math.pow(abstandX, 2) + Math.pow(abstandY, 2));
             abstand = getDistanceTo(car);
 
             vX = (abstandX / abstand) * vel;
