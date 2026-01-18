@@ -58,6 +58,6 @@ public class ProgramController {
      * @param dt Zeit seit letztem Frame in Sekunden
      */
     public void updateProgram(double dt){
-        music.setVolume(SettingsModel.getMusicVolume() * SettingsModel.getSoundVolume());
+        music.setVolume(SettingsModel.getMusicVolume() * SettingsModel.getMasterVolume());
     }
 }

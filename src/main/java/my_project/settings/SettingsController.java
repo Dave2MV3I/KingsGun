@@ -28,14 +28,14 @@ public class SettingsController {
 
     /**
      * Method for changing visual and auditory game settings with float values.
-     * @param setting options: musicVolume, soundVolume, brightness
+     * @param setting options: musicVolume, masterVolume, brightness
      * @param value the new value to be assigned
      */
     public void setSetting(String setting, float value) {
         switch (setting) {
             case "musicVolume" : SettingsModel.setMusicVolume(value);
                 break;
-            case "soundVolume" : SettingsModel.setSoundVolume(value);
+            case "masterVolume" : SettingsModel.setMasterVolume(value);
                 break;
             case "brightness" : SettingsModel.setBrightness(value);
                 break;

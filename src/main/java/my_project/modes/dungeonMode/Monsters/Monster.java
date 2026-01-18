@@ -16,7 +16,7 @@ import java.awt.*;
 
 /**
  * In each Dungeon spawn some type of Monster.
- * <br><br>
+ * <br>
  * David Glusmann
  */
 
@@ -26,8 +26,6 @@ public abstract class Monster extends LivingDungeonEntity {
     private double attackCoolDown = 2;
     private double pathCoolDown = 2;
     private Stack<Tile> currentPath = new Stack<>();
-    // TODO Monster kennt 1 oder mehr seiner Angriffe und DungeonModeView greift über DungeonModeControl auf diese Referenzen zu und
-    //  zeichnet die Angriffe/ updatet sie
 
     public Monster(DungeonModeControl dungeonModeControl, AttackData[] attacks){
         super(dungeonModeControl);
@@ -35,17 +33,11 @@ public abstract class Monster extends LivingDungeonEntity {
         radius = 10;
 
         this.dungeonPlayer = dungeonModeControl.getDungeonPlayer();
-
-        //TODO David: Design the monsters with different appearances and get them to know their tasks in the enum Task with all tasks
-
-
-        // TODO ? David: Monster in enum reintun und nur class Monster nutzen, Instanziierung mitten im Spiel lassen aber ändern,
-        //  in beiden Fällen alten Monstercode nutzen um zu zeigen, wann enums nützlich sind und dann Attack zeigen
     }
 
     @Override
     public void draw(DrawTool drawTool){
-        texture.autoDraw(drawTool, x-16, y-16, 32); // TODO give the monsters their textures
+        texture.autoDraw(drawTool, x-16, y-16, 32);
         drawTool.setCurrentColor(new Color(255, 0, 0));
         autoDrawHitbox(drawTool);
     }
@@ -85,7 +77,7 @@ public abstract class Monster extends LivingDungeonEntity {
                 }
             }
             if (currentPath.top() != null) {
-                setVelocityAS(getDirection(currentPath.top()), 50); // TODO every monster has its own speed
+                setVelocityAS(getDirection(currentPath.top()), 50);
             }
 
         }
@@ -102,19 +94,22 @@ public abstract class Monster extends LivingDungeonEntity {
         this.y = y;
     }
 
+    /**
+     * The methoden a monster calls for starting an attack in the player.
+     */
     private void attack(){
-
-        // TODO animate attacks
-        // TODO attacks get deleted from arrayList after attack
         int numAttacks = myAttacks.length;
         int rndAttack = (int)(Math.random()*numAttacks);
         AttackData attackData = myAttacks[rndAttack];
         double damage = attackData.calculateDamage();
 
-        control.getDungeon().getCurrentAttacks().add(new AttackRepresentation(control, attackData, dungeonPlayer, x, y));
-        dungeonPlayer.damage(damage);
+        AttackRepresentation attack = new AttackRepresentation(control, attackData, dungeonPlayer, damage, x, y);
+        control.getDungeon().getCurrentAttacks().add(attack);
+        if (attackData.ANIMATION_TYPE.equals(AttackData.AnimationType.STATIC)) attack.setMonster(this);
+
 
         attackCoolDown = 2;
+        System.out.println("Attacked");
     }
 
     /**

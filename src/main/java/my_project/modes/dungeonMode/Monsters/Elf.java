@@ -5,7 +5,7 @@ import my_project.modes.dungeonMode.Attacks.AttackData;
 
 public class Elf extends Monster{
     public Elf(DungeonModeControl dungeonModeControl) {
-        super(dungeonModeControl, new AttackData[]{AttackData.SWORD_ATTACK});
-        setAnimatedTexture("testSlime.png", 1, 2);
+        super(dungeonModeControl, new AttackData[]{AttackData.SWORD_ATTACK, AttackData.DAGGER_ATTACK});
+        setAnimatedTexture("elf.png", 1, 4);
     }
 }

@@ -1,7 +1,7 @@
 package my_project.modes.villageMode;
 
 import KAGO_framework.model.Sound;
-import KAGO_framework.model.abitur.datenstrukturen.List;
+import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import javafx.embed.swing.JFXPanel;
 import my_project.control.MainController;
@@ -16,13 +16,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Tomole
- */
 public class ShopWindow {
     private MainController mainController;
 
-    private List<Ammunition> shopItems;
+    private Queue<Ammunition> shopItems;
     private Stack<Ammunition> ammo;
 
     private JPanel shopPanal;
@@ -74,8 +71,7 @@ public class ShopWindow {
                     shopSound.play();
 
                     mainController.getCurrentPlayer().addMoney(-2);
-                    shopItems.toFirst();
-                    shopItems.remove();
+                    shopItems.dequeue();
                     addAmmunition();
                     updateShopText();
                 }else showTipp();
@@ -84,14 +80,13 @@ public class ShopWindow {
         takeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                shopItems.toFirst();
-                if(checkingToBuy(shopItems.getContent())) {
+                if(checkingToBuy(shopItems.front())) {
                     shopSound.setVolume(SettingsModel.getSoundVolume());
                     if(shopSound.isPlaying()) shopSound.stop();
                     shopSound.play();
 
-                    Ammunition takenAmmunition = shopItems.getContent();
-                    shopItems.remove();
+                    Ammunition takenAmmunition = shopItems.front();
+                    shopItems.dequeue();
                     addAmmunition();
                     updateShopText();
                     ammo.push(takenAmmunition);
@@ -142,17 +137,16 @@ public class ShopWindow {
     }
 
     private void updateShopText() {
-        shopItems.toFirst();
         String ammoType = "";
-        if (shopItems.getContent() instanceof NormalAmmunition) {
+        if (shopItems.front() instanceof NormalAmmunition) {
             ammoType = "Normal Ammunition";
             optionPicture.setIcon(normalIcon);
             priceLabel.setText("10");
-        }else if (shopItems.getContent() instanceof ElectricAmmunition) {
+        }else if (shopItems.front() instanceof ElectricAmmunition) {
             ammoType = "Electric Ammunition";
             optionPicture.setIcon(electricIcon);
             priceLabel.setText("12");
-        }else if (shopItems.getContent() instanceof ExplosiveAmmunition) {
+        }else if (shopItems.front() instanceof ExplosiveAmmunition) {
             ammoType = "Explosive Ammunition";
             optionPicture.setIcon(explodingIcon);
             priceLabel.setText("15");
@@ -174,12 +168,14 @@ public class ShopWindow {
         }else {
             newAmmo = new ExplosiveAmmunition();
         }
-        shopItems.append(newAmmo);
+        shopItems.enqueue(newAmmo);
     }
 
     private void initiateShopQueue() {
-        shopItems = new List<Ammunition>();
-        addAmmunition();
+        shopItems = new Queue<Ammunition>();
+        for (int i = 0; i < 10; i++) {
+            addAmmunition();
+        }
     }
 
     public JPanel getShopPane() {return shopPanal;}

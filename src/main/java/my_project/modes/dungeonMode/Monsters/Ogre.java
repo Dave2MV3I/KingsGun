@@ -5,7 +5,7 @@ import my_project.modes.dungeonMode.Attacks.AttackData;
 
 public class Ogre extends Monster{
     public Ogre(DungeonModeControl dungeonModeControl) {
-        super(dungeonModeControl, new AttackData[]{AttackData.WEIGHT_ATTACK});
+        super(dungeonModeControl, new AttackData[]{AttackData.SWORD_ATTACK, AttackData.DAGGER_ATTACK});
         setAnimatedTexture("Ogre.png", 1, 4);
     }
 }

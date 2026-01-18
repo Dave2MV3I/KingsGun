@@ -23,7 +23,6 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         monsterClasses.append(Orc.class);
         monsterClasses.append(Goblin.class);
         monsterClasses.append(Dragon.class);
-
     }
 
     @Override
@@ -88,5 +87,9 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
 
     public Player getPlayer() {
         return mainController.getCurrentPlayer();
+    }
+
+    public void removeAttack(AttackRepresentation aR){
+        dungeon.getCurrentAttacks().remove(aR);
     }
 }

@@ -4,7 +4,7 @@ import my_project.modes.dungeonMode.Attacks.AttackData;
 
 public class Orc extends Monster{
     public Orc(DungeonModeControl dungeonModeControl) {
-        super(dungeonModeControl, new AttackData[]{AttackData.WEIGHT_ATTACK, AttackData.AXE_ATTACK});
+        super(dungeonModeControl, new AttackData[]{AttackData.SWORD_ATTACK, AttackData.AXE_ATTACK, AttackData.DAGGER_ATTACK});
         setAnimatedTexture("orc.png", 1, 4);
     }
 

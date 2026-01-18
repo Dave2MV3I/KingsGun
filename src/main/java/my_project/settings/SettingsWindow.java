@@ -13,10 +13,10 @@ public class SettingsWindow {
     private JPanel mainPanel;
     private JLabel header;
     private JSlider musicSlider;
-    private JSlider soundSlider;
+    private JSlider masterVolumeSlider;
     private JSlider brightnessSlider;
     private JLabel musicLabel;
-    private JLabel soundLabel;
+    private JLabel masterVolumeLabel;
     private JLabel brightnessLabel;
     private JSlider performanceSlider;
     private JLabel performanceLabel;
@@ -35,10 +35,10 @@ public class SettingsWindow {
                 settingController.setSetting("musicVolume", (float) musicSlider.getValue() /100);}
         });
 
-        soundSlider.addChangeListener(new ChangeListener() {
+        masterVolumeSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
-                settingController.setSetting("soundVolume", (float) soundSlider.getValue() /100);
+                settingController.setSetting("masterVolume", (float) masterVolumeSlider.getValue() /100);
             }
         });
 
