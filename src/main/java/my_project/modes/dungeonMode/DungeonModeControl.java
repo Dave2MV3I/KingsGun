@@ -8,6 +8,10 @@ import my_project.modes.dungeonMode.Monsters.*;
 import my_project.modes.dungeonMode.Tiles.*;
 import my_project.modes.*;
 
+/**
+ * Control Class for the Dungeon Mode
+ * By Joshua Becker, David Gregory Glusmann
+ */
 public class DungeonModeControl extends ModeControl<DungeonModeView> {
     Dungeon dungeon;
     DungeonPlayer dungeonPlayer;

@@ -3,7 +3,9 @@ package my_project.modes.dungeonMode.Tiles;
 import my_project.model.Graphics.SpriteSheet;
 import my_project.model.Graphics.Texture;
 import my_project.modes.dungeonMode.Dungeon;
-
+/** Grid Based Tile for the Dungeon, to give the Player loot
+ * By joshua Becker
+ */
 public class TileChest extends InteractiveTile {
     private boolean isClosed = true;
     public TileChest(int x, int y, Dungeon dungeon) {

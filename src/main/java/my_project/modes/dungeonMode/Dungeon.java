@@ -9,8 +9,8 @@ import my_project.modes.dungeonMode.Tiles.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/** Dungeon Object, which
- *
+/** Dungeon Object, which provides the player with loot
+ * By Joshua Becker
  */
 public class Dungeon extends GraphicalObject {
     private Tile[][] tiles;

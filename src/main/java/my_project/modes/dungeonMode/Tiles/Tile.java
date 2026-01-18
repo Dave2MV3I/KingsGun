@@ -10,6 +10,9 @@ import my_project.view.MainView;
 
 import java.awt.*;
 
+/** Grid Based Tiles for the Dungeon
+ * By joshua Becker
+ */
 public abstract class Tile extends GameObject {
     private static final double WIDTH = 32;
     private static final double HEIGHT = 32;

@@ -3,7 +3,9 @@ package my_project.modes.dungeonMode.Tiles;
 import my_project.model.Graphics.SpriteSheet;
 import my_project.modes.dungeonMode.Dungeon;
 import my_project.model.Graphics.Texture;
-
+/** Grid Based Tile for the Dungeon, to give the Player a escaping chance
+ * By joshua Becker
+ */
 public class TileDoor extends InteractiveTile{
 
     private int opening = 0;

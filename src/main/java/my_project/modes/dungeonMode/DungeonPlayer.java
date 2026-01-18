@@ -10,7 +10,10 @@ import my_project.view.MainView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-
+/**
+ * Player Object to walk around in Dungeon
+ * By Joshua Becker
+ */
 public class DungeonPlayer extends LivingDungeonEntity {
     private double money;
     private double exitTimer;
