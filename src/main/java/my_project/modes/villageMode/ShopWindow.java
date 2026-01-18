@@ -42,6 +42,7 @@ public class ShopWindow {
     private ImageIcon coinIcon = new ImageIcon("src/main/resources/graphic/Coin.png");
     private JFXPanel fxPanel = new JFXPanel();
     private Sound shopSound = new Sound("src/main/resources/sound/Buying.mp3","Buying", false);
+    private Sound declineSound = new Sound("src/main/resources/sound/swoosh_decline.mp3","Decline", false);
 
     public ShopWindow(MainController mainController) {
         this.mainController = mainController;
@@ -102,7 +103,7 @@ public class ShopWindow {
                     if (shopSound.isPlaying()) shopSound.stop();
                     shopSound.play();
                     updateShopText();
-                }
+                }else showTipp();
             }
         });
 
@@ -130,6 +131,9 @@ public class ShopWindow {
 
     private void showTipp() {
         tippLabel.setText("Tipp: Go to the Dungeon to get Money");
+        declineSound.setVolume(SettingsModel.getSoundVolume());
+        if(declineSound.isPlaying()) declineSound.stop();
+        declineSound.play();
     }
 
     private void updateShopText() {

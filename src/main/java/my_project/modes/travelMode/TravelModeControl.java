@@ -4,7 +4,7 @@ import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import my_project.control.MainController;
 import my_project.modes.ModeControl;
-import my_project.modes.travelMode.Bandits.Archer;
+import my_project.modes.travelMode.Bandits.Mage;
 import my_project.modes.travelMode.Bandits.Bandit;
 
 public class TravelModeControl extends ModeControl<TravelModeView> {
@@ -29,12 +29,12 @@ public class TravelModeControl extends ModeControl<TravelModeView> {
         for (int i = 0; i < 500; i++) {
             int linkrecht = (int)(Math.random()*2);
             int obenunten = ((int)(Math.random() * 2)) * 2 - 1;
-            bandits.append(new Archer(carriage, 1800 - i*40, linkrecht, obenunten));
+            bandits.append(new Mage(carriage, 1800 - i*40, linkrecht, obenunten));
             System.out.println("created Bandit");
         }
-        //bandits.append(new Archer(carriage, 500, 0));
-        //bandits.append(new Archer(carriage, 300, 1));
-        //bandits.append(new Archer(carriage, 100, 1));
+        //bandits.append(new Mage(carriage, 500, 0));
+        //bandits.append(new Mage(carriage, 300, 1));
+        //bandits.append(new Mage(carriage, 100, 1));
         //System.out.println("created Bandit");
     }
     @Override
