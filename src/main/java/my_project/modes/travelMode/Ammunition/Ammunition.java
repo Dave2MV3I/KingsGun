@@ -10,6 +10,8 @@ import my_project.view.MainView;
 import java.awt.*;
 
 public abstract class Ammunition extends GameObject {
+    private static final double MAX_SHOTS = 100;
+    private static double AMOUNT_SHOTS = 0;
     public Ammunition(double shots, double damage) {
         this.shots = shots;
         this.damage = damage;
@@ -32,8 +34,10 @@ public abstract class Ammunition extends GameObject {
         return shoot(direction, startX, startY, bandits, steps, stepLength, null);
     }
 
-        public boolean shoot(double direction, double startX, double startY, List<Bandit> bandits, int steps, double stepLength, Bandit ignore) {
-        if (shots > 0) {
+    public boolean shoot(double direction, double startX, double startY, List<Bandit> bandits, int steps, double stepLength, Bandit ignore) {
+    if (shots > 0) {
+        AMOUNT_SHOTS++;
+        if (AMOUNT_SHOTS < MAX_SHOTS) {
             shots--;
             double currentX = startX;
             double currentY = startY;
@@ -52,12 +56,13 @@ public abstract class Ammunition extends GameObject {
                 currentY += Math.sin(direction) * stepLength;
             }
             hitDrawableQueue.enqueue(new HitDrawable(startX, startY, currentX, currentY));
-            return true;
-        } else {
-            System.out.println("no ammo");
-            return false;
         }
+        return true;
+    } else {
+        System.out.println("no ammo");
+        return false;
     }
+}
 
     @Override
     public void draw(DrawTool drawTool) {
@@ -66,6 +71,7 @@ public abstract class Ammunition extends GameObject {
             hitDrawableQueue.front().draw(drawTool, this.color);
             hitDrawableQueue.dequeue();
         }
+        AMOUNT_SHOTS = 0;
     }
 
     public abstract void hit(Bandit bandit, List<Bandit> bandits, double hitX, double hitY);

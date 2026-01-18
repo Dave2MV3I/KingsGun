@@ -64,7 +64,7 @@ public class Gun extends GameObject {
             carriage.getAmmo().top().draw(drawTool);
         }
         texture.autoDraw(drawTool, x-this.radius, y-this.radius*2, this.radius*2, (direction/Math.PI)*180+90);
-        drawCursor(drawTool);
+        //drawCursor(drawTool);
     }
     private void drawCursor(DrawTool drawTool){
         double mx = MainView.translateAndScaleX(Mouse.getPosition().x, true);
