@@ -4,15 +4,14 @@ package my_project.modes.dungeonMode.Attacks;
  * AttackData stores model information for each monster attack.
  */
 public enum AttackData {
-    WEIGHT_ATTACK(50, 75, "dagger.png", 50, AnimationType.MOVING),
-    AXE_ATTACK(25, 50, "dagger.png", 50, AnimationType.MOVING),
-    SPEAR_ATTACK(10, 50, "dagger.png", 50, AnimationType.MOVING),
-    SWORD_ATTACK(10, 20, "dagger.png", 50, AnimationType.MOVING, 1),
-    FIRE_ATTACK(70, 90, "dagger.png", 50, AnimationType.STATIC, 0.8);
-    // Elf Goblin, (Fire), Axe, Spear, Sword, eines zu Dagger, Weight entfernen
+    DAGGER_ATTACK(5, 10, "dagger.png", 50, AnimationType.MOVING),
+    AXE_ATTACK(25, 50, "axe.png", AnimationType.STATIC),
+    SPEAR_ATTACK(10, 50, "spear.png", 50, AnimationType.MOVING),
+    SWORD_ATTACK(40, 60, "sword.png", AnimationType.STATIC),
+    FIRE_ATTACK(70, 90, "fire.png", AnimationType.STATIC);
+
     public final double MIN_DAMAGE;
     public final double MAX_DAMAGE;
-    public final double ATTACK_FREQUENCY;
     public final String TEXTURE;
     public final double STRENGTH;
     public final AnimationType ANIMATION_TYPE;
@@ -24,25 +23,21 @@ public enum AttackData {
     AttackData(double minDamage, double maxDamage, String texture, double strength, AnimationType animationType) {
         this.MIN_DAMAGE = minDamage;
         this.MAX_DAMAGE = maxDamage;
-        this.ATTACK_FREQUENCY = 0.5;
         this.TEXTURE = texture;
         this.STRENGTH = strength;
         this.ANIMATION_TYPE = animationType;
     }
 
-    AttackData(double minDamage, double maxDamage, String texture, double strength, AnimationType animationType, double attackFrequency){
+    AttackData(double minDamage, double maxDamage, String texture, AnimationType animationType){
         this.MIN_DAMAGE = minDamage;
         this.MAX_DAMAGE = maxDamage;
         this.TEXTURE = texture;
-        this.STRENGTH = strength;
+        this.STRENGTH = 0;
         this.ANIMATION_TYPE = animationType;
-        this.ATTACK_FREQUENCY = attackFrequency;
     }
 
     public double calculateDamage(){
         return MIN_DAMAGE + Math.random()*(MAX_DAMAGE - MIN_DAMAGE);
     }
-    public String getTEXTURE(){return TEXTURE;}
-    public double getSTRENGTH(){return STRENGTH;}
 
 }

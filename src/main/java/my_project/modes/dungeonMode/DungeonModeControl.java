@@ -23,7 +23,6 @@ public class DungeonModeControl extends ModeControl<DungeonModeView> {
         monsterClasses.append(Orc.class);
         monsterClasses.append(Goblin.class);
         monsterClasses.append(Dragon.class);
-
     }
 
     @Override

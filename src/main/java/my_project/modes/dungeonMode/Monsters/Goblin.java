@@ -5,7 +5,7 @@ import my_project.modes.dungeonMode.Attacks.AttackData;
 
 public class Goblin extends Monster{
     public Goblin(DungeonModeControl dungeonModeControl) {
-        super(dungeonModeControl, new AttackData[]{AttackData.SPEAR_ATTACK});
-        setAnimatedTexture("testSlime.png", 1, 2);
+        super(dungeonModeControl, new AttackData[]{AttackData.SPEAR_ATTACK, AttackData.DAGGER_ATTACK});
+        setAnimatedTexture("goblin.png", 1, 4);
     }
 }

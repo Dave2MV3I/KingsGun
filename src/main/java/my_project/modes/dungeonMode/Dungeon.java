@@ -24,21 +24,18 @@ public class Dungeon extends GraphicalObject {
         this.control = control;
         this.monsterClasses = monsterClasses;
         setMap("src/main/resources/graphic/Dungeon "+((int)(Math.random()*5)+1)+".png");
-
-        // TODO ArrayList with all attacks right now, iterator for drawing and updating them
-        // Erst ArrayList lesen und verstehen
-        // In Präsi Anwendung einer Arraylist erklären und den iterator, mehr nicht notwendig
-
     }
 
     private Monster generateMonster(double x, double y){
         monsterClasses.toFirst();
         double nextMonsterProbability = Math.random();
         while(nextMonsterProbability < 0.4){
-            if (monsterClasses.hasAccess()) {
-                monsterClasses.next();
-                nextMonsterProbability = Math.random();
-            } else monsterClasses.toLast();
+            monsterClasses.next();
+            if (!monsterClasses.hasAccess()) {
+                monsterClasses.toLast();
+                break;
+            }
+            nextMonsterProbability = Math.random();
         }
         // Instantiate chosen monster
         Class<? extends Monster> chosenMonster = monsterClasses.getContent();
@@ -47,7 +44,7 @@ public class Dungeon extends GraphicalObject {
             constructor.setAccessible(true);
             System.out.println("Neues Monster gespawnt: " + chosenMonster);
 
-            Monster temp = constructor.newInstance(control); // MOnster werden jetzt in einer eigenen Funktion Generiert und hier zurück gegeben.
+            Monster temp = constructor.newInstance(control); // Monster werden jetzt in einer eigenen Funktion Generiert und hier zurück gegeben.
             temp.setPosition(x, y);
             return temp;
         } catch (NoSuchMethodException e) {
