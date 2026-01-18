@@ -12,19 +12,19 @@ import my_project.modes.dungeonMode.Monsters.Monster;
  * Note: MVC is broken bcs of practical reasons: V takes data from M without C
  */
 public class AttackRepresentation extends DungeonEntity {
-    AttackData attackData;
-    DungeonPlayer dungeonPlayer;
+    private AttackData attackData;
+    private DungeonPlayer dungeonPlayer;
     double damage;
     double attackCoolDown = 2;
-    Monster myMonster;
+    private Monster myMonster;
 
-    public AttackRepresentation(DungeonModeControl dungeonModeControl, AttackData attackData, DungeonPlayer player, double damage, double x, double y) {
+    public AttackRepresentation(DungeonModeControl dungeonModeControl, AttackData attackData, DungeonPlayer dungeonPlayer, double damage, double x, double y) {
         super(dungeonModeControl);
         this.attackData = attackData;
         this.x = x;
         this.y = y;
 
-        this.dungeonPlayer = player;
+        this.dungeonPlayer = dungeonPlayer;
         this.damage = damage;
 
         if (dungeonPlayer != null && attackData.ANIMATION_TYPE.equals(AttackData.AnimationType.MOVING)){
