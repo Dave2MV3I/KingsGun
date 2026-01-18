@@ -14,6 +14,9 @@ import my_project.settings.SettingsModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+/**
+ * Tomole
+ */
 public class MapModeView extends ModeView<MapModeControl> {
     private int amountVillages;
     private List<Village> villages;

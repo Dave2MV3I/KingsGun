@@ -37,7 +37,7 @@ public class VillageModeControl extends ModeControl<VillageModeView> {
 
     @Override
     protected void activate() {
-        modeView.activationVillage();
+
     }
     @Override
     protected void deactivate() {
